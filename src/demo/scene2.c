@@ -2,7 +2,7 @@
 #include "scene2.h"
 
 SceneNode scene2;
-static void backButtonUpdate(ActorNode button, double delta);
+static void pauseButtonUpdate(ActorNode button, double delta);
 static void playerUpdate(ActorNode player, double delta);
 
 void setupScene_scene2()
@@ -11,7 +11,7 @@ void setupScene_scene2()
     scene2 = newScene("scene2");
 
     Vector *backgroundPos = newVector(getww / 2, getwh / 2);
-    Rect *backgroundRect = newRect(backgroundPos, 0, getww, getwh, TRUE, "White", 1);
+    Rect *backgroundRect = newRect(backgroundPos, 0, getww, getwh, TRUE, "Black", 1);
     ActorNode background = newActor("background", backgroundPos);
     CollisionShape *backgroundShape = newCollisionShape((Shape *)backgroundRect);
     backgroundShape->enable = FALSE;
@@ -21,19 +21,19 @@ void setupScene_scene2()
     destoryVector(backgroundPos);
     destoryShape((Shape *)backgroundRect);
 
-    Vector *backButtonPos = newVector(getww / 5, getwh * 4 / 5);
-    ActorNode backButton = newActor("back_button", backButtonPos);
-    Texture *backButtonTexture = newTexture("./res/scene2/back_button_texture.txt", backButtonPos, "Blue", 3);
-    backButtonTexture->visible = TRUE;
-    backButtonTexture->setMeta((ComponentNode)backButtonTexture, "back_button_texture");
-    backButton->addComponent(backButton, (ComponentNode)backButtonTexture);
-    backButton->vptr->update = backButtonUpdate;
-    destoryVector(backButtonPos);
+    Vector *pauseButtonPos = newVector(getww / 12, getwh * 7 / 8);
+    ActorNode pauseButton = newActor("back_button", pauseButtonPos);
+    Texture *pauseButtonTexture = newTexture("./res/scene2/pause_button_texture.txt", pauseButtonPos, "White", 1);
+    pauseButtonTexture->visible = TRUE;
+    pauseButtonTexture->setMeta((ComponentNode)pauseButtonTexture, "pause_button_texture");
+    pauseButton->addComponent(pauseButton, (ComponentNode)pauseButtonTexture);
+    pauseButton->vptr->update = pauseButtonUpdate;
+    destoryVector(pauseButtonPos);
 
     Vector *playerPos = newVector(getww / 2, getwh / 2);
     ActorNode player = newActor("player", playerPos);
     // playerTexture
-    Texture *playerTexture = newTexture("./res/scene2/playerBody.txt", playerPos, "Blue", 1);
+    Texture *playerTexture = newTexture("./res/scene2/playerBody.txt", playerPos, "Cyan", 1);
     playerTexture->visible = TRUE;
     playerTexture->setMeta((ComponentNode)playerTexture, "player_texture");
     player->addComponent(player, (ComponentNode)playerTexture);
@@ -56,14 +56,14 @@ void setupScene_scene2()
         0,
         playerTexture->getWidth(playerTexture) / 2.2,
         FALSE,
-        "Blue",
+        "Cyan",
         1);
     CollisionShape *playerDashTargetShape = newCollisionShape((Shape *)targetCircle);
     playerDashTargetShape->visible = FALSE;
     playerDashTargetShape->enable = FALSE;
     playerDashTargetShape->setMeta((ComponentNode)playerDashTargetShape, "player_dash_circle");
     player->addComponent(player, (ComponentNode)playerDashTargetShape);
-    //dashPowerStrip
+    // dashPowerStrip
     Vector *stripPos = newVector(playerPos->x, playerPos->y - playerTexture->getHeight(playerTexture) / 1.8);
     Rect *stripRect = newRect(
         stripPos,
@@ -71,8 +71,7 @@ void setupScene_scene2()
         playerTexture->getWidth(playerTexture), playerTexture->getHeight(playerTexture) * 0.1,
         TRUE,
         "Green",
-        1
-    );
+        1);
     CollisionShape *playerDashPowerStrip = newCollisionShape((Shape *)stripRect);
     playerDashPowerStrip->visible = TRUE;
     playerDashPowerStrip->enable = FALSE;
@@ -87,7 +86,7 @@ void setupScene_scene2()
     destoryShape((Shape *)stripRect);
 
     scene2->addActor(scene2, background);
-    scene2->addActor(scene2, backButton);
+    scene2->addActor(scene2, pauseButton);
     scene2->addActor(scene2, player);
 }
 
@@ -127,13 +126,14 @@ static void playerUpdate(ActorNode player, double delta)
             playerDashTargetCircle->visible = FALSE;
             player->vel.x = dashDirection->x * 0.08;
             player->vel.y = dashDirection->y * 0.08;
-        }else{
+        }
+        else
+        {
             GAME_TIME_TICK = 1.0 / 60.0;
         }
-        
     }
     dashPower = dashPower < 90.0 ? dashPower + 50 * delta : 90.0;
-    ((Rect*)(playerDashPowerStrip->shape))->width = (dashPower / 90.0) * playerTexture->getWidth(playerTexture);
+    ((Rect *)(playerDashPowerStrip->shape))->width = (dashPower / 90.0) * playerTexture->getWidth(playerTexture);
 
     Vector *acc = newVector((-inmng.keyStates['A'] + inmng.keyStates['D']),
                             (-inmng.keyStates['S'] + inmng.keyStates['W']));
@@ -144,7 +144,8 @@ static void playerUpdate(ActorNode player, double delta)
     acc->normalize(acc);
     acc->mult(acc, delta * ACC_CONST);
     Vector vel;
-    if (!inmng.keyStates['R']){
+    if (!inmng.keyStates['R'])
+    {
         player->vel.add(&(player->vel), acc);
     }
     memcpy(&(vel), &(player->vel), sizeof(Vector));
@@ -162,19 +163,20 @@ static void playerUpdate(ActorNode player, double delta)
     destoryVector(dashDirection);
 }
 
-static void backButtonUpdate(ActorNode button, double delta)
+static void pauseButtonUpdate(ActorNode button, double delta)
 {
     double mouseX = inmng.mouseX;
     double mouseY = inmng.mouseY;
 
-    Texture *buttonTexture = (Texture *)(button->getComponent(button, "back_button_texture"));
+    Texture *buttonTexture = (Texture *)(button->getComponent(button, "pause_button_texture"));
     Vector pos = *(buttonTexture->getPos(buttonTexture));
     double width = buttonTexture->getWidth(buttonTexture);
     double height = buttonTexture->getHeight(buttonTexture);
 
-    if (mouseX > pos.x - width / 2 && mouseX < pos.x + width / 2 && mouseY > pos.y - height / 2 && mouseY < pos.y + height / 2)
+    if (mouseX > pos.x - width / 2 && mouseX < pos.x + width / 2 && mouseY > pos.y - height / 2 && mouseY < pos.y + height / 2 ||
+        inmng.keyStates[VK_ESCAPE])
     {
-        if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP)
+        if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP || inmng.keyStates[VK_ESCAPE])
         {
             buttonTexture->color = "Blue";
             scene2->setSwitchTarget(scene2, "scene1");
@@ -185,11 +187,11 @@ static void backButtonUpdate(ActorNode button, double delta)
         }
         else
         {
-            buttonTexture->color = "Green";
+            buttonTexture->color = "Cyan";
         }
     }
     else
     {
-        buttonTexture->color = "Red";
+        buttonTexture->color = "White";
     }
 }
