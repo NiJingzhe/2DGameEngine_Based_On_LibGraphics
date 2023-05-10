@@ -6,14 +6,6 @@
 #define EMPTY_SHAPE 0
 #define RECT 1
 #define CIRCLE 2
-
-/*----------------------Virtual Table Type-------------------------*/
-typedef struct {
-	void (*render)(struct Shape*);
-	const int (*getShape)();
-} shapevTable;
-
-
 /*---------------------------Shape Type----------------------------*/
 typedef struct Shape {
 	
@@ -30,8 +22,15 @@ typedef struct Shape {
 	bool (*isCollideWith)(struct Shape*, struct Shape*);
 	//Vector* (*getCollisionVector)(struct Shape*, struct Shape*);
 
-	shapevTable* vptr;
+	struct shapevTable* vptr;
 } Shape;
+
+/*----------------------Virtual Table Type-------------------------*/
+typedef struct shapevTable{
+	void (*render)(struct Shape*);
+	const int (*getShape)();
+} shapevTable;
+
 
 Shape* newShape(Vector *pos, double angle, bool fill, char* color, double density);
 void destoryShape(Shape* s);

@@ -6,19 +6,13 @@
 
 #define JUST_ACTOR 0
 
-typedef struct actorvTable {
-	void (*update)(struct Actor*, double);
-	void (*render)(struct Actor*);
-	const int (*getActor)();
-} actorvTable;
-
 typedef struct Actor {
 
 	ComponentNode componentList;
 
 	Vector pos, vel;
 	char* meta;
-	actorvTable* vptr;
+	struct actorvTable* vptr;
 
 	struct Actor* prev, * next;
 
@@ -26,15 +20,21 @@ typedef struct Actor {
 	Vector* (*getVel)(struct Actor*);
 	void (*setPos)(struct Actor*, Vector*);
 	Vector* (*getPos)(struct Actor*);
-	const char* (*getMeta)(struct Actor*);
+	char* (*getMeta)(struct Actor*);
 	void (*setMeta)(struct Actor*, char* meta);
 	void (*addComponent)(struct Actor*, Component*);
-	void (*delComponent)(struct Actor*, int compType, char* meta);
+	void (*delComponent)(struct Actor*, char* meta);
 	ComponentNode (*getComponent)(struct Actor*, char* meta);
 
 	bool (*isCollideWithActor)(struct Actor*, struct Actor*);
 	
 } Actor, *ActorNode;
+
+typedef struct actorvTable {
+	void (*update)(struct Actor*, double);
+	void (*render)(struct Actor*);
+	const int (*getActor)();
+} actorvTable;
 
 Actor* newActor(char* meta, Vector* pos);
 void destoryActor(Actor* actor);
