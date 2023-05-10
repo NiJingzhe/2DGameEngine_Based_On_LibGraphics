@@ -118,13 +118,7 @@ static void addComponent(Actor* actor, ComponentNode comp) {
 	}
 	//Don' t forget to set the prev pointer of the new node
 	comp->prev = currentComp;
-	currentComp->next = (ComponentNode)calloc(1, sizeof(Component));
-	//use memcpy so we can finally free the argument comp to prevent memory leak.
-	if (currentComp->next == NULL) {
-		printf("Cannot allocate memory for new component node\n");
-		return;
-	}
-	memcpy(currentComp->next, comp, sizeof(Component));
+	currentComp->next = comp;
 }
 
 static void delComponent(Actor* actor, char* meta) {
@@ -160,7 +154,7 @@ static ComponentNode getComponent(Actor* actor, char* meta) {
 		return NULL;
 	}
 	//Or we have something, then we have to find the correct node with compType and meta
-	while (currentComp->next && strcmp(currentComp->getMeta(currentComp), meta) == 0) {
+	while (currentComp->next && strcmp(currentComp->getMeta(currentComp), meta) != 0) {
 		currentComp = currentComp->next;
 	}
 	//Reach the tail node but still not found, directly exit this function.

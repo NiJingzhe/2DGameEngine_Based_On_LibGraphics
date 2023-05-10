@@ -139,8 +139,8 @@ static void initCollisionShape(CollisionShape* c, Shape* shape) {
 	destoryComponent(super);
 
 	c->enable = TRUE;
-	c->pos.x = 0;
-	c->pos.y = 0;
+	c->pos.x = c->shape->pos.x;
+	c->pos.y = c->shape->pos.y;
 	c->getMeta = c->super.getMeta;
 	c->setMeta = c->super.setMeta;
 	c->getPos = getCollisionShapePos;

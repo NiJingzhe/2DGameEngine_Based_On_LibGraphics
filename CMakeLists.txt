@@ -19,4 +19,4 @@ add_compile_options(-std=c11)
 add_executable (2DGameEngine ${SRC_LIST} ${HEAD_LIST} ${ENG_LIST})
 
 # TODO: 如有需要，请添加测试并安装目标。
-install(TARGETS 2DGameEngine DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/bin/)
+install(TARGETS 2DGameEngine DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/)

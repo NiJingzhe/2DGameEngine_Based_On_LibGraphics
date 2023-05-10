@@ -6,5 +6,5 @@ C_DEFINES =
 
 C_INCLUDES = @CMakeFiles/2DGameEngine.dir/includes_C.rsp
 
-C_FLAGS = -g -std=c11
+C_FLAGS = -O3 -DNDEBUG -std=c11
 

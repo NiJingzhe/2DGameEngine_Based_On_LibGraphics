@@ -73,8 +73,9 @@ static void normalize(Vector* v) {
 	if (v->length(v) == 0){
 		return;
 	}
-	v->x /= v->length(v);
-	v->y /= v->length(v);
+	double len = v->length(v);
+	v->x /= len;
+	v->y /= len;
 }
 
 void destoryVector(Vector* v){
