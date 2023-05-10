@@ -1,0 +1,28 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"shape.h": "c",
+			"public_headers.h": "c",
+			"actor.h": "c",
+			"scene.h": "c",
+			"2dengine.h": "c",
+			"vector.h": "c",
+			"extgraph.h": "c",
+			"graphics.h": "c",
+			"scene2.h": "c",
+			"scene1.h": "c",
+			"input_manager.h": "c",
+			"scenes_manager.h": "c"
+		}
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+		]
+	}
+}

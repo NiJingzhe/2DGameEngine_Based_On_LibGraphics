@@ -1,0 +1,342 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
+!_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
+!_TAG_PROC_CWD	/data/data/com.termux/files/home/project/c_programming/libgraphics/	//
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	5.9.0	//
+ACL_Keyboard_Event	graphics.h	/^} ACL_Keyboard_Event;$/;"	t	typeref:enum:__anone2019b0c0303
+ACL_Mouse_Button	graphics.h	/^} ACL_Mouse_Button;$/;"	t	typeref:enum:__anone2019b0c0103
+ACL_Mouse_Event	graphics.h	/^} ACL_Mouse_Event;$/;"	t	typeref:enum:__anone2019b0c0203
+ANY	exceptio.c	/^exception ANY = { "ANY" };$/;"	v	typeref:typename:exception
+AddPolygonPoint	graphics.c	/^static void AddPolygonPoint(int x, int y)$/;"	f	typeref:typename:void	file:
+AddSegment	graphics.c	/^static void AddSegment(int x0, int y0, int x1, int y1)$/;"	f	typeref:typename:void	file:
+AnyButton	graphics.c	/^#define AnyButton /;"	d	file:
+BUTTON_DOUBLECLICK	graphics.h	/^    BUTTON_DOUBLECLICK,$/;"	e	enum:__anone2019b0c0203
+BUTTON_DOWN	graphics.h	/^    BUTTON_DOWN,$/;"	e	enum:__anone2019b0c0203
+BUTTON_UP	graphics.h	/^    BUTTON_UP,$/;"	e	enum:__anone2019b0c0203
+Bold	extgraph.h	/^#define Bold /;"	d
+BottomMargin	graphics.c	/^#define BottomMargin /;"	d	file:
+CharEventCallback	graphics.h	/^typedef void (*CharEventCallback) (char c);$/;"	t	typeref:typename:void (*)(char c)
+CharToString	strlib.c	/^string CharToString(char ch)$/;"	f	typeref:typename:string
+CheckEvents	graphics.c	/^static void CheckEvents(void)$/;"	f	typeref:typename:void	file:
+Concat	strlib.c	/^string Concat(string s1, string s2)$/;"	f	typeref:typename:string
+ConsoleHeight	graphics.c	/^#define ConsoleHeight /;"	d	file:
+ConvertToLowerCase	strlib.c	/^string ConvertToLowerCase(string s)$/;"	f	typeref:typename:string
+ConvertToUpperCase	strlib.c	/^string ConvertToUpperCase(string s)$/;"	f	typeref:typename:string
+CopyString	strlib.c	/^string CopyString(string s)$/;"	f	typeref:typename:string
+CreateString	strlib.c	/^static string CreateString(int len)$/;"	f	typeref:typename:string	file:
+DefaultFont	graphics.c	/^#define DefaultFont /;"	d	file:
+DefaultSize	graphics.c	/^#define DefaultSize /;"	d	file:
+DefineColor	graphics.c	/^void DefineColor(string name,$/;"	f	typeref:typename:void
+DesiredHeight	graphics.c	/^#define DesiredHeight /;"	d	file:
+DesiredWidth	graphics.c	/^#define DesiredWidth /;"	d	file:
+DisplayArc	graphics.c	/^static void DisplayArc(double xc, double yc, double rx, double ry,$/;"	f	typeref:typename:void	file:
+DisplayClear	graphics.c	/^static void DisplayClear(void)$/;"	f	typeref:typename:void	file:
+DisplayExit	graphics.c	/^static void DisplayExit(void)$/;"	f	typeref:typename:void	file:
+DisplayFont	graphics.c	/^static void DisplayFont(string font, int size, int style)$/;"	f	typeref:typename:void	file:
+DisplayLine	graphics.c	/^static void DisplayLine(double x, double y, double dx, double dy)$/;"	f	typeref:typename:void	file:
+DisplayPolygon	graphics.c	/^static void DisplayPolygon(void)$/;"	f	typeref:typename:void	file:
+DisplayText	graphics.c	/^static void DisplayText(double x, double y, string text)$/;"	f	typeref:typename:void	file:
+DoUpdate	graphics.c	/^static void DoUpdate(void)$/;"	f	typeref:typename:void	file:
+DrawArc	graphics.c	/^void DrawArc(double r, double start, double sweep)$/;"	f	typeref:typename:void
+DrawEllipticalArc	graphics.c	/^void DrawEllipticalArc(double rx, double ry,$/;"	f	typeref:typename:void
+DrawLine	graphics.c	/^void DrawLine(double dx, double dy)$/;"	f	typeref:typename:void
+DrawTextString	graphics.c	/^void DrawTextString(string text)$/;"	f	typeref:typename:void
+ES_EvalBody	exception.h	/^#define ES_EvalBody /;"	d
+ES_Exception	exception.h	/^#define ES_Exception /;"	d
+ES_Initialize	exception.h	/^#define ES_Initialize /;"	d
+ETooManyExceptClauses	exception.h	/^#define ETooManyExceptClauses /;"	d
+EUnhandledException	exception.h	/^#define EUnhandledException /;"	d
+EndFilledRegion	graphics.c	/^void EndFilledRegion(void)$/;"	f	typeref:typename:void
+EnumerateProc	graphics.c	/^static BOOL CALLBACK EnumerateProc(HWND window, LPARAM clientData)$/;"	f	typeref:typename:BOOL CALLBACK	file:
+Epsilon	graphics.c	/^#define Epsilon /;"	d	file:
+Error	genlib.c	/^void Error(string msg, ...)$/;"	f	typeref:typename:void
+ErrorException	exceptio.c	/^exception ErrorException = { "ErrorException" };$/;"	v	typeref:typename:exception
+ErrorExitStatus	genlib.c	/^#define ErrorExitStatus /;"	d	file:
+ExitGraphics	graphics.c	/^void ExitGraphics(void)$/;"	f	typeref:typename:void
+FALSE	genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anonf15eef4c0103
+FALSE	genlib.h	/^#      define FALSE /;"	d
+FindChar	strlib.c	/^int FindChar(char ch, string text, int start)$/;"	f	typeref:typename:int
+FindColorName	graphics.c	/^static int FindColorName(string name)$/;"	f	typeref:typename:int	file:
+FindConsoleWindow	graphics.c	/^static HWND FindConsoleWindow(void)$/;"	f	typeref:typename:HWND	file:
+FindExistingFont	graphics.c	/^static int FindExistingFont(string name, int size, int style)$/;"	f	typeref:typename:int	file:
+FindHandler	exceptio.c	/^static context_block *FindHandler(exception *e)$/;"	f	typeref:typename:context_block *	file:
+FindString	strlib.c	/^int FindString(string str, string text, int start)$/;"	f	typeref:typename:int
+FreeBlock	genlib.c	/^void FreeBlock(void *ptr)$/;"	f	typeref:typename:void
+GWClassName	graphics.c	/^#define GWClassName /;"	d	file:
+GetBlock	genlib.c	/^void *GetBlock(size_t nbytes)$/;"	f	typeref:typename:void *
+GetCurrentException	exception.h	/^#define GetCurrentException(/;"	d
+GetCurrentX	graphics.c	/^double GetCurrentX(void)$/;"	f	typeref:typename:double
+GetCurrentY	graphics.c	/^double GetCurrentY(void)$/;"	f	typeref:typename:double
+GetEraseMode	graphics.c	/^bool GetEraseMode(void)$/;"	f	typeref:typename:bool
+GetExceptionName	exception.h	/^#define GetExceptionName(/;"	d
+GetExceptionValue	exception.h	/^#define GetExceptionValue(/;"	d
+GetFont	graphics.c	/^string GetFont(void)$/;"	f	typeref:typename:string
+GetFontAscent	graphics.c	/^double GetFontAscent(void)$/;"	f	typeref:typename:double
+GetFontDescent	graphics.c	/^double GetFontDescent(void)$/;"	f	typeref:typename:double
+GetFontHeight	graphics.c	/^double GetFontHeight(void)$/;"	f	typeref:typename:double
+GetFullScreenHeight	graphics.c	/^double GetFullScreenHeight(void)$/;"	f	typeref:typename:double
+GetFullScreenWidth	graphics.c	/^double GetFullScreenWidth(void)$/;"	f	typeref:typename:double
+GetInteger	simpio.c	/^int GetInteger(void)$/;"	f	typeref:typename:int
+GetLine	simpio.c	/^string GetLine(void)$/;"	f	typeref:typename:string
+GetLong	simpio.c	/^long GetLong(void)$/;"	f	typeref:typename:long
+GetMouseX	graphics.c	/^double GetMouseX(void)$/;"	f	typeref:typename:double
+GetMouseY	graphics.c	/^double GetMouseY(void)$/;"	f	typeref:typename:double
+GetPenColor	graphics.c	/^string GetPenColor(void)$/;"	f	typeref:typename:string
+GetPenSize	graphics.c	/^int GetPenSize(void)$/;"	f	typeref:typename:int
+GetPointSize	graphics.c	/^int GetPointSize(void)$/;"	f	typeref:typename:int
+GetReal	simpio.c	/^double GetReal(void)$/;"	f	typeref:typename:double
+GetStyle	graphics.c	/^int GetStyle(void)$/;"	f	typeref:typename:int
+GetWindowHeight	graphics.c	/^double GetWindowHeight(void)$/;"	f	typeref:typename:double
+GetWindowTitle	graphics.c	/^string GetWindowTitle(void)$/;"	f	typeref:typename:string
+GetWindowWidth	graphics.c	/^double GetWindowWidth(void)$/;"	f	typeref:typename:double
+GetXResolution	graphics.c	/^double GetXResolution(void)$/;"	f	typeref:typename:double
+GetYResolution	graphics.c	/^double GetYResolution(void)$/;"	f	typeref:typename:double
+GraphicsEventProc	graphics.c	/^static LONG FAR PASCAL GraphicsEventProc(HWND hwnd, UINT msg,$/;"	f	typeref:typename:LONG FAR PASCAL	file:
+HandlerExists	exceptio.c	/^bool HandlerExists(exception *e)$/;"	f	typeref:typename:bool
+HasColor	graphics.c	/^bool HasColor(void)$/;"	f	typeref:typename:bool
+InchesX	graphics.c	/^static double InchesX(int x)$/;"	f	typeref:typename:double	file:
+InchesY	graphics.c	/^static double InchesY(int y)$/;"	f	typeref:typename:double	file:
+InitCheck	graphics.c	/^static void InitCheck(void)$/;"	f	typeref:typename:void	file:
+InitColors	graphics.c	/^static void InitColors(void)$/;"	f	typeref:typename:void	file:
+InitConsole	graphics.c	/^void InitConsole(void)$/;"	f	typeref:typename:void
+InitDisplay	graphics.c	/^static void InitDisplay(void)$/;"	f	typeref:typename:void	file:
+InitDrawingTools	graphics.c	/^static void InitDrawingTools(void)$/;"	f	typeref:typename:void	file:
+InitGraphics	graphics.c	/^void InitGraphics(void)$/;"	f	typeref:typename:void
+InitGraphicsState	graphics.c	/^static void InitGraphicsState(void)$/;"	f	typeref:typename:void	file:
+InitialBufferSize	simpio.c	/^#define InitialBufferSize /;"	d	file:
+IntegerToString	strlib.c	/^string IntegerToString(int n)$/;"	f	typeref:typename:string
+Italic	extgraph.h	/^#define Italic /;"	d
+IthChar	strlib.c	/^char IthChar(string s, int i)$/;"	f	typeref:typename:char
+KEY_DOWN	graphics.h	/^	KEY_DOWN,$/;"	e	enum:__anone2019b0c0303
+KEY_UP	graphics.h	/^	KEY_UP$/;"	e	enum:__anone2019b0c0303
+KeyboardEventCallback	graphics.h	/^typedef void (*KeyboardEventCallback) (int key,int event);$/;"	t	typeref:typename:void (*)(int key,int event)
+LEFT_BUTTON	graphics.h	/^    LEFT_BUTTON,$/;"	e	enum:__anone2019b0c0103
+LargeInt	graphics.c	/^#define LargeInt /;"	d	file:
+LeftMargin	graphics.c	/^#define LeftMargin /;"	d	file:
+MIDDLE_BUTTON	graphics.h	/^    MIDDLE_BUTTON,$/;"	e	enum:__anone2019b0c0103
+MOUSEMOVE	graphics.h	/^    MOUSEMOVE	$/;"	e	enum:__anone2019b0c0203
+Max	graphics.c	/^static int Max(int x, int y)$/;"	f	typeref:typename:int	file:
+MaxColors	graphics.c	/^#define MaxColors /;"	d	file:
+MaxDigits	strlib.c	/^#define MaxDigits /;"	d	file:
+MaxErrorMessage	genlib.c	/^#define MaxErrorMessage /;"	d	file:
+MaxExceptionsPerScope	exception.h	/^#define MaxExceptionsPerScope /;"	d
+MaxFontName	graphics.c	/^#define MaxFontName /;"	d	file:
+MaxFonts	graphics.c	/^#define MaxFonts /;"	d	file:
+MaxTitle	graphics.c	/^#define MaxTitle /;"	d	file:
+MaxUnhandledMessage	exceptio.c	/^#define MaxUnhandledMessage /;"	d	file:
+Min	graphics.c	/^static int Min(int x, int y)$/;"	f	typeref:typename:int	file:
+MinColors	graphics.c	/^#define MinColors /;"	d	file:
+MinConsoleScale	graphics.c	/^#define MinConsoleScale /;"	d	file:
+MouseButtonIsDown	graphics.c	/^bool MouseButtonIsDown(void)$/;"	f	typeref:typename:bool
+MouseEventCallback	graphics.h	/^typedef void (*MouseEventCallback) (int x, int y, int button, int event);$/;"	t	typeref:typename:void (*)(int x,int y,int button,int event)
+MovePen	graphics.c	/^void MovePen(double x, double y)$/;"	f	typeref:typename:void
+NFills	graphics.c	/^#define NFills /;"	d	file:
+NO_BUTTON	graphics.h	/^    NO_BUTTON = 0,$/;"	e	enum:__anone2019b0c0103
+New	genlib.h	/^#define New(/;"	d
+NewArray	genlib.h	/^#define NewArray(/;"	d
+NoRegion	graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anone2019b070203	file:
+Normal	extgraph.h	/^#define Normal /;"	d
+PStartSize	graphics.c	/^#define PStartSize /;"	d	file:
+Pause	graphics.c	/^void Pause(double seconds)$/;"	f	typeref:typename:void
+PenHasMoved	graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anone2019b070203	file:
+Pi	graphics.c	/^#define Pi /;"	d	file:
+PixelsX	graphics.c	/^static int PixelsX(double x)$/;"	f	typeref:typename:int	file:
+PixelsY	graphics.c	/^static int PixelsY(double y)$/;"	f	typeref:typename:int	file:
+PrefixMatch	graphics.c	/^static bool PrefixMatch(char *prefix, char *str)$/;"	f	typeref:typename:bool	file:
+PrepareToDraw	graphics.c	/^static void PrepareToDraw(void)$/;"	f	typeref:typename:void	file:
+ProtectBlock	genlib.c	/^void ProtectBlock(void *ptr, size_t nbytes)$/;"	f	typeref:typename:void
+ProtectVariable	gcalloc.h	/^#define ProtectVariable(/;"	d
+RAND_MAX	random.h	/^#  define RAND_MAX /;"	d
+RIGHT_BUTTON	graphics.h	/^    RIGHT_BUTTON$/;"	e	enum:__anone2019b0c0103
+ROLL_DOWN	graphics.h	/^    ROLL_DOWN,$/;"	e	enum:__anone2019b0c0203
+ROLL_UP	graphics.h	/^    ROLL_UP,$/;"	e	enum:__anone2019b0c0203
+Radians	graphics.c	/^static double Radians(double degrees)$/;"	f	typeref:typename:double	file:
+RaiseException	exceptio.c	/^void RaiseException(exception *e, string name, void *value)$/;"	f	typeref:typename:void
+RandomChance	random.c	/^bool RandomChance(double p)$/;"	f	typeref:typename:bool
+RandomInteger	random.c	/^int RandomInteger(int low, int high)$/;"	f	typeref:typename:int
+RandomReal	random.c	/^double RandomReal(double low, double high)$/;"	f	typeref:typename:double
+Randomize	random.c	/^void Randomize(void)$/;"	f	typeref:typename:void
+ReadLine	simpio.c	/^string ReadLine(FILE *infile)$/;"	f	typeref:typename:string
+RealToString	strlib.c	/^string RealToString(double d)$/;"	f	typeref:typename:string
+RectHeight	graphics.c	/^static int RectHeight(RECT *rp)$/;"	f	typeref:typename:int	file:
+RectWidth	graphics.c	/^static int RectWidth(RECT *rp)$/;"	f	typeref:typename:int	file:
+RegionActive	graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anone2019b070203	file:
+RegionStarting	graphics.c	/^    NoRegion, RegionStarting, RegionActive, PenHasMoved$/;"	e	enum:__anone2019b070203	file:
+RegisterWindowClass	graphics.c	/^static void RegisterWindowClass(void)$/;"	f	typeref:typename:void	file:
+RenderArc	graphics.c	/^static void RenderArc(double x, double y, double rx, double ry,$/;"	f	typeref:typename:void	file:
+RestoreGraphicsState	graphics.c	/^void RestoreGraphicsState(void)$/;"	f	typeref:typename:void
+RightMargin	graphics.c	/^#define RightMargin /;"	d	file:
+Round	graphics.c	/^static int Round(double x)$/;"	f	typeref:typename:int	file:
+SaveGraphicsState	graphics.c	/^void SaveGraphicsState(void)$/;"	f	typeref:typename:void
+ScaleX	graphics.c	/^static int ScaleX(double x)$/;"	f	typeref:typename:int	file:
+ScaleXInches	graphics.c	/^double ScaleXInches(int x) \/*x coordinate from pixels to inches*\/$/;"	f	typeref:typename:double
+ScaleY	graphics.c	/^static int ScaleY(double y)$/;"	f	typeref:typename:int	file:
+ScaleYInches	graphics.c	/^double ScaleYInches(int y)\/*y coordinate from pixels to inches*\/$/;"	f	typeref:typename:double
+SetArcBB	graphics.c	/^static void SetArcBB(RECT *rp, double xc, double yc,$/;"	f	typeref:typename:void	file:
+SetEraseMode	graphics.c	/^void SetEraseMode(bool mode)$/;"	f	typeref:typename:void
+SetFont	graphics.c	/^void SetFont(string font)$/;"	f	typeref:typename:void
+SetLineBB	graphics.c	/^static void SetLineBB(RECT *rp, double x, double y, double dx, double dy)$/;"	f	typeref:typename:void	file:
+SetPenColor	graphics.c	/^void SetPenColor(string color)$/;"	f	typeref:typename:void
+SetPenSize	graphics.c	/^void SetPenSize(int size)$/;"	f	typeref:typename:void
+SetPointSize	graphics.c	/^void SetPointSize(int size)$/;"	f	typeref:typename:void
+SetRectFromSize	graphics.c	/^static void SetRectFromSize(RECT *rp, int x, int y, int width, int height)$/;"	f	typeref:typename:void	file:
+SetStyle	graphics.c	/^void SetStyle(int style)$/;"	f	typeref:typename:void
+SetTextBB	graphics.c	/^static void SetTextBB(RECT *rp, double x, double y, string text)$/;"	f	typeref:typename:void	file:
+SetWindowSize	graphics.c	/^void SetWindowSize(double width, double height)$/;"	f	typeref:typename:void
+SetWindowTitle	graphics.c	/^void SetWindowTitle(string title)$/;"	f	typeref:typename:void
+StartFilledRegion	graphics.c	/^void StartFilledRegion(double grayScale)$/;"	f	typeref:typename:void
+StartPolygon	graphics.c	/^static void StartPolygon(void)$/;"	f	typeref:typename:void	file:
+StringCompare	strlib.c	/^int StringCompare(string s1, string s2)$/;"	f	typeref:typename:int
+StringEqual	strlib.c	/^bool StringEqual(string s1, string s2)$/;"	f	typeref:typename:bool
+StringLength	strlib.c	/^int StringLength(string s)$/;"	f	typeref:typename:int
+StringMatch	graphics.c	/^static bool StringMatch(string s1, string s2)$/;"	f	typeref:typename:bool	file:
+StringToInteger	strlib.c	/^int StringToInteger(string s)$/;"	f	typeref:typename:int
+StringToReal	strlib.c	/^double StringToReal(string s)$/;"	f	typeref:typename:double
+SubString	strlib.c	/^string SubString(string s, int p1, int p2)$/;"	f	typeref:typename:string
+TRUE	genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	e	enum:__anonf15eef4c0103
+TRUE	genlib.h	/^#      define TRUE /;"	d
+TextStringWidth	graphics.c	/^double TextStringWidth(string text)$/;"	f	typeref:typename:double
+TimerEventCallback	graphics.h	/^typedef void (*TimerEventCallback) (int timerID);$/;"	t	typeref:typename:void (*)(int timerID)
+TopMargin	graphics.c	/^#define TopMargin /;"	d	file:
+UNDEFINED	genlib.h	/^#define UNDEFINED /;"	d
+UpdateDisplay	graphics.c	/^void UpdateDisplay(void)$/;"	f	typeref:typename:void
+WaitForMouseDown	graphics.c	/^void WaitForMouseDown(void)$/;"	f	typeref:typename:void
+WaitForMouseUp	graphics.c	/^void WaitForMouseUp(void)$/;"	f	typeref:typename:void
+WinMain	graphics.c	/^int WINAPI WinMain (HINSTANCE hThisInstance,$/;"	f	typeref:typename:int WINAPI
+WindowSep	graphics.c	/^#define WindowSep /;"	d	file:
+_GCControlBlock	gcalloc.h	/^} *_GCControlBlock;$/;"	t	typeref:struct:__anon5c425e100108 *
+__anon5c425e100108	gcalloc.h	/^typedef struct {$/;"	s
+__anon73c5c4ca0108	exception.h	/^typedef struct { string name; } exception;$/;"	s
+__anone2019b070108	graphics.c	/^typedef struct {$/;"	s	file:
+__anone2019b070203	graphics.c	/^typedef enum {$/;"	g	file:
+__anone2019b070308	graphics.c	/^typedef struct {$/;"	s	file:
+__anone2019b0c0103	graphics.h	/^{$/;"	g
+__anone2019b0c0203	graphics.h	/^{$/;"	g
+__anone2019b0c0303	graphics.h	/^{$/;"	g
+__anonf15eef4c0103	genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	g
+__anonf15eef4c0103	genlib.h	/^       typedef enum {FALSE, TRUE} bool;$/;"	t	typeref:enum:bool
+_acb	genlib.c	/^_GCControlBlock _acb = NULL;$/;"	v	typeref:typename:_GCControlBlock
+_exception_h	exception.h	/^#define _exception_h$/;"	d
+_extgraph_h	extgraph.h	/^#define _extgraph_h$/;"	d
+_gcalloc_h	gcalloc.h	/^#define _gcalloc_h$/;"	d
+_genlib_h	genlib.h	/^#define _genlib_h$/;"	d
+_graphics_h	graphics.h	/^#define _graphics_h$/;"	d
+_random_h	random.h	/^#define _random_h$/;"	d
+_simpio_h	simpio.h	/^#define _simpio_h$/;"	d
+_strlib_h	strlib.h	/^#define _strlib_h$/;"	d
+allocMethod	gcalloc.h	/^    void *(*allocMethod)(size_t nbytes);$/;"	m	struct:__anon5c425e100108	typeref:typename:void * (*)(size_t nbytes)
+array	exception.h	/^    exception *array[MaxExceptionsPerScope];$/;"	m	struct:ctx_block	typeref:typename:exception * []
+ascent	graphics.c	/^    int points, ascent, descent, height;$/;"	m	struct:__anone2019b070108	typeref:typename:int	file:
+blue	graphics.c	/^    double red, green, blue;$/;"	m	struct:__anone2019b070308	typeref:typename:double	file:
+bool	genlib.h	/^#      define bool /;"	d
+cancelCharEvent	graphics.c	/^void cancelCharEvent()$/;"	f	typeref:typename:void
+cancelKeyboardEvent	graphics.c	/^void cancelKeyboardEvent()$/;"	f	typeref:typename:void
+cancelMouseEvent	graphics.c	/^void cancelMouseEvent()$/;"	f	typeref:typename:void
+cancelTimer	graphics.c	/^void cancelTimer(int id)$/;"	f	typeref:typename:void
+cancelTimerEvent	graphics.c	/^void cancelTimerEvent()$/;"	f	typeref:typename:void
+color	graphics.c	/^    int color;$/;"	m	struct:graphicsStateT	typeref:typename:int	file:
+colorEntryT	graphics.c	/^} colorEntryT;$/;"	t	typeref:struct:__anone2019b070308	file:
+colorTable	graphics.c	/^static colorEntryT colorTable[MaxColors];$/;"	v	typeref:typename:colorEntryT[]	file:
+consoleWindow	graphics.c	/^static HWND consoleWindow, graphicsWindow;$/;"	v	typeref:typename:HWND	file:
+context_block	exception.h	/^} context_block;$/;"	t	typeref:struct:ctx_block
+ctx_block	exception.h	/^typedef struct ctx_block {$/;"	s
+currentFont	graphics.c	/^static int currentFont;$/;"	v	typeref:typename:int	file:
+cx	graphics.c	/^    double cx, cy;$/;"	m	struct:graphicsStateT	typeref:typename:double	file:
+cx	graphics.c	/^static double cx, cy;$/;"	v	typeref:typename:double	file:
+cy	graphics.c	/^    double cx, cy;$/;"	m	struct:graphicsStateT	typeref:typename:double	file:
+cy	graphics.c	/^static double cx, cy;$/;"	v	typeref:typename:double	file:
+descent	graphics.c	/^    int points, ascent, descent, height;$/;"	m	struct:__anone2019b070108	typeref:typename:int	file:
+drawColor	graphics.c	/^static COLORREF drawColor, eraseColor;$/;"	v	typeref:typename:COLORREF	file:
+drawPen	graphics.c	/^static HPEN drawPen, erasePen, nullPen;$/;"	v	typeref:typename:HPEN	file:
+endtry	exception.h	/^#define endtry /;"	d
+erase	graphics.c	/^    bool erase;$/;"	m	struct:graphicsStateT	typeref:typename:bool	file:
+eraseColor	graphics.c	/^static COLORREF drawColor, eraseColor;$/;"	v	typeref:typename:COLORREF	file:
+eraseMode	graphics.c	/^static bool eraseMode;$/;"	v	typeref:typename:bool	file:
+erasePen	graphics.c	/^static HPEN drawPen, erasePen, nullPen;$/;"	v	typeref:typename:HPEN	file:
+except	exception.h	/^#define except(/;"	d
+exception	exception.h	/^typedef struct { string name; } exception;$/;"	t	typeref:struct:__anon73c5c4ca0108
+exceptionStack	exceptio.c	/^context_block *exceptionStack = NULL;$/;"	v	typeref:typename:context_block *
+fillBitmaps	graphics.c	/^static HBITMAP fillBitmaps[NFills];$/;"	v	typeref:typename:HBITMAP[]	file:
+fillList	graphics.c	/^static short fillList[][8] = {$/;"	v	typeref:typename:short[][8]	file:
+font	graphics.c	/^    HFONT font;$/;"	m	struct:__anone2019b070108	typeref:typename:HFONT	file:
+font	graphics.c	/^    string font;$/;"	m	struct:graphicsStateT	typeref:typename:string	file:
+fontEntryT	graphics.c	/^} fontEntryT;$/;"	t	typeref:struct:__anone2019b070108	file:
+fontTable	graphics.c	/^static fontEntryT fontTable[MaxFonts];$/;"	v	typeref:typename:fontEntryT[]	file:
+freeMethod	gcalloc.h	/^    void (*freeMethod)(void *ptr);$/;"	m	struct:__anon5c425e100108	typeref:typename:void (*)(void * ptr)
+g_char	graphics.c	/^CharEventCallback g_char = NULL;$/;"	v	typeref:typename:CharEventCallback
+g_keyboard	graphics.c	/^KeyboardEventCallback g_keyboard = NULL;$/;"	v	typeref:typename:KeyboardEventCallback
+g_mouse	graphics.c	/^MouseEventCallback g_mouse = NULL;$/;"	v	typeref:typename:MouseEventCallback
+g_timer	graphics.c	/^TimerEventCallback g_timer = NULL;$/;"	v	typeref:typename:TimerEventCallback
+gdc	graphics.c	/^static HDC gdc, osdc;$/;"	v	typeref:typename:HDC	file:
+graphicsStateT	graphics.c	/^typedef struct graphicsStateT {$/;"	s	file:
+graphicsStateT	graphics.c	/^} *graphicsStateT;$/;"	t	typeref:struct:graphicsStateT *	file:
+graphicsWindow	graphics.c	/^static HWND consoleWindow, graphicsWindow;$/;"	v	typeref:typename:HWND	file:
+green	graphics.c	/^    double red, green, blue;$/;"	m	struct:__anone2019b070308	typeref:typename:double	file:
+height	graphics.c	/^    int points, ascent, descent, height;$/;"	m	struct:__anone2019b070108	typeref:typename:int	file:
+id	exception.h	/^    exception *id;$/;"	m	struct:ctx_block	typeref:typename:exception *
+initialized	graphics.c	/^static bool initialized = FALSE;$/;"	v	typeref:typename:bool	file:
+jmp	exception.h	/^    jmp_buf jmp;$/;"	m	struct:ctx_block	typeref:typename:jmp_buf
+link	exception.h	/^    struct ctx_block *link;$/;"	m	struct:ctx_block	typeref:struct:ctx_block *
+link	graphics.c	/^    struct graphicsStateT *link;$/;"	m	struct:graphicsStateT	typeref:struct:graphicsStateT *	file:
+mouseButton	graphics.c	/^static bool mouseButton = FALSE;$/;"	v	typeref:typename:bool	file:
+mouseX	graphics.c	/^static int mouseX, mouseY;$/;"	v	typeref:typename:int	file:
+mouseY	graphics.c	/^static int mouseX, mouseY;$/;"	v	typeref:typename:int	file:
+nColors	graphics.c	/^static int nColors;$/;"	v	typeref:typename:int	file:
+nFonts	graphics.c	/^static int nFonts;$/;"	v	typeref:typename:int	file:
+nPolygonPoints	graphics.c	/^static int nPolygonPoints;$/;"	v	typeref:typename:int	file:
+name	exception.h	/^    string name;$/;"	m	struct:ctx_block	typeref:typename:string
+name	exception.h	/^typedef struct { string name; } exception;$/;"	m	struct:__anon73c5c4ca0108	typeref:typename:string
+name	graphics.c	/^    string name;$/;"	m	struct:__anone2019b070108	typeref:typename:string	file:
+name	graphics.c	/^    string name;$/;"	m	struct:__anone2019b070308	typeref:typename:string	file:
+nullPen	graphics.c	/^static HPEN drawPen, erasePen, nullPen;$/;"	v	typeref:typename:HPEN	file:
+nx	exception.h	/^    int nx;$/;"	m	struct:ctx_block	typeref:typename:int
+osBits	graphics.c	/^static HBITMAP osBits;$/;"	v	typeref:typename:HBITMAP	file:
+osdc	graphics.c	/^static HDC gdc, osdc;$/;"	v	typeref:typename:HDC	file:
+pauseOnExit	graphics.c	/^static bool pauseOnExit = TRUE;$/;"	v	typeref:typename:bool	file:
+penColor	graphics.c	/^static int penColor;$/;"	v	typeref:typename:int	file:
+penSize	graphics.c	/^static int penSize = 1;$/;"	v	typeref:typename:int	file:
+pixelHeight	graphics.c	/^static int pixelWidth, pixelHeight;$/;"	v	typeref:typename:int	file:
+pixelWidth	graphics.c	/^static int pixelWidth, pixelHeight;$/;"	v	typeref:typename:int	file:
+pointSize	graphics.c	/^static int pointSize;$/;"	v	typeref:typename:int	file:
+points	graphics.c	/^    int points, ascent, descent, height;$/;"	m	struct:__anone2019b070108	typeref:typename:int	file:
+polygonBounds	graphics.c	/^static RECT polygonBounds;$/;"	v	typeref:typename:RECT	file:
+polygonPoints	graphics.c	/^static POINT *polygonPoints;$/;"	v	typeref:typename:POINT *	file:
+polygonSize	graphics.c	/^static int polygonSize;$/;"	v	typeref:typename:int	file:
+previousColor	graphics.c	/^static int previousColor;$/;"	v	typeref:typename:int	file:
+protectMethod	gcalloc.h	/^    void (*protectMethod)(void *ptr, size_t nbytes);$/;"	m	struct:__anon5c425e100108	typeref:typename:void (*)(void * ptr,size_t nbytes)
+ps	graphics.c	/^static PAINTSTRUCT ps;$/;"	v	typeref:typename:PAINTSTRUCT	file:
+raise	exception.h	/^#define raise(/;"	d
+red	graphics.c	/^    double red, green, blue;$/;"	m	struct:__anone2019b070308	typeref:typename:double	file:
+regionDensity	graphics.c	/^static double regionDensity;$/;"	v	typeref:typename:double	file:
+regionState	graphics.c	/^static regionStateT regionState;$/;"	v	typeref:typename:regionStateT	file:
+regionStateT	graphics.c	/^} regionStateT;$/;"	t	typeref:enum:__anone2019b070203	file:
+registerCharEvent	graphics.c	/^void registerCharEvent(CharEventCallback callback)$/;"	f	typeref:typename:void
+registerKeyboardEvent	graphics.c	/^void registerKeyboardEvent(KeyboardEventCallback callback)$/;"	f	typeref:typename:void
+registerMouseEvent	graphics.c	/^void registerMouseEvent(MouseEventCallback callback)$/;"	f	typeref:typename:void
+registerTimerEvent	graphics.c	/^void registerTimerEvent(TimerEventCallback callback)$/;"	f	typeref:typename:void
+repaint	graphics.c	/^void repaint()$/;"	f	typeref:typename:void
+repeat	genlib.h	/^#define repeat /;"	d
+size	graphics.c	/^    int size, style;$/;"	m	struct:__anone2019b070108	typeref:typename:int	file:
+size	graphics.c	/^    int size;$/;"	m	struct:graphicsStateT	typeref:typename:int	file:
+startTimer	graphics.c	/^void startTimer(int id,int timeinterval)$/;"	f	typeref:typename:void
+stateStack	graphics.c	/^static graphicsStateT stateStack;$/;"	v	typeref:typename:graphicsStateT	file:
+stream	genlib.h	/^typedef FILE *stream;$/;"	t	typeref:typename:FILE *
+string	genlib.h	/^typedef char *string;$/;"	t	typeref:typename:char *
+style	graphics.c	/^    int size, style;$/;"	m	struct:__anone2019b070108	typeref:typename:int	file:
+style	graphics.c	/^    int style;$/;"	m	struct:graphicsStateT	typeref:typename:int	file:
+textFont	graphics.c	/^static string textFont;$/;"	v	typeref:typename:string	file:
+textStyle	graphics.c	/^static int textStyle;$/;"	v	typeref:typename:int	file:
+try	exception.h	/^#define try /;"	d
+undefined_object	genlib.c	/^char undefined_object[] = "UNDEFINED";$/;"	v	typeref:typename:char[]
+value	exception.h	/^    void *value;$/;"	m	struct:ctx_block	typeref:typename:void *
+windowHeight	graphics.c	/^static double windowHeight = DesiredHeight;$/;"	v	typeref:typename:double	file:
+windowTitle	graphics.c	/^static string windowTitle = "Graphics Window";$/;"	v	typeref:typename:string	file:
+windowWidth	graphics.c	/^static double windowWidth = DesiredWidth;$/;"	v	typeref:typename:double	file:
+xResolution	graphics.c	/^static double xResolution, yResolution;$/;"	v	typeref:typename:double	file:
+yResolution	graphics.c	/^static double xResolution, yResolution;$/;"	v	typeref:typename:double	file:
