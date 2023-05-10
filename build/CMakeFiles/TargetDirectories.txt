@@ -1,0 +1,7 @@
+D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/2DGameEngine.dir
+D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/edit_cache.dir
+D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/rebuild_cache.dir
+D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/list_install_components.dir
+D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/install.dir
+D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/install/local.dir
+D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/install/strip.dir
