@@ -26,20 +26,20 @@ Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" p
 The CXX compiler identification is GNU, found in "D:/Proj/2DGameEngine/build/CMakeFiles/3.25.1/CompilerIdCXX/a.exe"
 
 Detecting C compiler ABI info compiled with the following output:
-Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-k4ql08
+Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-mgcsh2
 
-Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_3fb29/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_3fb29.dir/build.make CMakeFiles/cmTC_3fb29.dir/build
-make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-k4ql08'
-Building C object CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj
-D:/InstalledAPP/MinGW/bin/gcc.exe   -v -o CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c
+Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_779c8/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_779c8.dir/build.make CMakeFiles/cmTC_779c8.dir/build
+make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-mgcsh2'
+Building C object CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj
+D:/InstalledAPP/MinGW/bin/gcc.exe   -v -o CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c
 Using built-in specs.
 COLLECT_GCC=D:/InstalledAPP/MinGW/bin/gcc.exe
 Target: mingw32
 Configured with: ../src/gcc-6.3.0/configure --build=x86_64-pc-linux-gnu --host=mingw32 --target=mingw32 --with-gmp=/mingw --with-mpfr --with-mpc=/mingw --with-isl=/mingw --prefix=/mingw --disable-win32-registry --with-arch=i586 --with-tune=generic --enable-languages=c,c++,objc,obj-c++,fortran,ada --with-pkgversion='MinGW.org GCC-6.3.0-1' --enable-static --enable-shared --enable-threads --with-dwarf2 --disable-sjlj-exceptions --enable-version-specific-runtime-libs --with-libiconv-prefix=/mingw --with-libintl-prefix=/mingw --enable-libstdcxx-debug --enable-libgomp --disable-libvtv --enable-nls
 Thread model: win32
 gcc version 6.3.0 (MinGW.org GCC-6.3.0-1) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586'
- d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\cceK1J7N.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586'
+ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\ccRmDfcg.s
 GNU C11 (MinGW.org GCC-6.3.0-1) version 6.3.0 (mingw32)
 	compiled by GNU C version 6.3.0, GMP version 6.1.2, MPFR version 3.1.5, MPC version 1.0.3, isl version 0.15
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
@@ -60,16 +60,16 @@ GNU C11 (MinGW.org GCC-6.3.0-1) version 6.3.0 (mingw32)
 	compiled by GNU C version 6.3.0, GMP version 6.1.2, MPFR version 3.1.5, MPC version 1.0.3, isl version 0.15
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: 384cad586f05ed581a9c068b2f18b408
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586'
- d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj C:\Users\HUAWEI\AppData\Local\Temp\cceK1J7N.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586'
+ d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj C:\Users\HUAWEI\AppData\Local\Temp\ccRmDfcg.s
 GNU assembler version 2.28 (mingw32) using BFD version (GNU Binutils) 2.28
 COMPILER_PATH=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../libexec/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/
 LIBRARY_PATH=d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../lib/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586'
-Linking C executable cmTC_3fb29.exe
-D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_3fb29.dir/objects.a
-D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_3fb29.dir/objects.a @CMakeFiles/cmTC_3fb29.dir/objects1
-D:/InstalledAPP/MinGW/bin/gcc.exe  -v -Wl,--whole-archive CMakeFiles/cmTC_3fb29.dir/objects.a -Wl,--no-whole-archive -o cmTC_3fb29.exe -Wl,--out-implib,libcmTC_3fb29.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586'
+Linking C executable cmTC_779c8.exe
+D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_779c8.dir/objects.a
+D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_779c8.dir/objects.a @CMakeFiles/cmTC_779c8.dir/objects1
+D:/InstalledAPP/MinGW/bin/gcc.exe  -v -Wl,--whole-archive CMakeFiles/cmTC_779c8.dir/objects.a -Wl,--no-whole-archive -o cmTC_779c8.exe -Wl,--out-implib,libcmTC_779c8.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
 Using built-in specs.
 COLLECT_GCC=D:/InstalledAPP/MinGW/bin/gcc.exe
 COLLECT_LTO_WRAPPER=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe
@@ -79,10 +79,10 @@ Thread model: win32
 gcc version 6.3.0 (MinGW.org GCC-6.3.0-1) 
 COMPILER_PATH=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../libexec/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/
 LIBRARY_PATH=d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../lib/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3fb29.exe' '-mtune=generic' '-march=i586'
- d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\cc674OQc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -o cmTC_3fb29.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_3fb29.dir/objects.a --no-whole-archive --out-implib libcmTC_3fb29.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3fb29.exe' '-mtune=generic' '-march=i586'
-make.exe[1]: Leaving directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-k4ql08'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_779c8.exe' '-mtune=generic' '-march=i586'
+ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccT9p5du.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -o cmTC_779c8.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_779c8.dir/objects.a --no-whole-archive --out-implib libcmTC_779c8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_779c8.exe' '-mtune=generic' '-march=i586'
+make.exe[1]: Leaving directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-mgcsh2'
 
 
 
@@ -101,20 +101,20 @@ Parsed C implicit include dir info from above output: rv=done
 
 Parsed C implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-k4ql08]
+  ignore line: [Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-mgcsh2]
   ignore line: []
-  ignore line: [Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_3fb29/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_3fb29.dir/build.make CMakeFiles/cmTC_3fb29.dir/build]
-  ignore line: [make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-k4ql08']
-  ignore line: [Building C object CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj]
-  ignore line: [D:/InstalledAPP/MinGW/bin/gcc.exe   -v -o CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c]
+  ignore line: [Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_779c8/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_779c8.dir/build.make CMakeFiles/cmTC_779c8.dir/build]
+  ignore line: [make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-mgcsh2']
+  ignore line: [Building C object CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj]
+  ignore line: [D:/InstalledAPP/MinGW/bin/gcc.exe   -v -o CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=D:/InstalledAPP/MinGW/bin/gcc.exe]
   ignore line: [Target: mingw32]
   ignore line: [Configured with: ../src/gcc-6.3.0/configure --build=x86_64-pc-linux-gnu --host=mingw32 --target=mingw32 --with-gmp=/mingw --with-mpfr --with-mpc=/mingw --with-isl=/mingw --prefix=/mingw --disable-win32-registry --with-arch=i586 --with-tune=generic --enable-languages=c c++ objc obj-c++ fortran ada --with-pkgversion='MinGW.org GCC-6.3.0-1' --enable-static --enable-shared --enable-threads --with-dwarf2 --disable-sjlj-exceptions --enable-version-specific-runtime-libs --with-libiconv-prefix=/mingw --with-libintl-prefix=/mingw --enable-libstdcxx-debug --enable-libgomp --disable-libvtv --enable-nls]
   ignore line: [Thread model: win32]
   ignore line: [gcc version 6.3.0 (MinGW.org GCC-6.3.0-1) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586']
-  ignore line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\cceK1J7N.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586']
+  ignore line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCCompilerABI.c -quiet -dumpbase CMakeCCompilerABI.c -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\ccRmDfcg.s]
   ignore line: [GNU C11 (MinGW.org GCC-6.3.0-1) version 6.3.0 (mingw32)]
   ignore line: [	compiled by GNU C version 6.3.0  GMP version 6.1.2  MPFR version 3.1.5  MPC version 1.0.3  isl version 0.15]
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
@@ -135,8 +135,8 @@ Parsed C implicit link information from above output:
   ignore line: [	compiled by GNU C version 6.3.0  GMP version 6.1.2  MPFR version 3.1.5  MPC version 1.0.3  isl version 0.15]
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: 384cad586f05ed581a9c068b2f18b408]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586']
-  ignore line: [ d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj C:\Users\HUAWEI\AppData\Local\Temp\cceK1J7N.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586']
+  ignore line: [ d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj C:\Users\HUAWEI\AppData\Local\Temp\ccRmDfcg.s]
   ignore line: [GNU assembler version 2.28 (mingw32) using BFD version (GNU Binutils) 2.28]
   ignore line: [COMPILER_PATH=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/]
   ignore line: [d:/installedapp/mingw/bin/../libexec/gcc/]
@@ -145,11 +145,11 @@ Parsed C implicit link information from above output:
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_3fb29.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586']
-  ignore line: [Linking C executable cmTC_3fb29.exe]
-  ignore line: [D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_3fb29.dir/objects.a]
-  ignore line: [D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_3fb29.dir/objects.a @CMakeFiles/cmTC_3fb29.dir/objects1]
-  ignore line: [D:/InstalledAPP/MinGW/bin/gcc.exe  -v -Wl --whole-archive CMakeFiles/cmTC_3fb29.dir/objects.a -Wl --no-whole-archive -o cmTC_3fb29.exe -Wl --out-implib libcmTC_3fb29.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_779c8.dir/CMakeCCompilerABI.c.obj' '-c' '-mtune=generic' '-march=i586']
+  ignore line: [Linking C executable cmTC_779c8.exe]
+  ignore line: [D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_779c8.dir/objects.a]
+  ignore line: [D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_779c8.dir/objects.a @CMakeFiles/cmTC_779c8.dir/objects1]
+  ignore line: [D:/InstalledAPP/MinGW/bin/gcc.exe  -v -Wl --whole-archive CMakeFiles/cmTC_779c8.dir/objects.a -Wl --no-whole-archive -o cmTC_779c8.exe -Wl --out-implib libcmTC_779c8.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=D:/InstalledAPP/MinGW/bin/gcc.exe]
   ignore line: [COLLECT_LTO_WRAPPER=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe]
@@ -164,13 +164,13 @@ Parsed C implicit link information from above output:
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_3fb29.exe' '-mtune=generic' '-march=i586']
-  link line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\cc674OQc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -o cmTC_3fb29.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_3fb29.dir/objects.a --no-whole-archive --out-implib libcmTC_3fb29.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_779c8.exe' '-mtune=generic' '-march=i586']
+  link line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccT9p5du.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_eh -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -o cmTC_779c8.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_779c8.dir/objects.a --no-whole-archive --out-implib libcmTC_779c8.dll.a --major-image-version 0 --minor-image-version 0 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc -lgcc_eh -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o]
     arg [d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe] ==> ignore
     arg [-plugin] ==> ignore
     arg [d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll] ==> ignore
     arg [-plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe] ==> ignore
-    arg [-plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\cc674OQc.res] ==> ignore
+    arg [-plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccT9p5du.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_eh] ==> ignore
@@ -189,7 +189,7 @@ Parsed C implicit link information from above output:
     arg [-plugin-opt=-pass-through=-lmsvcrt] ==> ignore
     arg [-Bdynamic] ==> search dynamic
     arg [-o] ==> ignore
-    arg [cmTC_3fb29.exe] ==> ignore
+    arg [cmTC_779c8.exe] ==> ignore
     arg [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o] ==> obj [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o]
     arg [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o] ==> obj [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o]
     arg [-Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0] ==> dir [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0]
@@ -197,10 +197,10 @@ Parsed C implicit link information from above output:
     arg [-Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib] ==> dir [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib]
     arg [-Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../..] ==> dir [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../..]
     arg [--whole-archive] ==> ignore
-    arg [CMakeFiles/cmTC_3fb29.dir/objects.a] ==> ignore
+    arg [CMakeFiles/cmTC_779c8.dir/objects.a] ==> ignore
     arg [--no-whole-archive] ==> ignore
     arg [--out-implib] ==> ignore
-    arg [libcmTC_3fb29.dll.a] ==> ignore
+    arg [libcmTC_779c8.dll.a] ==> ignore
     arg [--major-image-version] ==> ignore
     arg [0] ==> ignore
     arg [--minor-image-version] ==> ignore
@@ -240,20 +240,20 @@ Parsed C implicit link information from above output:
 
 
 Detecting CXX compiler ABI info compiled with the following output:
-Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-nqp726
+Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-poabu6
 
-Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_71eca/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_71eca.dir/build.make CMakeFiles/cmTC_71eca.dir/build
-make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-nqp726'
-Building CXX object CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj
-D:/InstalledAPP/MinGW/bin/g++.exe   -v -o CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp
+Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_09fea/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_09fea.dir/build.make CMakeFiles/cmTC_09fea.dir/build
+make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-poabu6'
+Building CXX object CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj
+D:/InstalledAPP/MinGW/bin/g++.exe   -v -o CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp
 Using built-in specs.
 COLLECT_GCC=D:/InstalledAPP/MinGW/bin/g++.exe
 Target: mingw32
 Configured with: ../src/gcc-6.3.0/configure --build=x86_64-pc-linux-gnu --host=mingw32 --with-gmp=/mingw --with-mpfr=/mingw --with-mpc=/mingw --with-isl=/mingw --prefix=/mingw --disable-win32-registry --target=mingw32 --with-arch=i586 --enable-languages=c,c++,objc,obj-c++,fortran,ada --with-pkgversion='MinGW.org GCC-6.3.0-1' --enable-static --enable-shared --enable-threads --with-dwarf2 --disable-sjlj-exceptions --enable-version-specific-runtime-libs --with-libiconv-prefix=/mingw --with-libintl-prefix=/mingw --enable-libstdcxx-debug --with-tune=generic --enable-libgomp --disable-libvtv --enable-nls
 Thread model: win32
 gcc version 6.3.0 (MinGW.org GCC-6.3.0-1) 
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586'
- d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1plus.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\ccZ7vrwd.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586'
+ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1plus.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\ccLvCZ3Z.s
 GNU C++14 (MinGW.org GCC-6.3.0-1) version 6.3.0 (mingw32)
 	compiled by GNU C version 6.3.0, GMP version 6.1.2, MPFR version 3.1.5, MPC version 1.0.2, isl version 0.15
 warning: MPC header version 1.0.2 differs from library version 1.0.3.
@@ -282,16 +282,16 @@ GNU C++14 (MinGW.org GCC-6.3.0-1) version 6.3.0 (mingw32)
 warning: MPC header version 1.0.2 differs from library version 1.0.3.
 GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 Compiler executable checksum: af09a87986453bf79da3565f33c7648f
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586'
- d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\HUAWEI\AppData\Local\Temp\ccZ7vrwd.s
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586'
+ d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\HUAWEI\AppData\Local\Temp\ccLvCZ3Z.s
 GNU assembler version 2.28 (mingw32) using BFD version (GNU Binutils) 2.28
 COMPILER_PATH=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../libexec/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/
 LIBRARY_PATH=d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../lib/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../
-COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586'
-Linking CXX executable cmTC_71eca.exe
-D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_71eca.dir/objects.a
-D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_71eca.dir/objects.a @CMakeFiles/cmTC_71eca.dir/objects1
-D:/InstalledAPP/MinGW/bin/g++.exe  -v -Wl,--whole-archive CMakeFiles/cmTC_71eca.dir/objects.a -Wl,--no-whole-archive -o cmTC_71eca.exe -Wl,--out-implib,libcmTC_71eca.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
+COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586'
+Linking CXX executable cmTC_09fea.exe
+D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_09fea.dir/objects.a
+D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_09fea.dir/objects.a @CMakeFiles/cmTC_09fea.dir/objects1
+D:/InstalledAPP/MinGW/bin/g++.exe  -v -Wl,--whole-archive CMakeFiles/cmTC_09fea.dir/objects.a -Wl,--no-whole-archive -o cmTC_09fea.exe -Wl,--out-implib,libcmTC_09fea.dll.a -Wl,--major-image-version,0,--minor-image-version,0 
 Using built-in specs.
 COLLECT_GCC=D:/InstalledAPP/MinGW/bin/g++.exe
 COLLECT_LTO_WRAPPER=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe
@@ -301,10 +301,10 @@ Thread model: win32
 gcc version 6.3.0 (MinGW.org GCC-6.3.0-1) 
 COMPILER_PATH=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../libexec/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/
 LIBRARY_PATH=d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/;d:/installedapp/mingw/bin/../lib/gcc/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/;d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_71eca.exe' '-shared-libgcc' '-mtune=generic' '-march=i586'
- d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccogYYXv.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_71eca.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_71eca.dir/objects.a --no-whole-archive --out-implib libcmTC_71eca.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o
-COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_71eca.exe' '-shared-libgcc' '-mtune=generic' '-march=i586'
-make.exe[1]: Leaving directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-nqp726'
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_09fea.exe' '-shared-libgcc' '-mtune=generic' '-march=i586'
+ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccNecpdc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_09fea.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_09fea.dir/objects.a --no-whole-archive --out-implib libcmTC_09fea.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o
+COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_09fea.exe' '-shared-libgcc' '-mtune=generic' '-march=i586'
+make.exe[1]: Leaving directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-poabu6'
 
 
 
@@ -329,20 +329,20 @@ Parsed CXX implicit include dir info from above output: rv=done
 
 Parsed CXX implicit link information from above output:
   link line regex: [^( *|.*[/\])(ld\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
-  ignore line: [Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-nqp726]
+  ignore line: [Change Dir: D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-poabu6]
   ignore line: []
-  ignore line: [Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_71eca/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_71eca.dir/build.make CMakeFiles/cmTC_71eca.dir/build]
-  ignore line: [make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-nqp726']
-  ignore line: [Building CXX object CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj]
-  ignore line: [D:/InstalledAPP/MinGW/bin/g++.exe   -v -o CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Run Build Command(s):D:/InstalledAPP/MinGW/bin/make.exe -f Makefile cmTC_09fea/fast && D:/InstalledAPP/MinGW/bin/make.exe  -f CMakeFiles/cmTC_09fea.dir/build.make CMakeFiles/cmTC_09fea.dir/build]
+  ignore line: [make.exe[1]: Entering directory 'D:/Proj/2DGameEngine/build/CMakeFiles/CMakeScratch/TryCompile-poabu6']
+  ignore line: [Building CXX object CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj]
+  ignore line: [D:/InstalledAPP/MinGW/bin/g++.exe   -v -o CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj -c D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=D:/InstalledAPP/MinGW/bin/g++.exe]
   ignore line: [Target: mingw32]
   ignore line: [Configured with: ../src/gcc-6.3.0/configure --build=x86_64-pc-linux-gnu --host=mingw32 --with-gmp=/mingw --with-mpfr=/mingw --with-mpc=/mingw --with-isl=/mingw --prefix=/mingw --disable-win32-registry --target=mingw32 --with-arch=i586 --enable-languages=c c++ objc obj-c++ fortran ada --with-pkgversion='MinGW.org GCC-6.3.0-1' --enable-static --enable-shared --enable-threads --with-dwarf2 --disable-sjlj-exceptions --enable-version-specific-runtime-libs --with-libiconv-prefix=/mingw --with-libintl-prefix=/mingw --enable-libstdcxx-debug --with-tune=generic --enable-libgomp --disable-libvtv --enable-nls]
   ignore line: [Thread model: win32]
   ignore line: [gcc version 6.3.0 (MinGW.org GCC-6.3.0-1) ]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586']
-  ignore line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1plus.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\ccZ7vrwd.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586']
+  ignore line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/cc1plus.exe -quiet -v -iprefix d:\installedapp\mingw\bin\../lib/gcc/mingw32/6.3.0/ D:/InstalledAPP/cmake/share/cmake-3.25/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpbase CMakeCXXCompilerABI.cpp -mtune=generic -march=i586 -auxbase-strip CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj -version -o C:\Users\HUAWEI\AppData\Local\Temp\ccLvCZ3Z.s]
   ignore line: [GNU C++14 (MinGW.org GCC-6.3.0-1) version 6.3.0 (mingw32)]
   ignore line: [	compiled by GNU C version 6.3.0  GMP version 6.1.2  MPFR version 3.1.5  MPC version 1.0.2  isl version 0.15]
   ignore line: [warning: MPC header version 1.0.2 differs from library version 1.0.3.]
@@ -371,8 +371,8 @@ Parsed CXX implicit link information from above output:
   ignore line: [warning: MPC header version 1.0.2 differs from library version 1.0.3.]
   ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
   ignore line: [Compiler executable checksum: af09a87986453bf79da3565f33c7648f]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586']
-  ignore line: [ d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\HUAWEI\AppData\Local\Temp\ccZ7vrwd.s]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586']
+  ignore line: [ d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/bin/as.exe -v -o CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj C:\Users\HUAWEI\AppData\Local\Temp\ccLvCZ3Z.s]
   ignore line: [GNU assembler version 2.28 (mingw32) using BFD version (GNU Binutils) 2.28]
   ignore line: [COMPILER_PATH=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/]
   ignore line: [d:/installedapp/mingw/bin/../libexec/gcc/]
@@ -381,11 +381,11 @@ Parsed CXX implicit link information from above output:
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_71eca.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586']
-  ignore line: [Linking CXX executable cmTC_71eca.exe]
-  ignore line: [D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_71eca.dir/objects.a]
-  ignore line: [D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_71eca.dir/objects.a @CMakeFiles/cmTC_71eca.dir/objects1]
-  ignore line: [D:/InstalledAPP/MinGW/bin/g++.exe  -v -Wl --whole-archive CMakeFiles/cmTC_71eca.dir/objects.a -Wl --no-whole-archive -o cmTC_71eca.exe -Wl --out-implib libcmTC_71eca.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'CMakeFiles/cmTC_09fea.dir/CMakeCXXCompilerABI.cpp.obj' '-c' '-shared-libgcc' '-mtune=generic' '-march=i586']
+  ignore line: [Linking CXX executable cmTC_09fea.exe]
+  ignore line: [D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/cmTC_09fea.dir/objects.a]
+  ignore line: [D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/cmTC_09fea.dir/objects.a @CMakeFiles/cmTC_09fea.dir/objects1]
+  ignore line: [D:/InstalledAPP/MinGW/bin/g++.exe  -v -Wl --whole-archive CMakeFiles/cmTC_09fea.dir/objects.a -Wl --no-whole-archive -o cmTC_09fea.exe -Wl --out-implib libcmTC_09fea.dll.a -Wl --major-image-version 0 --minor-image-version 0 ]
   ignore line: [Using built-in specs.]
   ignore line: [COLLECT_GCC=D:/InstalledAPP/MinGW/bin/g++.exe]
   ignore line: [COLLECT_LTO_WRAPPER=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe]
@@ -400,13 +400,13 @@ Parsed CXX implicit link information from above output:
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib/]
   ignore line: [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../]
-  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_71eca.exe' '-shared-libgcc' '-mtune=generic' '-march=i586']
-  link line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccogYYXv.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_71eca.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_71eca.dir/objects.a --no-whole-archive --out-implib libcmTC_71eca.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-o' 'cmTC_09fea.exe' '-shared-libgcc' '-mtune=generic' '-march=i586']
+  link line: [ d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe -plugin d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll -plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccNecpdc.res -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -plugin-opt=-pass-through=-ladvapi32 -plugin-opt=-pass-through=-lshell32 -plugin-opt=-pass-through=-luser32 -plugin-opt=-pass-through=-lkernel32 -plugin-opt=-pass-through=-lmingw32 -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lmoldname -plugin-opt=-pass-through=-lmingwex -plugin-opt=-pass-through=-lmsvcrt -Bdynamic -u ___register_frame_info -u ___deregister_frame_info -o cmTC_09fea.exe d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0 -Ld:/installedapp/mingw/bin/../lib/gcc -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib -Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../.. --whole-archive CMakeFiles/cmTC_09fea.dir/objects.a --no-whole-archive --out-implib libcmTC_09fea.dll.a --major-image-version 0 --minor-image-version 0 -lstdc++ -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt -ladvapi32 -lshell32 -luser32 -lkernel32 -lmingw32 -lgcc_s -lgcc -lmoldname -lmingwex -lmsvcrt d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtend.o]
     arg [d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/collect2.exe] ==> ignore
     arg [-plugin] ==> ignore
     arg [d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/liblto_plugin-0.dll] ==> ignore
     arg [-plugin-opt=d:/installedapp/mingw/bin/../libexec/gcc/mingw32/6.3.0/lto-wrapper.exe] ==> ignore
-    arg [-plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccogYYXv.res] ==> ignore
+    arg [-plugin-opt=-fresolution=C:\Users\HUAWEI\AppData\Local\Temp\ccNecpdc.res] ==> ignore
     arg [-plugin-opt=-pass-through=-lmingw32] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
     arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
@@ -429,7 +429,7 @@ Parsed CXX implicit link information from above output:
     arg [-u] ==> ignore
     arg [___deregister_frame_info] ==> ignore
     arg [-o] ==> ignore
-    arg [cmTC_71eca.exe] ==> ignore
+    arg [cmTC_09fea.exe] ==> ignore
     arg [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o] ==> obj [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../crt2.o]
     arg [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o] ==> obj [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/crtbegin.o]
     arg [-Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0] ==> dir [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0]
@@ -437,10 +437,10 @@ Parsed CXX implicit link information from above output:
     arg [-Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib] ==> dir [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../../mingw32/lib]
     arg [-Ld:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../..] ==> dir [d:/installedapp/mingw/bin/../lib/gcc/mingw32/6.3.0/../../..]
     arg [--whole-archive] ==> ignore
-    arg [CMakeFiles/cmTC_71eca.dir/objects.a] ==> ignore
+    arg [CMakeFiles/cmTC_09fea.dir/objects.a] ==> ignore
     arg [--no-whole-archive] ==> ignore
     arg [--out-implib] ==> ignore
-    arg [libcmTC_71eca.dll.a] ==> ignore
+    arg [libcmTC_09fea.dll.a] ==> ignore
     arg [--major-image-version] ==> ignore
     arg [0] ==> ignore
     arg [--minor-image-version] ==> ignore
