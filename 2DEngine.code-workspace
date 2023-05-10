@@ -17,7 +17,8 @@
 			"scene2.h": "c",
 			"scene1.h": "c",
 			"input_manager.h": "c",
-			"scenes_manager.h": "c"
+			"scenes_manager.h": "c",
+			"*.tcc": "c"
 		}
 	},
 	"launch": {

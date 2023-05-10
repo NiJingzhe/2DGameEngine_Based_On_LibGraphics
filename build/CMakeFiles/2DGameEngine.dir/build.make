@@ -53,10 +53,10 @@ RM = D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:/Proj/c_programming/2DGameEngine
+CMAKE_SOURCE_DIR = D:/Proj/2DGameEngine
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:/Proj/c_programming/2DGameEngine/build
+CMAKE_BINARY_DIR = D:/Proj/2DGameEngine/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/2DGameEngine.dir/depend.make
@@ -71,258 +71,258 @@ include CMakeFiles/2DGameEngine.dir/flags.make
 
 CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj: D:/Proj/c_programming/2DGameEngine/src/demo/game.c
+CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj: D:/Proj/2DGameEngine/src/demo/game.c
 CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj -MF CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj -c D:/Proj/c_programming/2DGameEngine/src/demo/game.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj -MF CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj -c D:/Proj/2DGameEngine/src/demo/game.c
 
 CMakeFiles/2DGameEngine.dir/src/demo/game.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/demo/game.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/demo/game.c > CMakeFiles/2DGameEngine.dir/src/demo/game.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/demo/game.c > CMakeFiles/2DGameEngine.dir/src/demo/game.c.i
 
 CMakeFiles/2DGameEngine.dir/src/demo/game.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/demo/game.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/demo/game.c -o CMakeFiles/2DGameEngine.dir/src/demo/game.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/demo/game.c -o CMakeFiles/2DGameEngine.dir/src/demo/game.c.s
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj: D:/Proj/c_programming/2DGameEngine/src/demo/scene1.c
+CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj: D:/Proj/2DGameEngine/src/demo/scene1.c
 CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj -MF CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj -c D:/Proj/c_programming/2DGameEngine/src/demo/scene1.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj -MF CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj -c D:/Proj/2DGameEngine/src/demo/scene1.c
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/demo/scene1.c > CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/demo/scene1.c > CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.i
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/demo/scene1.c -o CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/demo/scene1.c -o CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.s
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj: D:/Proj/c_programming/2DGameEngine/src/demo/scene2.c
+CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj: D:/Proj/2DGameEngine/src/demo/scene2.c
 CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj -MF CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj -c D:/Proj/c_programming/2DGameEngine/src/demo/scene2.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj -MF CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj -c D:/Proj/2DGameEngine/src/demo/scene2.c
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/demo/scene2.c > CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/demo/scene2.c > CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.i
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/demo/scene2.c -o CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/demo/scene2.c -o CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/exceptio.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj: D:/Proj/2DGameEngine/src/2DEngine/libgraphics/exceptio.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/exceptio.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/libgraphics/exceptio.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/exceptio.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/libgraphics/exceptio.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/exceptio.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/libgraphics/exceptio.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/exceptio.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/genlib.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj: D:/Proj/2DGameEngine/src/2DEngine/libgraphics/genlib.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/genlib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/libgraphics/genlib.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/genlib.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/libgraphics/genlib.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/genlib.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/libgraphics/genlib.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/genlib.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/graphics.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj: D:/Proj/2DGameEngine/src/2DEngine/libgraphics/graphics.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/graphics.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/libgraphics/graphics.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/graphics.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/libgraphics/graphics.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/graphics.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/libgraphics/graphics.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/graphics.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/random.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj: D:/Proj/2DGameEngine/src/2DEngine/libgraphics/random.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/random.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/libgraphics/random.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/random.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/libgraphics/random.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/random.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/libgraphics/random.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/random.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/simpio.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj: D:/Proj/2DGameEngine/src/2DEngine/libgraphics/simpio.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/simpio.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/libgraphics/simpio.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/simpio.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/libgraphics/simpio.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/simpio.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/libgraphics/simpio.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/simpio.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/strlib.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj: D:/Proj/2DGameEngine/src/2DEngine/libgraphics/strlib.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/strlib.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/libgraphics/strlib.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/strlib.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/libgraphics/strlib.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/libgraphics/strlib.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/libgraphics/strlib.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/libgraphics/strlib.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/2DEngine.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj: D:/Proj/2DGameEngine/src/2DEngine/2DEngine.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/2DEngine.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/2DEngine.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/2DEngine.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/2DEngine.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/2DEngine.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/2DEngine.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/2DEngine.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/actor.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj: D:/Proj/2DGameEngine/src/2DEngine/actor.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/actor.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/actor.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/actor.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/actor.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/actor.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/actor.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/actor.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/component.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj: D:/Proj/2DGameEngine/src/2DEngine/component.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/component.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/component.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/component.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/component.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/component.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/component.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/component.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/input_manager.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj: D:/Proj/2DGameEngine/src/2DEngine/input_manager.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/input_manager.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/input_manager.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/input_manager.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/input_manager.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/input_manager.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/input_manager.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/input_manager.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/scene.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj: D:/Proj/2DGameEngine/src/2DEngine/scene.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/scene.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/scene.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/scene.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/scene.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/scene.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/scene.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scene.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/scenes_manager.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj: D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/scenes_manager.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/scenes_manager.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/scenes_manager.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/scenes_manager.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/shape.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj: D:/Proj/2DGameEngine/src/2DEngine/shape.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/shape.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/shape.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/shape.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/shape.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/shape.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/shape.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/shape.c.s
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj: CMakeFiles/2DGameEngine.dir/flags.make
 CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj: CMakeFiles/2DGameEngine.dir/includes_C.rsp
-CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj: D:/Proj/c_programming/2DGameEngine/src/2DEngine/vector.c
+CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj: D:/Proj/2DGameEngine/src/2DEngine/vector.c
 CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj: CMakeFiles/2DGameEngine.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj -c D:/Proj/c_programming/2DGameEngine/src/2DEngine/vector.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building C object CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj"
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj -MF CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj.d -o CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.obj -c D:/Proj/2DGameEngine/src/2DEngine/vector.c
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.i"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/c_programming/2DGameEngine/src/2DEngine/vector.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.i
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:/Proj/2DGameEngine/src/2DEngine/vector.c > CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.i
 
 CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.s"
-	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/c_programming/2DGameEngine/src/2DEngine/vector.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.s
+	D:/InstalledAPP/MinGW/bin/gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:/Proj/2DGameEngine/src/2DEngine/vector.c -o CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.s
 
 # Object files for target 2DGameEngine
 2DGameEngine_OBJECTS = \
@@ -367,10 +367,10 @@ CMakeFiles/2DGameEngine.dir/src/2DEngine/vector.c.s: cmake_force
 2DGameEngine.exe: CMakeFiles/2DGameEngine.dir/build.make
 2DGameEngine.exe: CMakeFiles/2DGameEngine.dir/linkLibs.rsp
 2DGameEngine.exe: CMakeFiles/2DGameEngine.dir/objects1
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:/Proj/c_programming/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking C executable 2DGameEngine.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:/Proj/2DGameEngine/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking C executable 2DGameEngine.exe"
 	D:/InstalledAPP/cmake/bin/cmake.exe -E rm -f CMakeFiles/2DGameEngine.dir/objects.a
 	D:/InstalledAPP/MinGW/bin/ar.exe qc CMakeFiles/2DGameEngine.dir/objects.a @CMakeFiles/2DGameEngine.dir/objects1
-	D:/InstalledAPP/MinGW/bin/gcc.exe -O3 -DNDEBUG -Wl,--whole-archive CMakeFiles/2DGameEngine.dir/objects.a -Wl,--no-whole-archive -o 2DGameEngine.exe -Wl,--out-implib,lib2DGameEngine.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/2DGameEngine.dir/linkLibs.rsp
+	D:/InstalledAPP/MinGW/bin/gcc.exe -g -Wl,--whole-archive CMakeFiles/2DGameEngine.dir/objects.a -Wl,--no-whole-archive -o 2DGameEngine.exe -Wl,--out-implib,lib2DGameEngine.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles/2DGameEngine.dir/linkLibs.rsp
 
 # Rule to build all files generated by this target.
 CMakeFiles/2DGameEngine.dir/build: 2DGameEngine.exe
@@ -381,6 +381,6 @@ CMakeFiles/2DGameEngine.dir/clean:
 .PHONY : CMakeFiles/2DGameEngine.dir/clean
 
 CMakeFiles/2DGameEngine.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" D:/Proj/c_programming/2DGameEngine D:/Proj/c_programming/2DGameEngine D:/Proj/c_programming/2DGameEngine/build D:/Proj/c_programming/2DGameEngine/build D:/Proj/c_programming/2DGameEngine/build/CMakeFiles/2DGameEngine.dir/DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" D:/Proj/2DGameEngine D:/Proj/2DGameEngine D:/Proj/2DGameEngine/build D:/Proj/2DGameEngine/build D:/Proj/2DGameEngine/build/CMakeFiles/2DGameEngine.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/2DGameEngine.dir/depend
 

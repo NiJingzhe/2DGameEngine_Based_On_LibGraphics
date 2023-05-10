@@ -26,6 +26,9 @@ Actor* newActor(char* meta, Vector* pos) {
 static void initActor(Actor* actor, char* meta, Vector pos) {
 	actor->meta = meta;
 	actor->pos = pos;
+	Vector *vel = newVector(0,0);
+	actor->vel = *vel;
+	destoryVector(vel);
 	actor->vptr = (actorvTable*)calloc(1, sizeof(actorvTable));
 	if (actor->vptr == NULL) {
 		printf("Cannot allocate memory for vptr of Actor\n");

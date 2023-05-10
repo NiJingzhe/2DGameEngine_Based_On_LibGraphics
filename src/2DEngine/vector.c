@@ -70,6 +70,9 @@ static double length(Vector* v) {
 }
 
 static void normalize(Vector* v) {
+	if (v->length(v) == 0){
+		return;
+	}
 	v->x /= v->length(v);
 	v->y /= v->length(v);
 }
