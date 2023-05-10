@@ -7,18 +7,9 @@
 #define COLLISION_SHAPE 1
 #define TEXTURE 2
 
-typedef void (*ComponentRender)(struct Component*);
-typedef void (*ComponentUpdate)(struct Component*, ...);
-
 /*-------------------------Component------------------------------*/
-typedef struct componentvTable {
-	ComponentRender render;
-	ComponentUpdate update;
-	const int(*getComponentType)();
-} componentvTable;
-
 typedef struct Component {
-	componentvTable *vptr;
+	struct componentvTable *vptr;
 	char* meta;
 	struct Component *next, *prev;
 
@@ -26,6 +17,15 @@ typedef struct Component {
 	void (*setMeta)(struct Component*, char* meta);
 
 } Component, *ComponentNode;
+
+typedef void (*ComponentRender)(struct Component*);
+typedef void (*ComponentUpdate)(struct Component*, ...);
+
+typedef struct componentvTable {
+	ComponentRender render;
+	ComponentUpdate update;
+	const int(*getComponentType)();
+} componentvTable;
 
 Component* newComponent(ComponentRender render, ComponentUpdate update);
 void destoryComponent(Component* c);

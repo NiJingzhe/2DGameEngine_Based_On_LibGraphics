@@ -2,9 +2,8 @@
 
 InputManager inputManager;
 
-static KeyboardEventCallback KeyboardEvent(int key, int event);
-static CharEventCallback CharEvent(char c);
-static MouseEventCallback  MouseEvent(int x, int y, int button, int event);
+void KeyboardEvent(int key, int event);
+void MouseEvent(int x, int y, int button, int event);
 
 
 void initInputManager() {
@@ -21,7 +20,6 @@ void initInputManager() {
 
 	registerKeyboardEvent(KeyboardEvent);
 	registerMouseEvent(MouseEvent);
-	registerCharEvent(CharEvent);
 
 }
 void clearEvent(){
@@ -38,7 +36,7 @@ void clearEvent(){
 		inputManager.mouseEventType = -9;
 }
 
-static KeyboardEventCallback KeyboardEvent(int key, int event)
+void KeyboardEvent(int key, int event)
 {
     for (int i = 0; i < 256; i++) {
 		inputManager.keyStates[i] = GetAsyncKeyState(i) & 0x8000 ? 1 : 0;
@@ -46,11 +44,7 @@ static KeyboardEventCallback KeyboardEvent(int key, int event)
 	inputManager.keyBoardEventType = event;
 }
 
-static CharEventCallback CharEvent(char c) {
-	return;
-}
-
-static MouseEventCallback MouseEvent(int x, int y, int button, int event) {
+void MouseEvent(int x, int y, int button, int event) {
 	inputManager.mouseX = ScaleXInches(x);
 	inputManager.mouseY = ScaleYInches(y);
 
