@@ -18,7 +18,8 @@
 			"scene1.h": "c",
 			"input_manager.h": "c",
 			"scenes_manager.h": "c",
-			"*.tcc": "c"
+			"*.tcc": "c",
+			"mmsystem.h": "c"
 		}
 	},
 	"launch": {

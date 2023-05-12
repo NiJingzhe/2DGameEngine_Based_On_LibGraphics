@@ -36,6 +36,7 @@ typedef struct actorvTable {
 	const int (*getActor)();
 } actorvTable;
 
+
 Actor* newActor(char* meta, Vector* pos);
 void destoryActor(Actor* actor);
 

@@ -9,6 +9,11 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdarg.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+#include <malloc.h>
 
 #include <windows.h>
 #include <olectl.h>
@@ -19,6 +24,7 @@
 #include <winuser.h>
 
 #include <math.h>
+#pragma comment(lib,"winmm.lib")
 
 #define DEBUG   0
 
