@@ -120,6 +120,23 @@ static void playerUpdate(ActorNode player, double delta)
     static double dashPower = 90;
     double ACC_CONST = 10;
     double VEL_CONST = 5;
+
+     //键盘控制人物移动部分
+    Vector *acc = newVector((-inmng.keyStates['A'] + inmng.keyStates['D']),
+                            (-inmng.keyStates['S'] + inmng.keyStates['W']));
+
+    acc->normalize(acc);
+    acc->mult(acc, delta * ACC_CONST);
+    Vector vel;
+    if (!inmng.keyStates['R'] || player->vel.length(&(player->vel)) >= 2.0)
+    {
+        player->vel.add(&(player->vel), acc);
+    }
+    memcpy(&(vel), &(player->vel), sizeof(Vector));
+    vel.mult(&(vel), delta * VEL_CONST);
+    player->pos.add(&(player->pos), &(vel));
+    if (!inmng.keyStates['R'] || player->vel.length(&(player->vel)) >= 2.0)
+        player->vel.mult(&(player->vel), 0.9);
     
     //R键技能
     Vector *dashDirection = newVector(inmng.mouseX - player->pos.x, inmng.mouseY - player->pos.y);
@@ -128,7 +145,7 @@ static void playerUpdate(ActorNode player, double delta)
         dashDirection->normalize(dashDirection);
         dashDirection->mult(dashDirection, 5);
     }
-    if (inmng.keyStates['R'])
+    if (inmng.keyStates['R'] && player->vel.length(&(player->vel)) <= 2.0)
     {
         if (!bulletTimeSound->playing)
             bulletTimeSound->play(bulletTimeSound);
@@ -183,22 +200,6 @@ static void playerUpdate(ActorNode player, double delta)
         playerCollisionShape->enable = TRUE;
     }
 
-    //键盘控制人物移动部分
-    Vector *acc = newVector((-inmng.keyStates['A'] + inmng.keyStates['D']),
-                            (-inmng.keyStates['S'] + inmng.keyStates['W']));
-
-    acc->normalize(acc);
-    acc->mult(acc, delta * ACC_CONST);
-    Vector vel;
-    if (!inmng.keyStates['R'])
-    {
-        player->vel.add(&(player->vel), acc);
-    }
-    memcpy(&(vel), &(player->vel), sizeof(Vector));
-    vel.mult(&(vel), delta * VEL_CONST);
-    player->pos.add(&(player->pos), &(vel));
-    if (!inmng.keyStates['R'])
-        player->vel.mult(&(player->vel), 0.9);
 
     //根据人物位置更新各个组件的位置
     playerCollisionShape->super.vptr->update((ComponentNode)playerCollisionShape, &(player->pos));
