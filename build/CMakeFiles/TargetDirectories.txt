@@ -1,4 +1,0 @@
-D:/Proj/2DGameEngine/build/CMakeFiles/2DGameEngine.dir
-D:/Proj/2DGameEngine/build/CMakeFiles/INSTALL.dir
-D:/Proj/2DGameEngine/build/CMakeFiles/ALL_BUILD.dir
-D:/Proj/2DGameEngine/build/CMakeFiles/ZERO_CHECK.dir
