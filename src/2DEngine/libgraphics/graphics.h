@@ -153,26 +153,26 @@ typedef enum
     RIGHT_BUTTON
 } ACL_Mouse_Button;
 
-typedef enum 
+typedef enum
 {
     BUTTON_DOWN,
     BUTTON_DOUBLECLICK,
     BUTTON_UP,
     ROLL_UP,
     ROLL_DOWN,
-    MOUSEMOVE	
+    MOUSEMOVE
 } ACL_Mouse_Event;
 
-typedef enum 
+typedef enum
 {
-	KEY_DOWN,
-	KEY_UP
+    KEY_DOWN,
+    KEY_UP
 } ACL_Keyboard_Event;
 
-typedef void (*KeyboardEventCallback) (int key,int event);
-typedef void (*CharEventCallback) (char c);
-typedef void (*MouseEventCallback) (int x, int y, int button, int event);
-typedef void (*TimerEventCallback) (int timerID);
+typedef void (*KeyboardEventCallback)(int key, int event);
+typedef void (*CharEventCallback)(char c);
+typedef void (*MouseEventCallback)(int x, int y, int button, int event);
+typedef void (*TimerEventCallback)(int timerID);
 
 void registerKeyboardEvent(KeyboardEventCallback callback);
 void registerCharEvent(CharEventCallback callback);

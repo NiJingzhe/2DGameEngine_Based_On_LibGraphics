@@ -92,7 +92,7 @@ const int returnActorType() {
 }
 
 void updateActor(Actor* actor, double delta){
-
+	//printf("\nLOG:\n	Enter updateActor, update actor: %s\n", actor->meta);
 	Vector* vel = actor->getVel(actor);
 	actor->pos.add(&(actor->pos), vel);
 	actor->setPos(actor, &(actor->pos));

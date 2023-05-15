@@ -47,13 +47,11 @@ void createScene1(SceneNode *scene1)
     destoryShape((Shape *)backgroundRect);
     destoryVector(titlePos);
     destoryVector(startButtonPos);
-
-    LOG("finished Scene1 create.");
 }
 
 void setupScene_scene1(SceneNode scene1, void *param)
 {
-    LOG("enter setup scene1\n");
+
     backgroundShape->enable = FALSE;
     backgroundShape->visible = TRUE;
     backgroundShape->setMeta((ComponentNode)backgroundShape, "backgroundShape");
@@ -65,8 +63,6 @@ void setupScene_scene1(SceneNode scene1, void *param)
     startButtonTexture->setMeta((ComponentNode)startButtonTexture, "start_button_texture");
 
     startButton->vptr->update = startButtonUpdate;
-
-    LOG("finished setup scene1\n");
 }
 
 static void startButtonUpdate(ActorNode button, double delta)
@@ -83,7 +79,8 @@ static void startButtonUpdate(ActorNode button, double delta)
     {
         if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP)
         {
-            scmng.loadScene(&scene2, createScene2);
+            if (scmng.getScene("scene2") == NULL)
+                scmng.loadScene(&scene2, createScene2);
             scmng.switchTo("scene2", TRUE, FALSE, NULL, 0);
         }
         else if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_DOWN)

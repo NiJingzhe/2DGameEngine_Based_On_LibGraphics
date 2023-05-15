@@ -11,11 +11,14 @@ typedef struct ScenesManager{
     SceneNode currentScene;
     SceneNode lastScene;
     SceneNode scenesList;
+    char* target;
+    bool unloadCur, setupNext;
 
     void* param;
 
     SceneNode (*getScene)(char*);
     void (*switchTo)(char*, bool, bool, void*, size_t);
+    void (*checkSwitch)();
     void (*loadScene)(SceneNode*, CreateSceneFunction);
     void (*unloadScene)(char* target);
 } ScenesManager;

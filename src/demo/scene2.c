@@ -10,10 +10,10 @@
 
 SceneNode scene2;
 
-Vector *backgroundPos;
-Rect *backgroundRect;
-ActorNode background;
-CollisionShape *backgroundShape;
+Vector *scene2BackgoundPos;
+Rect *scene2BackgoundRect;
+ActorNode scene2Backgound;
+CollisionShape *scene2BackgoundShape;
 
 Vector *pauseButtonPos;
 ActorNode pauseButton;
@@ -41,19 +41,18 @@ static void setupScene_scene2(SceneNode scene2, void *param);
 void createScene2(SceneNode *scene2)
 {
 
-    LOG("enter scene2 create process...");
     *scene2 = newScene("scene2");
     (*scene2)->setup = setupScene_scene2;
 
-    backgroundPos = newVector(getww / 2, getwh / 2);
-    backgroundRect = newRect(backgroundPos, 0, getww, getwh, TRUE, "Black", 1);
-    background = newActor("background", backgroundPos);
-    backgroundShape = newCollisionShape((Shape *)backgroundRect);
-    
+    scene2BackgoundPos = newVector(getww / 2, getwh / 2);
+    scene2BackgoundRect = newRect(scene2BackgoundPos, 0, getww, getwh, TRUE, "Black", 1);
+    scene2Backgound = newActor("scene2Backgound", scene2BackgoundPos);
+    scene2BackgoundShape = newCollisionShape((Shape *)scene2BackgoundRect);
+
     pauseButtonPos = newVector(getww / 12, getwh * 7 / 8);
     pauseButton = newActor("pause_button", pauseButtonPos);
     pauseButtonTexture = newTexture("./res/scene2/pause_button_texture.txt", pauseButtonPos, "White", 1);
-    
+
     playerPos = newVector(getww / 2, getwh / 2);
     player = newActor("player", playerPos);
     playerTexture = newTexture("./res/scene2/playerBody.txt", playerPos, "Cyan", 1);
@@ -85,10 +84,10 @@ void createScene2(SceneNode *scene2)
         "Green",
         1);
     playerDashPowerStrip = newCollisionShape((Shape *)stripRect);
-    
+
     bulletTimeSound = newAudio("./res/scene2/bullet_time.mp3", FALSE);
 
-    background->addComponent(background, (ComponentNode)backgroundShape);
+    scene2Backgound->addComponent(scene2Backgound, (ComponentNode)scene2BackgoundShape);
     pauseButton->addComponent(pauseButton, (ComponentNode)pauseButtonTexture);
     player->addComponent(player, (ComponentNode)playerTexture);
     player->addComponent(player, (ComponentNode)playerCollisionShape);
@@ -96,68 +95,58 @@ void createScene2(SceneNode *scene2)
     player->addComponent(player, (ComponentNode)playerDashPowerStrip);
     player->addComponent(player, (ComponentNode)bulletTimeSound);
     // 添加Actor到场景
-    (*scene2)->addActor((*scene2), background);
+    (*scene2)->addActor((*scene2), scene2Backgound);
     (*scene2)->addActor((*scene2), pauseButton);
     (*scene2)->addActor((*scene2), player);
 
-    destoryVector(backgroundPos);
-    destoryShape((Shape *)backgroundRect);
+    destoryVector(scene2BackgoundPos);
+    destoryShape((Shape *)scene2BackgoundRect);
     destoryVector(pauseButtonPos);
     destoryVector(playerPos);
     destoryVector(stripPos);
     destoryShape((Shape *)collisionRect);
     destoryShape((Shape *)targetCircle);
     destoryShape((Shape *)stripRect);
-
-    LOG("finished scene2 create process!");
 }
 
 static void setupScene_scene2(SceneNode scene2, void *param)
 {
 
-    LOG("Enter scene2 setup process!....");
-
     // 创建背景Actor
-    backgroundShape->enable = FALSE;
-    backgroundShape->visible = TRUE;
-    backgroundShape->setMeta((ComponentNode)backgroundShape, "backgroundShape");
-    LOG("background setpup finished");
+    scene2BackgoundShape->enable = FALSE;
+    scene2BackgoundShape->visible = TRUE;
+    scene2BackgoundShape->setMeta((ComponentNode)scene2BackgoundShape, "scene2BackgoundShape");
+
     // 创建暂停按钮Actor
 
     pauseButtonTexture->visible = TRUE;
     pauseButtonTexture->setMeta((ComponentNode)pauseButtonTexture, "pause_button_texture");
     pauseButton->vptr->update = pauseButtonUpdate;
-    LOG("pauseButton setpup finished");
-    
+
     playerTexture->visible = TRUE;
     playerTexture->setMeta((ComponentNode)playerTexture, "player_texture");
-    LOG("playerTexture setpup finished");
 
     playerCollisionShape->visible = FALSE;
     playerCollisionShape->enable = TRUE;
     playerCollisionShape->setMeta((ComponentNode)playerCollisionShape, "player_collision_shape");
-    LOG("playerCollisionShape setpup finished");
+
     // playerDashTargetShape
 
     playerDashTargetShape->visible = FALSE;
     playerDashTargetShape->enable = FALSE;
     playerDashTargetShape->setMeta((ComponentNode)playerDashTargetShape, "player_dash_circle");
-    LOG("playerDashTarget setpup finished");
+
     // dashPowerStrip
 
     playerDashPowerStrip->visible = TRUE;
     playerDashPowerStrip->enable = FALSE;
     playerDashPowerStrip->setMeta((ComponentNode)playerDashPowerStrip, "player_dash_power_strip");
-    LOG("playerDashStrip setpup finished");
 
     // Audio
 
     bulletTimeSound->setMeta((ComponentNode)bulletTimeSound, "bullet_time_sound");
-    LOG("playerBulletTimeSound setpup finished");
 
     player->vptr->update = playerUpdate;
-
-    LOG("finish scene2 setup process!");
 }
 
 extern double GAME_TIME_TICK;
@@ -291,7 +280,7 @@ static void pauseButtonUpdate(ActorNode button, double delta)
         {
             buttonTexture->color = "Blue";
             scmng.loadScene(&scene1, createScene1);
-            scmng.switchTo("scene1", TRUE, FALSE, NULL, 0);
+            scmng.switchTo("scene1", FALSE, TRUE, NULL, 0);
         }
         else if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_DOWN)
         {

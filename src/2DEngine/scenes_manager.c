@@ -7,6 +7,7 @@ static void addScene(SceneNode scene);
 static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, size_t size);
 static SceneNode getScene(char *meta);
 static void loadScene(SceneNode *scene, CreateSceneFunction func);
+static void checkSwitch();
 
 static void addScene(SceneNode scene)
 {
@@ -38,7 +39,11 @@ void initScenesManager()
     scenesManager.scenesList = NULL;
 
     scenesManager.param = NULL;
+    scenesManager.target = NULL;
+    scenesManager.unloadCur = FALSE;
+    scenesManager.setupNext = TRUE;
 
+    scenesManager.checkSwitch = checkSwitch;
     scenesManager.loadScene = loadScene;
     scenesManager.getScene = getScene;
     scenesManager.switchTo = switchTo;
@@ -72,10 +77,14 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
     if (target == NULL || scenesManager.getScene(target) == NULL)
     {
         printf("The scene %s have not been loaded\n", target);
+        scenesManager.target = NULL;
         return;
     }
+    else{
+        scenesManager.target = target;
+    }
 
-    if (size > 0)
+    if (size > 0 && param != NULL)
     {
         void *new_param = malloc(size);
         memcpy(new_param, param, size);
@@ -94,8 +103,17 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
         scenesManager.param = NULL;
     }
 
-    if (unloadCur)
+    scenesManager.unloadCur = unloadCur;
+    scenesManager.setupNext = setupNext;
+}
+
+static void checkSwitch(){
+    if (scenesManager.target == NULL)
+        return;
+
+    if (scenesManager.unloadCur)
     {
+
         if (scenesManager.currentScene->prev != NULL)
         {
             scenesManager.currentScene->prev->next = scenesManager.currentScene->next;
@@ -118,10 +136,11 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
     }
 
     printf("\nLOG:\nSuccessfully unloaded last scene!\n");
-    scenesManager.currentScene = scenesManager.getScene(target);
+    scenesManager.currentScene = scenesManager.getScene(scenesManager.target);
+    scenesManager.target = NULL;
     printf("\nLOG:\nAfter getScene, now current scene is: %p, and meta is: %s\n", scenesManager.currentScene, scenesManager.currentScene->meta);
-    if (setupNext)
-        scenesManager.currentScene->setup(scenesManager.currentScene, param);
+    if (scenesManager.setupNext)
+        scenesManager.currentScene->setup(scenesManager.currentScene, scenesManager.param);
 }
 
 static void loadScene(SceneNode *scene, CreateSceneFunction func)
