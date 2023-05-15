@@ -6,9 +6,11 @@ static char* getSceneMeta(Scene* s);
 static void addActor(Scene* s, ActorNode actor);
 static ActorNode getActor(Scene* s, char* meta);
 static void delActor(Scene* s, char* meta);
-static void setSwitchTarget(Scene* s, char* switchTarget);
+//static void setSwitchTarget(Scene* s, char* switchTarget);    need to be deleted
 static void update(Scene* s, double delta);
 static void render(Scene* s);
+static void setup(Scene* s, void* param);
+static void exit_scene(Scene* s);
 
 Scene* newScene(char* meta){
 	Scene* s = (Scene*)calloc(1, sizeof(Scene));
@@ -19,7 +21,7 @@ Scene* newScene(char* meta){
 static void initScene(Scene* s, char* meta) {
 	s->meta = meta;
 	s->actorList = NULL;
-	s->switchTarget = "";
+	//s->switchTarget = "";
 	s->prev = NULL;
 	s->next = NULL;
 
@@ -28,8 +30,10 @@ static void initScene(Scene* s, char* meta) {
 	s->getActor = getActor;
 	s->getMeta = getSceneMeta;
 	s->setMeta = setSceneMeta;
-	s->setSwitchTarget = setSwitchTarget;
+	//s->setSwitchTarget = setSwitchTarget;
 	s->render = render;
+	s->setup = setup;
+	s->exit = exit_scene;
 	s->update = update;
 }
 
@@ -97,11 +101,12 @@ static void delActor(Scene* s, char* meta){
 	}
 }
 
+/*
 static void setSwitchTarget(Scene* s, char* switchTarget){
 	s->switchTarget = switchTarget;	
 	return;
 }
-
+*/
 static void update(Scene* s, double delta){
 	ActorNode curActor = s->actorList;
 	if (curActor == NULL){
@@ -127,6 +132,15 @@ static void render(Scene* s){
 		curActor->vptr->render(curActor);
 		curActor = curActor->next;
 	}
+	return;
+}
+
+static void setup(Scene* s, void* param){
+	printf("%s scene default updating\n", s->getMeta(s));
+}
+
+static void exit_scene(Scene* s){
+	destoryScene(s);
 	return;
 }
 

@@ -1,22 +1,20 @@
 #include "2DEngine.h"
-#include "scene1.h"
-#include "scene2.h"
+#include "scene_info.h"
 
 void Main() {
 	InitGraphics();
     //InitConsole();
     initInputManager();
     initScenesManager();
-    setupScene_scene1();
-    setupScene_scene2();
-
-    scmng.addScene(scene1);
-    scmng.addScene(scene2);
+    scmng.loadScene(&scene1, createScene1);
     scmng.currentScene = scene1;
+    scmng.currentScene->setup(scmng.currentScene, NULL);
+    LOG("Game init finished!");
 }
 
 void EngineUpdate(double delta) {
-    scmng.checkSwitch(scmng.currentScene);
+    LOG("Enter Engine Update");
+    printf("current Scene is:%s\n", scmng.currentScene->meta);
     scmng.currentScene->update(scmng.currentScene, delta);
     clearEvent();
 }

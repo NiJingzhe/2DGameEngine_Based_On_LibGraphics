@@ -920,8 +920,7 @@ CMakeFiles/2DGameEngine.dir/src/demo/game.c.obj: D:/Proj/2DGameEngine/src/demo/g
   D:/Proj/2DGameEngine/src/2DEngine/input_manager.h \
   D:/Proj/2DGameEngine/src/2DEngine/scene.h \
   D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.h \
-  D:/Proj/2DGameEngine/src/demo/scene1.h \
-  D:/Proj/2DGameEngine/src/demo/scene2.h
+  D:/Proj/2DGameEngine/src/demo/scene_info.h
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj: D:/Proj/2DGameEngine/src/demo/scene1.c \
   D:/Proj/2DGameEngine/src/2DEngine/2DEngine.h \
@@ -1011,7 +1010,7 @@ CMakeFiles/2DGameEngine.dir/src/demo/scene1.c.obj: D:/Proj/2DGameEngine/src/demo
   D:/Proj/2DGameEngine/src/2DEngine/input_manager.h \
   D:/Proj/2DGameEngine/src/2DEngine/scene.h \
   D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.h \
-  D:/Proj/2DGameEngine/src/demo/scene1.h
+  D:/Proj/2DGameEngine/src/demo/scene_info.h
 
 CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj: D:/Proj/2DGameEngine/src/demo/scene2.c \
   D:/Proj/2DGameEngine/src/2DEngine/2DEngine.h \
@@ -1101,7 +1100,7 @@ CMakeFiles/2DGameEngine.dir/src/demo/scene2.c.obj: D:/Proj/2DGameEngine/src/demo
   D:/Proj/2DGameEngine/src/2DEngine/input_manager.h \
   D:/Proj/2DGameEngine/src/2DEngine/scene.h \
   D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.h \
-  D:/Proj/2DGameEngine/src/demo/scene2.h
+  D:/Proj/2DGameEngine/src/demo/scene_info.h
 
 
 D:/Proj/2DGameEngine/src/2DEngine/component.h:
@@ -1320,9 +1319,7 @@ D:/Proj/2DGameEngine/src/2DEngine/scenes_manager.c:
 
 D:/Proj/2DGameEngine/src/demo/game.c:
 
-D:/Proj/2DGameEngine/src/demo/scene1.h:
-
-D:/Proj/2DGameEngine/src/demo/scene2.h:
+D:/Proj/2DGameEngine/src/demo/scene_info.h:
 
 D:/Proj/2DGameEngine/src/demo/scene1.c:
 
