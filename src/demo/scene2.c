@@ -51,12 +51,13 @@ void createScene2(SceneNode *scene2)
     backgroundShape = newCollisionShape((Shape *)backgroundRect);
     
     pauseButtonPos = newVector(getww / 12, getwh * 7 / 8);
-    pauseButton = newActor("back_button", pauseButtonPos);
+    pauseButton = newActor("pause_button", pauseButtonPos);
     pauseButtonTexture = newTexture("./res/scene2/pause_button_texture.txt", pauseButtonPos, "White", 1);
     
     playerPos = newVector(getww / 2, getwh / 2);
     player = newActor("player", playerPos);
     playerTexture = newTexture("./res/scene2/playerBody.txt", playerPos, "Cyan", 1);
+
     collisionRect = newRect(
         playerPos,
         0,
@@ -64,8 +65,8 @@ void createScene2(SceneNode *scene2)
         FALSE,
         "Red",
         1);
-
     playerCollisionShape = newCollisionShape((Shape *)collisionRect);
+
     targetCircle = newCircle(
         playerPos,
         0,
@@ -74,6 +75,7 @@ void createScene2(SceneNode *scene2)
         "Cyan",
         1);
     playerDashTargetShape = newCollisionShape((Shape *)targetCircle);
+
     stripPos = newVector(playerPos->x, playerPos->y - playerTexture->getHeight(playerTexture) / 1.8);
     stripRect = newRect(
         stripPos,
@@ -83,9 +85,11 @@ void createScene2(SceneNode *scene2)
         "Green",
         1);
     playerDashPowerStrip = newCollisionShape((Shape *)stripRect);
+    
     bulletTimeSound = newAudio("./res/scene2/bullet_time.mp3", FALSE);
 
     background->addComponent(background, (ComponentNode)backgroundShape);
+    pauseButton->addComponent(pauseButton, (ComponentNode)pauseButtonTexture);
     player->addComponent(player, (ComponentNode)playerTexture);
     player->addComponent(player, (ComponentNode)playerCollisionShape);
     player->addComponent(player, (ComponentNode)playerDashTargetShape);
@@ -122,7 +126,6 @@ static void setupScene_scene2(SceneNode scene2, void *param)
 
     pauseButtonTexture->visible = TRUE;
     pauseButtonTexture->setMeta((ComponentNode)pauseButtonTexture, "pause_button_texture");
-    pauseButton->addComponent(pauseButton, (ComponentNode)pauseButtonTexture);
     pauseButton->vptr->update = pauseButtonUpdate;
     LOG("pauseButton setpup finished");
     

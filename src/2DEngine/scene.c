@@ -146,6 +146,7 @@ static void exit_scene(Scene* s){
 
 
 void destoryScene(Scene* s) {
+	printf("\nLOG:\nEnter destoryScene, destorying %s....\n", s->meta);
 	ActorNode currentActor = s->actorList;
 	if (currentActor == NULL) {
 		printf("Actor List is empty in scene %s\n", s->getMeta(s));

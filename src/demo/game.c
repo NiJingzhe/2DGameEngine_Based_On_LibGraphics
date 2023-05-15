@@ -3,7 +3,7 @@
 
 void Main() {
 	InitGraphics();
-    //InitConsole();
+    InitConsole();
     initInputManager();
     initScenesManager();
     scmng.loadScene(&scene1, createScene1);

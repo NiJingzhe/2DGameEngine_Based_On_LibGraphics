@@ -19,7 +19,8 @@
 			"input_manager.h": "c",
 			"scenes_manager.h": "c",
 			"*.tcc": "c",
-			"mmsystem.h": "c"
+			"mmsystem.h": "c",
+			"cstdlib": "c"
 		}
 	},
 	"launch": {

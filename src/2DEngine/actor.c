@@ -187,7 +187,7 @@ static bool isCollideWithActor(Actor* a1, Actor* a2) {
 }
 
 void destoryActor(Actor* actor) {
-
+	printf("\nLOG:\n	Enter destoryActor, destorying actor: %s\n", actor->meta);
 	ComponentNode currentComponent = actor->componentList;
 	while (currentComponent->next) {
 		currentComponent = currentComponent->next;

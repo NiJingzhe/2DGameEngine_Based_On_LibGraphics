@@ -62,7 +62,7 @@ static void initComponent(Component* c, ComponentRender render, ComponentUpdate 
 	c->next = NULL;
 	c->prev = NULL;
 
-	c->meta = "";
+	c->meta = "ComponentBaseClass";
 }
 
 static char* getComponentMeta(Component* c) {
@@ -78,6 +78,7 @@ static const int returnEmptyType() {
 }
 
 void destoryComponent(Component* c) {
+	printf("\nLOG:\n		Enter destoryComponent, destorying component: %s\n", c->meta);
 	switch (c->vptr->getComponentType())
 	{
 	case EMPTY_COMPONENT:
