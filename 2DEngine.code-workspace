@@ -19,7 +19,27 @@
 			"input_manager.h": "c",
 			"scenes_manager.h": "c",
 			"*.tcc": "c",
-			"mmsystem.h": "c"
+			"mmsystem.h": "c",
+			"cstdlib": "c",
+			"cctype": "c",
+			"climits": "c",
+			"cmath": "c",
+			"compare": "c",
+			"concepts": "c",
+			"cstdarg": "c",
+			"cstdio": "c",
+			"array": "c",
+			"string": "c",
+			"tuple": "c",
+			"type_traits": "c",
+			"limits": "c",
+			"new": "c",
+			"algorithm": "c",
+			"numeric": "c",
+			"cstdint": "c",
+			"unordered_map": "c",
+			"utility": "c",
+			"typeinfo": "c"
 		}
 	},
 	"launch": {

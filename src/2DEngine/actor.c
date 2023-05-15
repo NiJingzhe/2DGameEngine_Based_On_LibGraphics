@@ -92,7 +92,7 @@ const int returnActorType() {
 }
 
 void updateActor(Actor* actor, double delta){
-
+	//printf("\nLOG:\n	Enter updateActor, update actor: %s\n", actor->meta);
 	Vector* vel = actor->getVel(actor);
 	actor->pos.add(&(actor->pos), vel);
 	actor->setPos(actor, &(actor->pos));
@@ -187,7 +187,7 @@ static bool isCollideWithActor(Actor* a1, Actor* a2) {
 }
 
 void destoryActor(Actor* actor) {
-
+	printf("\nLOG:\n	Enter destoryActor, destorying actor: %s\n", actor->meta);
 	ComponentNode currentComponent = actor->componentList;
 	while (currentComponent->next) {
 		currentComponent = currentComponent->next;
