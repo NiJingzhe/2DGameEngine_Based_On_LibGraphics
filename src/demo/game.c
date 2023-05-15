@@ -13,8 +13,6 @@ void Main() {
 }
 
 void EngineUpdate(double delta) {
-    LOG("Enter Engine Update");
-    printf("current Scene is:%s\n", scmng.currentScene->meta);
     scmng.currentScene->update(scmng.currentScene, delta);
     clearEvent();
 }

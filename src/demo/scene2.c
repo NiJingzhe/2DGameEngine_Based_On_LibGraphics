@@ -24,10 +24,8 @@ Vector *playerPos;
 ActorNode player;
 // playerTexture
 Texture *playerTexture;
-
 // playerCollisionShape
 Rect *collisionRect;
-
 CollisionShape *playerCollisionShape;
 Circle *targetCircle;
 CollisionShape *playerDashTargetShape;
@@ -42,6 +40,8 @@ static void setupScene_scene2(SceneNode scene2, void *param);
 
 void createScene2(SceneNode *scene2)
 {
+
+    LOG("enter scene2 create process...");
     *scene2 = newScene("scene2");
     (*scene2)->setup = setupScene_scene2;
 
@@ -49,9 +49,11 @@ void createScene2(SceneNode *scene2)
     backgroundRect = newRect(backgroundPos, 0, getww, getwh, TRUE, "Black", 1);
     background = newActor("background", backgroundPos);
     backgroundShape = newCollisionShape((Shape *)backgroundRect);
+    
     pauseButtonPos = newVector(getww / 12, getwh * 7 / 8);
     pauseButton = newActor("back_button", pauseButtonPos);
     pauseButtonTexture = newTexture("./res/scene2/pause_button_texture.txt", pauseButtonPos, "White", 1);
+    
     playerPos = newVector(getww / 2, getwh / 2);
     player = newActor("player", playerPos);
     playerTexture = newTexture("./res/scene2/playerBody.txt", playerPos, "Cyan", 1);
@@ -63,7 +65,7 @@ void createScene2(SceneNode *scene2)
         "Red",
         1);
 
-    CollisionShape *playerCollisionShape = newCollisionShape((Shape *)collisionRect);
+    playerCollisionShape = newCollisionShape((Shape *)collisionRect);
     targetCircle = newCircle(
         playerPos,
         0,
@@ -97,52 +99,62 @@ void createScene2(SceneNode *scene2)
     destoryVector(backgroundPos);
     destoryShape((Shape *)backgroundRect);
     destoryVector(pauseButtonPos);
-    playerTexture->visible = TRUE;
     destoryVector(playerPos);
     destoryVector(stripPos);
     destoryShape((Shape *)collisionRect);
     destoryShape((Shape *)targetCircle);
     destoryShape((Shape *)stripRect);
+
+    LOG("finished scene2 create process!");
 }
 
 static void setupScene_scene2(SceneNode scene2, void *param)
 {
 
+    LOG("Enter scene2 setup process!....");
+
     // 创建背景Actor
     backgroundShape->enable = FALSE;
     backgroundShape->visible = TRUE;
     backgroundShape->setMeta((ComponentNode)backgroundShape, "backgroundShape");
-
+    LOG("background setpup finished");
     // 创建暂停按钮Actor
 
     pauseButtonTexture->visible = TRUE;
     pauseButtonTexture->setMeta((ComponentNode)pauseButtonTexture, "pause_button_texture");
     pauseButton->addComponent(pauseButton, (ComponentNode)pauseButtonTexture);
     pauseButton->vptr->update = pauseButtonUpdate;
-
+    LOG("pauseButton setpup finished");
+    
+    playerTexture->visible = TRUE;
     playerTexture->setMeta((ComponentNode)playerTexture, "player_texture");
+    LOG("playerTexture setpup finished");
 
     playerCollisionShape->visible = FALSE;
     playerCollisionShape->enable = TRUE;
     playerCollisionShape->setMeta((ComponentNode)playerCollisionShape, "player_collision_shape");
-
+    LOG("playerCollisionShape setpup finished");
     // playerDashTargetShape
 
     playerDashTargetShape->visible = FALSE;
     playerDashTargetShape->enable = FALSE;
     playerDashTargetShape->setMeta((ComponentNode)playerDashTargetShape, "player_dash_circle");
-
+    LOG("playerDashTarget setpup finished");
     // dashPowerStrip
 
     playerDashPowerStrip->visible = TRUE;
     playerDashPowerStrip->enable = FALSE;
     playerDashPowerStrip->setMeta((ComponentNode)playerDashPowerStrip, "player_dash_power_strip");
+    LOG("playerDashStrip setpup finished");
 
     // Audio
 
     bulletTimeSound->setMeta((ComponentNode)bulletTimeSound, "bullet_time_sound");
+    LOG("playerBulletTimeSound setpup finished");
 
     player->vptr->update = playerUpdate;
+
+    LOG("finish scene2 setup process!");
 }
 
 extern double GAME_TIME_TICK;
@@ -276,7 +288,7 @@ static void pauseButtonUpdate(ActorNode button, double delta)
         {
             buttonTexture->color = "Blue";
             scmng.loadScene(&scene1, createScene1);
-            scmng.switchTo("scene1", TRUE, TRUE, NULL, 0);
+            scmng.switchTo("scene1", TRUE, FALSE, NULL, 0);
         }
         else if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_DOWN)
         {

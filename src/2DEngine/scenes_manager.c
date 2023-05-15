@@ -117,13 +117,16 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
         scenesManager.lastScene = scenesManager.currentScene;
     }
 
+    printf("\nLOG:\nSuccessfully unloaded last scene!\n");
     scenesManager.currentScene = scenesManager.getScene(target);
+    printf("\nLOG:\nAfter getScene, now current scene is: %p, and meta is: %s\n", scenesManager.currentScene, scenesManager.currentScene->meta);
     if (setupNext)
         scenesManager.currentScene->setup(scenesManager.currentScene, param);
 }
 
 static void loadScene(SceneNode *scene, CreateSceneFunction func)
 {
+    printf("\nLOG:\nstart load scene...\n");
     func(scene);
     (*scene)->setup(*scene, NULL);
     addScene(*scene);

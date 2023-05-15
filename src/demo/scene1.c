@@ -84,7 +84,7 @@ static void startButtonUpdate(ActorNode button, double delta)
         if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP)
         {
             scmng.loadScene(&scene2, createScene2);
-            scmng.switchTo("scene2", TRUE, TRUE, NULL, 0);
+            scmng.switchTo("scene2", TRUE, FALSE, NULL, 0);
         }
         else if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_DOWN)
         {

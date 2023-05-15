@@ -110,7 +110,7 @@ static void setSwitchTarget(Scene* s, char* switchTarget){
 static void update(Scene* s, double delta){
 	ActorNode curActor = s->actorList;
 	if (curActor == NULL){
-		printf("%s scene is updating\n", s->getMeta(s));
+		//printf("%s scene is updating\n", s->getMeta(s));
 		return;
 	}
 
@@ -124,7 +124,7 @@ static void update(Scene* s, double delta){
 static void render(Scene* s){
 	ActorNode curActor = s->actorList;
 	if (curActor == NULL){
-		printf("%s scene is updating\n", s->getMeta(s));
+		//printf("%s scene is updating\n", s->getMeta(s));
 		return;
 	}
 
