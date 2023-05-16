@@ -15,6 +15,7 @@
 #include <stdlib.h>
 #include <memory.h>
 #include <malloc.h>
+#include <time.h>
 
 #include <windows.h>
 #include <olectl.h>

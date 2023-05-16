@@ -23,7 +23,10 @@ Texture *pauseButtonTexture;
 Vector *playerPos;
 ActorNode player;
 // playerTexture
-Texture *playerTexture;
+Texture *playerTextureDown;
+Texture *playerTextureUp;
+Texture *playerTextureRight;
+Texture *playerTextureLeft;
 // playerCollisionShape
 Rect *collisionRect;
 CollisionShape *playerCollisionShape;
@@ -55,12 +58,15 @@ void createScene2(SceneNode *scene2)
 
     playerPos = newVector(getww / 2, getwh / 2);
     player = newActor("player", playerPos);
-    playerTexture = newTexture("./res/scene2/playerBody.txt", playerPos, "Cyan", 1);
+    playerTextureDown = newTexture("./res/scene2/player_down.txt", playerPos, "Cyan", 1);
+    playerTextureUp = newTexture("./res/scene2/player_up.txt", playerPos, "Cyan", 1);
+    playerTextureRight = newTexture("./res/scene2/player_right.txt", playerPos, "Cyan", 1);
+    playerTextureLeft = newTexture("./res/scene2/player_left.txt", playerPos, "Cyan", 1);
 
     collisionRect = newRect(
         playerPos,
         0,
-        playerTexture->getWidth(playerTexture), playerTexture->getHeight(playerTexture),
+        playerTextureDown->getWidth(playerTextureDown), playerTextureDown->getHeight(playerTextureDown),
         FALSE,
         "Red",
         1);
@@ -69,17 +75,17 @@ void createScene2(SceneNode *scene2)
     targetCircle = newCircle(
         playerPos,
         0,
-        playerTexture->getWidth(playerTexture) / 2.2,
+        playerTextureDown->getWidth(playerTextureDown) / 2.2,
         FALSE,
         "Cyan",
         1);
     playerDashTargetShape = newCollisionShape((Shape *)targetCircle);
 
-    stripPos = newVector(playerPos->x, playerPos->y - playerTexture->getHeight(playerTexture) / 1.8);
+    stripPos = newVector(playerPos->x, playerPos->y - playerTextureDown->getHeight(playerTextureDown) / 1.8);
     stripRect = newRect(
         stripPos,
         0,
-        playerTexture->getWidth(playerTexture), playerTexture->getHeight(playerTexture) * 0.1,
+        playerTextureDown->getWidth(playerTextureDown), playerTextureDown->getHeight(playerTextureDown) * 0.1,
         TRUE,
         "Green",
         1);
@@ -89,7 +95,10 @@ void createScene2(SceneNode *scene2)
 
     scene2Backgound->addComponent(scene2Backgound, (ComponentNode)scene2BackgoundShape);
     pauseButton->addComponent(pauseButton, (ComponentNode)pauseButtonTexture);
-    player->addComponent(player, (ComponentNode)playerTexture);
+    player->addComponent(player, (ComponentNode)playerTextureDown);
+    player->addComponent(player, (ComponentNode)playerTextureUp);
+    player->addComponent(player, (ComponentNode)playerTextureRight);
+    player->addComponent(player, (ComponentNode)playerTextureLeft);
     player->addComponent(player, (ComponentNode)playerCollisionShape);
     player->addComponent(player, (ComponentNode)playerDashTargetShape);
     player->addComponent(player, (ComponentNode)playerDashPowerStrip);
@@ -123,8 +132,14 @@ static void setupScene_scene2(SceneNode scene2, void *param)
     pauseButtonTexture->setMeta((ComponentNode)pauseButtonTexture, "pause_button_texture");
     pauseButton->vptr->update = pauseButtonUpdate;
 
-    playerTexture->visible = TRUE;
-    playerTexture->setMeta((ComponentNode)playerTexture, "player_texture");
+    playerTextureDown->visible = TRUE;
+    playerTextureDown->setMeta((ComponentNode)playerTextureDown, "player_texture_down");
+    playerTextureUp->visible = FALSE;
+    playerTextureUp->setMeta((ComponentNode)playerTextureUp, "player_texture_up");
+    playerTextureRight->visible = FALSE;
+    playerTextureRight->setMeta((ComponentNode)playerTextureRight, "player_texture_right");
+    playerTextureLeft->visible = FALSE;
+    playerTextureLeft->setMeta((ComponentNode)playerTextureLeft, "player_texture_left");
 
     playerCollisionShape->visible = FALSE;
     playerCollisionShape->enable = TRUE;
@@ -154,7 +169,10 @@ extern double GAME_TIME_TICK;
 static void playerUpdate(ActorNode player, double delta)
 {
     // 获取玩家在更新过过程中需要用到的组件
-    Texture *playerTexture = (Texture *)(player->getComponent(player, "player_texture"));
+    Texture *playerTextureDown = (Texture *)(player->getComponent(player, "player_texture_down"));
+    Texture *playerTextureUp = (Texture *)(player->getComponent(player, "player_texture_up"));
+    Texture *playerTextureRight = (Texture *)(player->getComponent(player, "player_texture_right"));
+    Texture *playerTextureLeft = (Texture *)(player->getComponent(player, "player_texture_left"));
     CollisionShape *playerCollisionShape = (CollisionShape *)(player->getComponent(player, "player_collision_shape"));
     CollisionShape *playerDashTargetCircle = (CollisionShape *)(player->getComponent(player, "player_dash_circle"));
     CollisionShape *playerDashPowerStrip = (CollisionShape *)(player->getComponent(player, "player_dash_power_strip"));
@@ -181,6 +199,62 @@ static void playerUpdate(ActorNode player, double delta)
     player->pos.add(&(player->pos), &(vel));
     if (!inmng.keyStates['R'] || player->vel.length(&(player->vel)) >= 2.0)
         player->vel.mult(&(player->vel), 0.9);
+
+    if (fabs(player->vel.x) <= 0.1)
+        player->vel.x = 0;
+    if (fabs(player->vel.y) <= 0.1)
+        player->vel.y = 0;
+
+    // 处理人物移动出边界的情况
+    if (player->pos.x < 0)
+        player->pos.x += getww;
+    if (player->pos.y < 0)
+        player->pos.y += getwh;
+    if (player->pos.x > getww)
+        player->pos.x -= getww;
+    if (player->pos.y > getwh)
+        player->pos.y -= getwh;
+
+    // 处理人物不同方向的纹理展示
+    if (player->vel.length(&(player->vel)) == 0)
+    {
+        playerTextureDown->visible = TRUE;
+        playerTextureUp->visible = FALSE;
+        playerTextureLeft->visible = FALSE;
+        playerTextureRight->visible = FALSE;
+    }
+    else
+    {
+        if (player->vel.y > 0)
+        {
+            playerTextureDown->visible = FALSE;
+            playerTextureUp->visible = TRUE;
+            playerTextureLeft->visible = FALSE;
+            playerTextureRight->visible = FALSE;
+        }
+        else
+        {
+            playerTextureDown->visible = TRUE;
+            playerTextureUp->visible = FALSE;
+            playerTextureLeft->visible = FALSE;
+            playerTextureRight->visible = FALSE;
+        }
+
+        if (player->vel.x > 0 && fabs(player->vel.x) > 0.6 * fabs(player->vel.y))
+        {
+            playerTextureDown->visible = FALSE;
+            playerTextureUp->visible = FALSE;
+            playerTextureLeft->visible = FALSE;
+            playerTextureRight->visible = TRUE;
+        }
+        else if (player->vel.x < 0 && fabs(player->vel.x) > 0.6 * fabs(player->vel.y))
+        {
+            playerTextureDown->visible = FALSE;
+            playerTextureUp->visible = FALSE;
+            playerTextureLeft->visible = TRUE;
+            playerTextureRight->visible = FALSE;
+        }
+    }
 
     // R键技能
     Vector *dashDirection = newVector(inmng.mouseX - player->pos.x, inmng.mouseY - player->pos.y);
@@ -223,8 +297,18 @@ static void playerUpdate(ActorNode player, double delta)
     }
     // 技能条的长度更新
     dashPower = dashPower < 90.0 ? dashPower + 50 * delta : 90.0;
-    ((Rect *)(playerDashPowerStrip->shape))->width = (dashPower / 90.0) * playerTexture->getWidth(playerTexture);
+    ((Rect *)(playerDashPowerStrip->shape))->width = (dashPower / 90.0) * playerTextureDown->getWidth(playerTextureDown);
     // 人物纹理颜色与可见性改变
+    Texture *playerTexture;
+    if (playerTextureDown->visible)
+        playerTexture = playerTextureDown;
+    else if (playerTextureUp->visible)
+        playerTexture = playerTextureUp;
+    else if (playerTextureLeft->visible)
+        playerTexture = playerTextureLeft;
+    else
+        playerTexture = playerTextureRight;
+
     if (player->vel.length(&(player->vel)) >= 1.5)
     {
         playerTexture->color = "Blue";
@@ -279,8 +363,9 @@ static void pauseButtonUpdate(ActorNode button, double delta)
         if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP || inmng.keyStates[VK_ESCAPE])
         {
             buttonTexture->color = "Blue";
-            scmng.loadScene(&scene1, createScene1);
-            scmng.switchTo("scene1", FALSE, TRUE, NULL, 0);
+            if (scmng.getScene("scene1") == NULL)
+                scmng.loadScene(&scene1, createScene1);
+            scmng.switchTo("scene1", TRUE, FALSE, NULL, 0);
         }
         else if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_DOWN)
         {

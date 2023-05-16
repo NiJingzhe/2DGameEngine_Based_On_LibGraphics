@@ -10,7 +10,7 @@
 #include "scene.h"
 #include "scenes_manager.h"
 
-#define ENGINE_DEBUG DEBUG
+#define ENGINE_DEBUG (MEM_DEBUG || DEBUG)
 
 #define LOG(str) {printf("\nLOG: \n"); printf(str);}while(0)
 
