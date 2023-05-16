@@ -1156,9 +1156,7 @@ static LONG FAR PASCAL GraphicsEventProc(HWND hwnd, UINT msg,
     			g_timer(wParam);
     		return 0;
         case WM_DESTROY:
-            g_looping = FALSE;
-            Free();
-            FreeConsole();  
+            g_looping = FALSE; 
             PostQuitMessage(0);
             return 0;   
         case WM_ERASEBKGND:
@@ -1945,7 +1943,8 @@ int WINAPI WinMain (HINSTANCE hThisInstance,
         EngineUpdate((double)GAME_TIME_TICK);
         Render();
     }
-    
+    Free();
+    FreeConsole();
     return messages.wParam;;
 }
 

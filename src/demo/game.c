@@ -1,30 +1,44 @@
 #include "2DEngine.h"
 #include "scene_info.h"
 
-void Main() {
-    LOG("Enter Game Init---------------------------------");
-	InitGraphics();
+void Main()
+{
+    InitGraphics();
+#if ENGINE_DEBUG
     InitConsole();
+#endif
+#if ENGINE_DEBUG
+    LOG("Enter Game Init--------------------------------------------------------------------------------------------------------------------------");
+#endif
     initInputManager();
     initScenesManager();
     scmng.loadScene(&scene1, createScene1);
     scmng.currentScene = scene1;
     scmng.currentScene->setup(scmng.currentScene, NULL);
-    LOG("Game init finished!------------------------------");
+#if ENGINE_DEBUG
+    LOG("Game init finished!----------------------------------------------------------------------------------------------------------------------");
+#endif
 }
 
-void EngineUpdate(double delta) {
+void EngineUpdate(double delta)
+{
     scmng.checkSwitch();
     scmng.currentScene->update(scmng.currentScene, delta);
     clearEvent();
 }
 
-void Render() {
+void Render()
+{
     scmng.currentScene->render(scmng.currentScene);
 }
 
-void Free() {
-    LOG("Enter Free---------------------------------------");
+void Free()
+{
+#if ENGINE_DEBUG
+    LOG("Enter Free-------------------------------------------------------------------------------------------------------------------------------");
+#endif
     destroyScenesManager();
-    LOG("Finish Free--------------------------------------");
+#if ENGINE_DEBUG
+    LOG("Finish Free------------------------------------------------------------------------------------------------------------------------------");
+#endif
 }
