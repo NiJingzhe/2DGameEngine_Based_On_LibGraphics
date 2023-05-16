@@ -1,7 +1,7 @@
 ﻿# CMakeList.txt: BrainFuckCompiler 的 CMake 项目，在此处包括源代码并定义
 # 项目特定的逻辑。
 #
-cmake_minimum_required (VERSION 3.11.0)
+cmake_minimum_required (VERSION 3.8.0)
 
 # Enable Hot Reload for MSVC compilers if supported.
 
@@ -11,8 +11,9 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DGameEngine/libgraphics/)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DGameEngine/Engine)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DGameEngine/)
 
-
+#以下：换成你自己需要的游戏源代码路径，此处为自带demo的路径
 aux_source_directory(src/demo SRC_LIST)
+#以上：换成你自己需要的游戏源代码路径，此处为自带demo的路径
 aux_source_directory(src/2DGameEngine/libgraphics HEAD_LIST)
 aux_source_directory(src/2DGameEngine/Engine ENG_LIST)
 aux_source_directory(src/2DGameEngine/ CONF_LIST)
