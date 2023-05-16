@@ -10,11 +10,9 @@
 #include "scene.h"
 #include "scenes_manager.h"
 
-#define ENGINE_DEBUG 1
+#define ENGINE_DEBUG DEBUG
 
-#if ENGINE_DEBUG
 #define LOG(str) {printf("\nLOG: \n"); printf(str);}while(0)
-#endif
 
 extern double GAME_TIME_TICK;
 

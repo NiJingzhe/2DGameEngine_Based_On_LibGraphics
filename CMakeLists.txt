@@ -7,18 +7,20 @@ cmake_minimum_required (VERSION 3.11.0)
 
 project ("2DGameEngine")
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DEngine/libgraphics/)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DEngine/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DGameEngine/libgraphics/)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DGameEngine/Engine)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/src/2DGameEngine/)
 
 
 aux_source_directory(src/demo SRC_LIST)
-aux_source_directory(src/2DEngine/libgraphics HEAD_LIST)
-aux_source_directory(src/2DEngine ENG_LIST)
+aux_source_directory(src/2DGameEngine/libgraphics HEAD_LIST)
+aux_source_directory(src/2DGameEngine/Engine ENG_LIST)
+aux_source_directory(src/2DGameEngine/ CONF_LIST)
 
 add_compile_options(-std=c11)
 # 将源代码添加到此项目的可执行文件。
 
-add_executable (2DGameEngine ${SRC_LIST} ${HEAD_LIST} ${ENG_LIST})
+add_executable (2DGameEngine ${SRC_LIST} ${HEAD_LIST} ${ENG_LIST} ${CONF_LIST})
 target_link_libraries(2DGameEngine winmm.lib)
 
 # TODO: 如有需要，请添加测试并安装目标。

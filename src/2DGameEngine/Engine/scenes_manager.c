@@ -80,7 +80,8 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
         scenesManager.target = NULL;
         return;
     }
-    else{
+    else
+    {
         scenesManager.target = target;
     }
 
@@ -91,6 +92,11 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
         if (scenesManager.param != NULL)
         {
             free(scenesManager.param);
+#if MEM_DEBUG
+            MEM_BLOCK_NUM--;
+            printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+            printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
         }
         scenesManager.param = new_param;
     }
@@ -99,6 +105,11 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
         if (scenesManager.param != NULL)
         {
             free(scenesManager.param);
+#if MEM_DEBUG
+            MEM_BLOCK_NUM--;
+            printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+            printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
         }
         scenesManager.param = NULL;
     }
@@ -107,7 +118,8 @@ static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, 
     scenesManager.setupNext = setupNext;
 }
 
-static void checkSwitch(){
+static void checkSwitch()
+{
     if (scenesManager.target == NULL)
         return;
 
@@ -135,17 +147,24 @@ static void checkSwitch(){
         scenesManager.lastScene = scenesManager.currentScene;
     }
 
+#if MEM_DEBUG
     printf("\nLOG:\nSuccessfully unloaded last scene!\n");
+#endif
+
     scenesManager.currentScene = scenesManager.getScene(scenesManager.target);
     scenesManager.target = NULL;
+#if MEM_DEBUG
     printf("\nLOG:\nAfter getScene, now current scene is: %p, and meta is: %s\n", scenesManager.currentScene, scenesManager.currentScene->meta);
+#endif
     if (scenesManager.setupNext)
         scenesManager.currentScene->setup(scenesManager.currentScene, scenesManager.param);
 }
 
 static void loadScene(SceneNode *scene, CreateSceneFunction func)
 {
+#if MEM_DEBUG
     printf("\nLOG:\nstart load scene...\n");
+#endif
     func(scene);
     (*scene)->setup(*scene, NULL);
     addScene(*scene);
@@ -166,6 +185,5 @@ void destroyScenesManager()
         destoryScene(currentScene->prev);
     }
     destoryScene(currentScene);
-    free(scenesManager.scenesList);
     return;
 }
