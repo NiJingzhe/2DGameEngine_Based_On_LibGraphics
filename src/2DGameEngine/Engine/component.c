@@ -46,7 +46,7 @@ static void setInterval(struct Timer *timer, int interval);
 static const int returnTimerType(ComponentNode c);
 static void destoryTimer(struct Timer *timer);
 
-static void initUIText(struct UIText *uiText, char *content, Vector pos, char* color, char *font, int style, int pointSize);
+static void initUIText(struct UIText *uiText, char *content, Vector pos, char *color, char *font, int style, int pointSize);
 static void renderUIText(Component *c);
 static void updateUIText(Component *c, ...);
 static void setUITextPos(UIText *t, Vector *pos);
@@ -654,6 +654,7 @@ static void initTimer(struct Timer *timer, int id, int interval, TIMERPROC callb
 	timer->super.vptr->getComponentType = returnTimerType;
 	timer->callBackFunction = callbackFunction;
 	timer->interval = interval;
+	timer->enable = FALSE;
 
 	timer->start = start;
 	timer->stop = stop;
@@ -669,25 +670,19 @@ static void renderTimer(Component *c)
 
 static void updateTimer(Component *c, ...)
 {
-	Timer *timer = (Timer *)c;
-	if (timer->enable)
-	{
-		startTimer(timer->id, timer->interval, timer->callBackFunction);
-	}
-	else if (!timer->enable)
-	{
-		cancelTimer(timer->id);
-	}
+	return;
 }
 
 static void start(struct Timer *timer)
 {
 	timer->enable = TRUE;
+	startTimer(timer->id, timer->interval, timer->callBackFunction);
 }
 
 static void stop(struct Timer *timer)
 {
 	timer->enable = FALSE;
+	cancelTimer(timer->id);
 }
 
 static void setInterval(struct Timer *timer, int interval)
@@ -729,14 +724,14 @@ static void destoryTimer(struct Timer *timer)
 
 /*---------------------------UIText Part----------------------------*/
 
-UIText *newUIText(char *content, Vector *pos, char* color, char *font, int style, int pointSize)
+UIText *newUIText(char *content, Vector *pos, char *color, char *font, int style, int pointSize)
 {
 	UIText *uiText = (UIText *)calloc(1, sizeof(UIText));
 	initUIText(uiText, content, *pos, color, font, style, pointSize);
 	return uiText;
 }
 
-static void initUIText(struct UIText *uiText, char *content, Vector pos, char* color, char *font, int style, int pointSize)
+static void initUIText(struct UIText *uiText, char *content, Vector pos, char *color, char *font, int style, int pointSize)
 {
 	Component *super = newComponent(renderUIText, updateUIText);
 	memcpy(&(uiText->super), super, sizeof(Component));
@@ -761,7 +756,14 @@ static void initUIText(struct UIText *uiText, char *content, Vector pos, char* c
 	uiText->pointSize = pointSize;
 	uiText->style = style;
 	uiText->color = color;
+
+	double pointSize_ = GetPointSize();
+	SetPointSize(uiText->pointSize);
+	SetFont(uiText->font);
+	SetStyle(uiText->style);
 	uiText->width = TextStringWidth(uiText->content);
+	SetPointSize(pointSize_);
+
 	uiText->visible = TRUE;
 
 	uiText->setContent = setUITextContent;
@@ -786,6 +788,7 @@ static Vector *getUITextPos(UIText *t)
 static void setUITextContent(UIText *t, char *content)
 {
 	t->content = content;
+	t->width = TextStringWidth(t->content);
 }
 
 static char *getUITextContent(UIText *t)
@@ -802,13 +805,15 @@ static void renderUIText(Component *c)
 {
 	UIText *t = (UIText *)c;
 	if (t->visible)
-	{
-		MovePen(t->pos.x - t->width / 2.0, t->pos.y);
+	{	
 		SetPenColor(t->color);
 		double pointSize_ = GetPointSize();
 		SetPointSize(t->pointSize);
 		SetFont(t->font);
 		SetStyle(t->style);
+		double width = TextStringWidth(t->content);
+		t->width = width;
+		MovePen(t->pos.x - width / 2, t->pos.y);
 		DrawTextString(t->content);
 		SetPointSize(pointSize_);
 	}

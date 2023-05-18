@@ -29,6 +29,7 @@
 #pragma comment(lib,"winmm.lib")
 
 #define MEM_DEBUG MEM_DEBUG_MODE
+#define DEBUG_MODE DEBUG || MEM_DEBUG
 
 #define fill(x) StartFilledRegion(x)
 #define endfill EndFilledRegion()
