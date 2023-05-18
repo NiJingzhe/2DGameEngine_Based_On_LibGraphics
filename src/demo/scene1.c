@@ -7,6 +7,7 @@ Vector *scene1BackgroundPos;
 Rect *scene1BackgroundRect;
 ActorNode scene1Background;
 CollisionShape *scene1BackgroundShape;
+
 Vector *titlePos;
 ActorNode title;
 Texture *titleTexture;

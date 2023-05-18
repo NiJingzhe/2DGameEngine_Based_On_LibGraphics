@@ -1,7 +1,7 @@
 #include "component.h"
 #include "public_headers.h"
 
-/*--------------------------------Component Part------------------------------------*/
+/*--------------------------------Function Declaration Part------------------------------------*/
 static void initComponent(Component *c, ComponentRender render, ComponentUpdate update);
 static char *getComponentMeta(Component *c);
 static void setComponentMeta(Component *c, char *meta);
@@ -36,6 +36,28 @@ static void Audio_stop(struct Audio *audio);
 static void Audio_setVolume(struct Audio *audio, int volume);
 static char *Audio_getFilePath(struct Audio *audio);
 static void destoryAudio(struct Audio *audio);
+
+static void initTimer(struct Timer *timer, int id, int interval, TIMERPROC callbackFunction);
+static void renderTimer(Component *c);
+static void updateTimer(Component *c, ...);
+static void start(struct Timer *timer);
+static void stop(struct Timer *timer);
+static void setInterval(struct Timer *timer, int interval);
+static const int returnTimerType(ComponentNode c);
+static void destoryTimer(struct Timer *timer);
+
+static void initUIText(struct UIText *uiText, char *content, Vector pos, char* color, char *font, int style, int pointSize);
+static void renderUIText(Component *c);
+static void updateUIText(Component *c, ...);
+static void setUITextPos(UIText *t, Vector *pos);
+static Vector *getUITextPos(UIText *t);
+static void setUITextContent(UIText *t, char *content);
+static char *getUITextContent(UIText *t);
+static double getUITextWidth(UIText *t);
+static const int returnUITextType(ComponentNode c);
+static void destoryUIText(struct UIText *uiText);
+
+/*------------------------------Empty Component Part---------------------------------*/
 
 Component *newComponent(ComponentRender render, ComponentUpdate update)
 {
@@ -89,9 +111,9 @@ static const int returnEmptyType()
 
 void destoryComponent(Component *c)
 {
-	#if MEM_DEBUG
+#if MEM_DEBUG
 	printf("\nLOG:\n		Enter destoryComponent, destorying component: %s\n", c->meta);
-	#endif
+#endif
 	switch (c->vptr->getComponentType())
 	{
 	case EMPTY_COMPONENT:
@@ -118,6 +140,14 @@ void destoryComponent(Component *c)
 
 	case AUDIO:
 		destoryAudio((Audio *)c);
+		break;
+
+	case TIMER:
+		destoryTimer((Timer *)c);
+		break;
+
+	case UITEXT:
+		destoryUIText((UIText *)c);
 		break;
 	}
 }
@@ -232,6 +262,7 @@ static void updateCollisionShape(Component *c, ...)
 	va_start(argList, c);
 	pos = va_arg(argList, Vector *);
 	cs->shape->setPos(cs->shape, pos);
+	cs->setPos(cs, pos);
 	va_end(argList);
 }
 
@@ -310,7 +341,7 @@ static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int 
 #endif
 	if (t->super.vptr == NULL)
 	{
-		printf("Cannot allocate memory for vptr of collionShape component\n");
+		printf("Cannot allocate memory for vptr of Texture component\n");
 		return;
 	}
 	memcpy(t->super.vptr, super->vptr, sizeof(componentvTable));
@@ -488,7 +519,6 @@ static void initAudio(struct Audio *audio, char *filePath, bool loop)
 		return;
 	}
 	memcpy(audio->super.vptr, super->vptr, sizeof(componentvTable));
-	audio->super.vptr->getComponentType = returnAudioType;
 	destoryComponent(super);
 	audio->super.vptr->getComponentType = returnAudioType;
 	audio->super.meta = NULL;
@@ -589,6 +619,229 @@ static void destoryAudio(struct Audio *audio)
 	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
 #endif
 	free(audio);
+#if MEM_DEBUG
+	MEM_BLOCK_NUM--;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+}
+
+/*---------------------------Timer Part------------------------------*/
+Timer *newTimer(int id, int interval, TIMERPROC callBackFunction)
+{
+	Timer *timer = (Timer *)malloc(sizeof(Timer));
+	initTimer(timer, id, interval, callBackFunction);
+	return timer;
+}
+
+static void initTimer(struct Timer *timer, int id, int interval, TIMERPROC callbackFunction)
+{
+	Component *super = newComponent(renderTimer, updateTimer);
+	memcpy(&(timer->super), super, sizeof(Component));
+	timer->super.vptr = NULL;
+	timer->super.vptr = (componentvTable *)calloc(1, sizeof(componentvTable));
+#if MEM_DEBUG
+	MEM_BLOCK_NUM++;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+	if (timer->super.vptr == NULL)
+	{
+		printf("Cannot allocate memory for vptr of audio component\n");
+		return;
+	}
+	memcpy(timer->super.vptr, super->vptr, sizeof(componentvTable));
+	destoryComponent(super);
+
+	timer->super.vptr->getComponentType = returnTimerType;
+	timer->callBackFunction = callbackFunction;
+	timer->interval = interval;
+
+	timer->start = start;
+	timer->stop = stop;
+	timer->setInterval = setInterval;
+	timer->getMeta = timer->super.getMeta;
+	timer->setMeta = timer->super.setMeta;
+}
+
+static void renderTimer(Component *c)
+{
+	return;
+}
+
+static void updateTimer(Component *c, ...)
+{
+	Timer *timer = (Timer *)c;
+	if (timer->enable)
+	{
+		startTimer(timer->id, timer->interval, timer->callBackFunction);
+	}
+	else if (!timer->enable)
+	{
+		cancelTimer(timer->id);
+	}
+}
+
+static void start(struct Timer *timer)
+{
+	timer->enable = TRUE;
+}
+
+static void stop(struct Timer *timer)
+{
+	timer->enable = FALSE;
+}
+
+static void setInterval(struct Timer *timer, int interval)
+{
+	if (timer->enable = TRUE)
+	{
+		cancelTimer(timer->id);
+		timer->interval = interval;
+		startTimer(timer->id, timer->interval, timer->callBackFunction);
+	}
+	else
+	{
+		timer->interval = interval;
+	}
+}
+
+static const int returnTimerType(ComponentNode c)
+{
+	return TIMER;
+}
+
+static void destoryTimer(struct Timer *timer)
+{
+	if (timer->enable)
+	{
+		cancelTimer(timer->id);
+	}
+	free(timer->super.vptr);
+#if MEM_DEBUG
+	MEM_BLOCK_NUM--;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+	free(timer);
+#if MEM_DEBUG
+	MEM_BLOCK_NUM--;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+}
+
+/*---------------------------UIText Part----------------------------*/
+
+UIText *newUIText(char *content, Vector *pos, char* color, char *font, int style, int pointSize)
+{
+	UIText *uiText = (UIText *)calloc(1, sizeof(UIText));
+	initUIText(uiText, content, *pos, color, font, style, pointSize);
+	return uiText;
+}
+
+static void initUIText(struct UIText *uiText, char *content, Vector pos, char* color, char *font, int style, int pointSize)
+{
+	Component *super = newComponent(renderUIText, updateUIText);
+	memcpy(&(uiText->super), super, sizeof(Component));
+	uiText->super.vptr = NULL;
+	uiText->super.vptr = (componentvTable *)calloc(1, sizeof(componentvTable));
+#if MEM_DEBUG
+	MEM_BLOCK_NUM++;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+	if (uiText->super.vptr == NULL)
+	{
+		printf("Cannot allocate memory for vptr of Texture component\n");
+		return;
+	}
+	memcpy(uiText->super.vptr, super->vptr, sizeof(componentvTable));
+	uiText->super.vptr->getComponentType = returnUITextType;
+	destoryComponent(super);
+
+	uiText->pos = pos;
+	uiText->content = content == NULL ? "" : content;
+	uiText->font = font == NULL ? "Consolas" : font;
+	uiText->pointSize = pointSize;
+	uiText->style = style;
+	uiText->color = color;
+	uiText->width = TextStringWidth(uiText->content);
+	uiText->visible = TRUE;
+
+	uiText->setContent = setUITextContent;
+	uiText->getContent = getUITextContent;
+	uiText->setPos = setUITextPos;
+	uiText->getPos = getUITextPos;
+	uiText->getWidth = getUITextWidth;
+	uiText->setMeta = uiText->super.setMeta;
+	uiText->getMeta - uiText->super.getMeta;
+}
+
+static void setUITextPos(UIText *t, Vector *pos)
+{
+	memcpy(&(t->pos), pos, sizeof(Vector));
+}
+
+static Vector *getUITextPos(UIText *t)
+{
+	return &(t->pos);
+}
+
+static void setUITextContent(UIText *t, char *content)
+{
+	t->content = content;
+}
+
+static char *getUITextContent(UIText *t)
+{
+	return t->content;
+}
+
+static double getUITextWidth(UIText *t)
+{
+	return TextStringWidth(t->content);
+}
+
+static void renderUIText(Component *c)
+{
+	UIText *t = (UIText *)c;
+	if (t->visible)
+	{
+		MovePen(t->pos.x - t->width / 2.0, t->pos.y);
+		SetPenColor(t->color);
+		double pointSize_ = GetPointSize();
+		SetPointSize(t->pointSize);
+		SetFont(t->font);
+		SetStyle(t->style);
+		DrawTextString(t->content);
+		SetPointSize(pointSize_);
+	}
+	else
+	{
+		return;
+	}
+}
+
+static void updateUIText(Component *c, ...)
+{
+	UIText *t = (UIText *)c;
+	Vector *pos = NULL;
+	va_list argList;
+	va_start(argList, c);
+	pos = va_arg(argList, Vector *);
+	t->setPos(t, pos);
+	va_end(argList);
+}
+
+static const int returnUITextType(ComponentNode c)
+{
+	return UITEXT;
+}
+
+static void destoryUIText(struct UIText *uiText)
+{
+	free(uiText->super.vptr);
+#if MEM_DEBUG
+	MEM_BLOCK_NUM--;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+	free(uiText);
 #if MEM_DEBUG
 	MEM_BLOCK_NUM--;
 	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);

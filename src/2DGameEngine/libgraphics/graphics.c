@@ -1988,9 +1988,9 @@ void cancelTimerEvent()
     g_timer = NULL;
 }
 
-void startTimer(int id,int timeinterval)
+void startTimer(int id,int timeinterval, TIMERPROC callback)
 {
-	SetTimer(graphicsWindow, id, timeinterval, NULL);
+	SetTimer(graphicsWindow, id, timeinterval, callback);
 }
 
 void cancelTimer(int id)
