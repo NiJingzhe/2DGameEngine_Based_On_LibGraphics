@@ -10,6 +10,7 @@ void Main()
 #if ENGINE_DEBUG
     LOG("Enter Game Init--------------------------------------------------------------------------------------------------------------------------");
 #endif
+    srand(time(0));
     initInputManager();
     initScenesManager();
     scmng.loadScene(&scene1, createScene1);

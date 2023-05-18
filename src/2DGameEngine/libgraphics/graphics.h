@@ -12,6 +12,7 @@
 
 #ifndef _graphics_h
 #define _graphics_h
+#include <winuser.h>
 /*
  * Overview
  * --------
@@ -139,6 +140,9 @@ double GetWindowHeight(void);
 
 double GetCurrentX(void);
 double GetCurrentY(void);
+
+void startTimer(int id,int timeinterval, TIMERPROC callback);
+void cancelTimer(int id);
 
 void Main();
 void EngineUpdate(double delta);
