@@ -74,6 +74,7 @@ typedef struct Texture
 	double (*getHeight)(struct Texture *);
 	char *(*getMeta)(struct Component *);
 	void (*setMeta)(struct Component *, char *meta);
+	void (*resetTexture)(struct Texture *, char* resPath);
 
 } Texture;
 

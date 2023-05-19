@@ -19,6 +19,8 @@ Texture *startButtonTexture;
 ActorNode scene1BGM;
 Audio *bgm;
 
+bool fromPause = FALSE;
+
 static void setupScene_scene1(SceneNode scene1, void *param);
 static void startButtonUpdate(ActorNode button, double delta);
 static void bgmUpdate(ActorNode scene1BGM, double delta);
@@ -64,6 +66,22 @@ void createScene1(SceneNode *scene1)
 void setupScene_scene1(SceneNode scene1, void *param)
 {
 
+    if (param != NULL)
+    {
+        if (strcmp(param, "from pause") == 0)
+        {
+            fromPause = TRUE;
+        }
+        else
+        {
+            fromPause = FALSE;
+        }
+    }
+    else
+    {
+        fromPause = FALSE;
+    }
+
     scene1BackgroundShape->enable = FALSE;
     scene1BackgroundShape->visible = TRUE;
     scene1BackgroundShape->setMeta((ComponentNode)scene1BackgroundShape, "scene1BackgroundShape");
@@ -81,19 +99,18 @@ void setupScene_scene1(SceneNode scene1, void *param)
     bgm->setMeta((ComponentNode)bgm, "scene1_bgm");
 
     scene1BGM->vptr->update = bgmUpdate;
-    
 }
 
 static void titleRender(ActorNode title)
 {
-	ComponentNode currentComp = title->componentList;
-	while (currentComp && currentComp->vptr != NULL && currentComp->vptr->render != 0)
-	{
-		currentComp->vptr->render(currentComp);
-		currentComp = currentComp->next;
-	}
+    ComponentNode currentComp = title->componentList;
+    while (currentComp && currentComp->vptr != NULL && currentComp->vptr->render != 0)
+    {
+        currentComp->vptr->render(currentComp);
+        currentComp = currentComp->next;
+    }
 
-    Texture *titleTexture = (Texture*)(title->getComponent(title, "title_texture"));
+    Texture *titleTexture = (Texture *)(title->getComponent(title, "title_texture"));
     Vector originPos;
     memcpy(&(originPos), &(titleTexture->pos), sizeof(Vector));
 
@@ -112,12 +129,13 @@ static void titleRender(ActorNode title)
     titleTexture->pos.x = originPos.x;
     titleTexture->pos.y = originPos.y;
     titleTexture->color = "White";
-
 }
 
-static void bgmUpdate(ActorNode scene1BGM, double delta){
-    Audio *bgm = (Audio*)(scene1BGM->getComponent(scene1BGM, "scene1_bgm"));
-    if (!bgm->playing){
+static void bgmUpdate(ActorNode scene1BGM, double delta)
+{
+    Audio *bgm = (Audio *)(scene1BGM->getComponent(scene1BGM, "scene1_bgm"));
+    if (!bgm->playing)
+    {
         bgm->play(bgm);
     }
 }
@@ -137,8 +155,8 @@ static void startButtonUpdate(ActorNode button, double delta)
         if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP)
         {
             if (scmng.getScene("scene2") == NULL)
-                scmng.loadScene(&scene2, createScene2);
-            scmng.switchTo("scene2", FALSE, FALSE, NULL, 0);
+                scmng.loadScene(&scene2, createScene2, &fromPause);
+            scmng.switchTo("scene2", FALSE, TRUE, &fromPause, sizeof(bool));
         }
         else if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_DOWN)
         {

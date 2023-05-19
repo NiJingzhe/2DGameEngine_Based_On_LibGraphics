@@ -20,6 +20,7 @@ static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int 
 static void renderTexture(Component *c);
 static void updateTexture(Component *c, ...); // ... should contain and only contain a Vector pointer represents the position of texture
 static void setTexturePos(Texture *t, Vector *pos);
+static void resetTexture(Texture *t, char *resPath);
 static Vector *getTexturePos(Texture *t);
 static double getWidth(Texture *t);
 static double getHeight(Texture *t);
@@ -46,7 +47,7 @@ static void setInterval(struct Timer *timer, int interval);
 static const int returnTimerType(ComponentNode c);
 static void destoryTimer(struct Timer *timer);
 
-static void initUIText(struct UIText *uiText, char *content, Vector pos, char* color, char *font, int style, int pointSize);
+static void initUIText(struct UIText *uiText, char *content, Vector pos, char *color, char *font, int style, int pointSize);
 static void renderUIText(Component *c);
 static void updateUIText(Component *c, ...);
 static void setUITextPos(UIText *t, Vector *pos);
@@ -356,6 +357,7 @@ static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int 
 	t->getPos = getTexturePos;
 	t->getHeight = getHeight;
 	t->getWidth = getWidth;
+	t->resetTexture = resetTexture;
 
 	t->getMeta = t->super.getMeta;
 	t->setMeta = t->super.setMeta;
@@ -374,6 +376,66 @@ static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int 
 #endif
 	t->lineNumber = 0;
 	t->pointSize = pointSize;
+
+	char buffer[500] = {'\0'};
+	while (!feof(textureFile))
+	{
+
+		t->textureString = (char **)realloc(t->textureString, (t->lineNumber + 1) * sizeof(char *));
+		fgets(buffer, 500, textureFile);
+		t->textureString[t->lineNumber] = (char *)calloc(strlen(buffer) + 1, sizeof(char));
+#if MEM_DEBUG
+		MEM_BLOCK_NUM++;
+		printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+		strcpy(t->textureString[t->lineNumber], buffer);
+		t->textureString[t->lineNumber][strlen(t->textureString[t->lineNumber])] = '\0';
+		memset(buffer, '\0', sizeof(buffer));
+		t->lineNumber++;
+	}
+	fclose(textureFile);
+
+	int pointSize_ = GetPointSize();
+	SetFont("Courier New");
+	SetStyle(Bold);
+	SetPointSize(t->pointSize);
+	t->height = t->lineNumber * (TextStringWidth(t->textureString[t->lineNumber - 1]) / strlen(t->textureString[t->lineNumber - 1]) * 1.01);
+	t->width = TextStringWidth(t->textureString[t->lineNumber - 1]);
+	SetPointSize(pointSize_);
+}
+
+static void resetTexture(Texture *t, char *resPath)
+{
+	FILE *textureFile = fopen(resPath, "r");
+	if (textureFile == NULL)
+	{
+		printf("CANNOT OPEN TEXTURE! PLEASE CHAECK YOUR PATH!");
+		return;
+	}
+
+	if (t->textureString != NULL)
+	{
+		for (int i = 0; i < t->lineNumber; ++i)
+		{
+			free(t->textureString[i]);
+#if MEM_DEBUG
+			MEM_BLOCK_NUM--;
+			printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+		}
+		free(t->textureString);
+#if MEM_DEBUG
+		MEM_BLOCK_NUM--;
+		printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+	}
+
+	t->textureString = (char **)calloc(1, sizeof(char *));
+#if MEM_DEBUG
+	MEM_BLOCK_NUM++;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+	t->lineNumber = 0;
 
 	char buffer[500] = {'\0'};
 	while (!feof(textureFile))
@@ -654,6 +716,7 @@ static void initTimer(struct Timer *timer, int id, int interval, TIMERPROC callb
 	timer->super.vptr->getComponentType = returnTimerType;
 	timer->callBackFunction = callbackFunction;
 	timer->interval = interval;
+	timer->enable = FALSE;
 
 	timer->start = start;
 	timer->stop = stop;
@@ -669,25 +732,19 @@ static void renderTimer(Component *c)
 
 static void updateTimer(Component *c, ...)
 {
-	Timer *timer = (Timer *)c;
-	if (timer->enable)
-	{
-		startTimer(timer->id, timer->interval, timer->callBackFunction);
-	}
-	else if (!timer->enable)
-	{
-		cancelTimer(timer->id);
-	}
+	return;
 }
 
 static void start(struct Timer *timer)
 {
 	timer->enable = TRUE;
+	startTimer(timer->id, timer->interval, timer->callBackFunction);
 }
 
 static void stop(struct Timer *timer)
 {
 	timer->enable = FALSE;
+	cancelTimer(timer->id);
 }
 
 static void setInterval(struct Timer *timer, int interval)
@@ -729,14 +786,18 @@ static void destoryTimer(struct Timer *timer)
 
 /*---------------------------UIText Part----------------------------*/
 
-UIText *newUIText(char *content, Vector *pos, char* color, char *font, int style, int pointSize)
+UIText *newUIText(char *content, Vector *pos, char *color, char *font, int style, int pointSize)
 {
 	UIText *uiText = (UIText *)calloc(1, sizeof(UIText));
+	#if MEM_DEBUG
+	MEM_BLOCK_NUM++;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
 	initUIText(uiText, content, *pos, color, font, style, pointSize);
 	return uiText;
 }
 
-static void initUIText(struct UIText *uiText, char *content, Vector pos, char* color, char *font, int style, int pointSize)
+static void initUIText(struct UIText *uiText, char *content, Vector pos, char *color, char *font, int style, int pointSize)
 {
 	Component *super = newComponent(renderUIText, updateUIText);
 	memcpy(&(uiText->super), super, sizeof(Component));
@@ -761,7 +822,14 @@ static void initUIText(struct UIText *uiText, char *content, Vector pos, char* c
 	uiText->pointSize = pointSize;
 	uiText->style = style;
 	uiText->color = color;
+
+	double pointSize_ = GetPointSize();
+	SetPointSize(uiText->pointSize);
+	SetFont(uiText->font);
+	SetStyle(uiText->style);
 	uiText->width = TextStringWidth(uiText->content);
+	SetPointSize(pointSize_);
+
 	uiText->visible = TRUE;
 
 	uiText->setContent = setUITextContent;
@@ -786,6 +854,7 @@ static Vector *getUITextPos(UIText *t)
 static void setUITextContent(UIText *t, char *content)
 {
 	t->content = content;
+	t->width = TextStringWidth(t->content);
 }
 
 static char *getUITextContent(UIText *t)
@@ -803,12 +872,14 @@ static void renderUIText(Component *c)
 	UIText *t = (UIText *)c;
 	if (t->visible)
 	{
-		MovePen(t->pos.x - t->width / 2.0, t->pos.y);
 		SetPenColor(t->color);
 		double pointSize_ = GetPointSize();
 		SetPointSize(t->pointSize);
 		SetFont(t->font);
 		SetStyle(t->style);
+		double width = TextStringWidth(t->content);
+		t->width = width;
+		MovePen(t->pos.x - width / 2, t->pos.y);
 		DrawTextString(t->content);
 		SetPointSize(pointSize_);
 	}

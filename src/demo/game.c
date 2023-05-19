@@ -13,7 +13,7 @@ void Main()
     srand(time(0));
     initInputManager();
     initScenesManager();
-    scmng.loadScene(&scene1, createScene1);
+    scmng.loadScene(&scene1, createScene1, NULL);
     scmng.currentScene = scene1;
     scmng.currentScene->setup(scmng.currentScene, NULL);
 #if ENGINE_DEBUG
