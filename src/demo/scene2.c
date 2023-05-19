@@ -65,8 +65,6 @@ ActorRender normalRender;
 // 玩家技能cd标志
 bool inCD1 = FALSE;
 bool inCD2 = FALSE;
-// 冲刺体力条机制
-double dashPower;
 /////////////////////////////// 场景全局量声明部分 ///////////////////////////////////////////
 /*------------------------------------------------------------------------------------------*/
 /////////////////////////////// 场景内Actor相关函数声明部分 //////////////////////////////////
@@ -220,18 +218,14 @@ static void setupScene_scene2(SceneNode scene2, void *param)
         }
         else
         {
-            dashPower = 90;
             countDown = 60 * 1000;
             aliveTime = 0;
-            freezed = FALSE;
         }
     }
     else
     {
-        dashPower = 90;
         countDown = 60 * 1000;
         aliveTime = 0;
-        freezed = FALSE;
     }
 
     // background
@@ -311,6 +305,7 @@ static void playerUpdate(ActorNode player, double delta)
     Audio *bulletTimeSound = (Audio *)(player->getComponent(player, "bullet_time_sound"));
     // 部分量的定义
     static bool enterPressed = FALSE;
+    static double dashPower = 90;
     double ACC_CONST = 10;
     double VEL_CONST = 5;
 
