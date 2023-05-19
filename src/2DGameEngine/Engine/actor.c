@@ -207,18 +207,20 @@ static bool isCollideWithActor(Actor *a1, Actor *a2)
 
 	while (a1CurrentComp)
 	{
+		a2CurrentComp = a2->componentList;
 		while (a2CurrentComp)
 		{
 			if (a1CurrentComp->vptr->getComponentType() == COLLISION_SHAPE &&
 				a2CurrentComp->vptr->getComponentType() == COLLISION_SHAPE)
 			{
-				collisionResult |=
+				collisionResult = collisionResult || 
 					((CollisionShape *)a1CurrentComp)->isCollideWith(((CollisionShape *)a1CurrentComp), ((CollisionShape *)a2CurrentComp));
 			}
 			a2CurrentComp = a2CurrentComp->next;
 		}
 		a1CurrentComp = a1CurrentComp->next;
 	}
+	return collisionResult;
 }
 
 void destoryActor(Actor *actor)

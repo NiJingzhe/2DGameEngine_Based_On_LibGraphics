@@ -50,8 +50,8 @@ Texture *player2TextureLeft;
 // player2CollisionShape
 Rect *player2collisionRect;
 CollisionShape *player2CollisionShape;
-Timer* freezSkillTimer;
-Audio* freezingFX;
+Timer *freezSkillTimer;
+Audio *freezingFX;
 
 // 倒计时UI
 Vector *countDownPos;
@@ -67,11 +67,17 @@ long long int countDown;
 long long int aliveTime;
 // 标志玩家1是否被控制
 bool freezed = FALSE;
+// 原始渲染函数
+ActorRender normalRender;
+// 玩家技能cd标志
+bool inCD1 = FALSE;
+bool inCD2 = FALSE;
 /////////////////////////////// 场景全局量声明部分 ///////////////////////////////////////////
 /*------------------------------------------------------------------------------------------*/
 /////////////////////////////// 场景内Actor相关函数声明部分 //////////////////////////////////
 static void pauseButtonUpdate(ActorNode button, double delta);
 static void playerUpdate(ActorNode player, double delta);
+static void playerSpecialRender(ActorNode player);
 static void player2Update(ActorNode player2, double delta);
 static void setupScene_scene2(SceneNode scene2, void *param);
 static void CALLBACK countDownUpdate(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwTime);
@@ -103,10 +109,10 @@ void createScene2(SceneNode *scene2)
     // player1
     playerPos = newVector(getww / 2, getwh / 2);
     player = newActor("player", playerPos);
-    playerTextureDown = newTexture("./res/scene2/player_down.txt", playerPos, "Red", 1);
-    playerTextureUp = newTexture("./res/scene2/player_up.txt", playerPos, "Red", 1);
-    playerTextureRight = newTexture("./res/scene2/player_right.txt", playerPos, "Red", 1);
-    playerTextureLeft = newTexture("./res/scene2/player_left.txt", playerPos, "Red", 1);
+    playerTextureDown = newTexture("./res/scene2/player_down.txt", playerPos, "White", 1);
+    playerTextureUp = newTexture("./res/scene2/player_up.txt", playerPos, "White", 1);
+    playerTextureRight = newTexture("./res/scene2/player_right.txt", playerPos, "White", 1);
+    playerTextureLeft = newTexture("./res/scene2/player_left.txt", playerPos, "White", 1);
     collisionRect = newRect(
         playerPos,
         0,
@@ -202,8 +208,6 @@ void createScene2(SceneNode *scene2)
     destoryShape((Shape *)targetCircle);
     destoryShape((Shape *)stripRect);
     destoryVector(countDownPos);
-
-    
 }
 
 /// @brief 场景2的初始化函数，初始化各个Component的属性
@@ -249,7 +253,7 @@ static void setupScene_scene2(SceneNode scene2, void *param)
     bulletTimeSound->setMeta((ComponentNode)bulletTimeSound, "bullet_time_sound");
     // update function
     player->vptr->update = playerUpdate;
-
+    normalRender = player->vptr->render;
     // player2
     player2TextureDown->visible = TRUE;
     player2TextureDown->setMeta((ComponentNode)player2TextureDown, "player2_texture_down");
@@ -266,7 +270,7 @@ static void setupScene_scene2(SceneNode scene2, void *param)
     freezingFX->setMeta((ComponentNode)freezingFX, "freezing_fx");
     player2->vptr->update = player2Update;
 
-    //countdown ui
+    // countdown ui
     timer->setMeta((ComponentNode)timer, "count_down_timer");
     timer->start(timer);
     countDownText->setMeta((ComponentNode)countDownText, "count_down_text");
@@ -295,10 +299,12 @@ static void playerUpdate(ActorNode player, double delta)
     double ACC_CONST = 10;
     double VEL_CONST = 5;
 
-    if (freezed) {
+    if (freezed)
+    {
         ACC_CONST = 4;
+        VEL_CONST = 5 * 0.4;
     }
-    
+
     // 键盘控制人物移动部分
     Vector *acc = newVector((-inmng.keyStates[VK_NUMPAD4] + inmng.keyStates[VK_NUMPAD6]),
                             (-inmng.keyStates[VK_NUMPAD5] + inmng.keyStates[VK_NUMPAD8]));
@@ -382,24 +388,25 @@ static void playerUpdate(ActorNode player, double delta)
     else
         playerTexture = playerTextureRight;
 
-    
-    if (freezed) {
+    if (freezed)
+    {
         playerTexture->color = "Blue";
     }
 
     // ENTER 键技能
+
     Vector *dashDirection = newVector(inmng.mouseX - player->pos.x, inmng.mouseY - player->pos.y);
     if (dashDirection->length(dashDirection) > 5)
     {
         dashDirection->normalize(dashDirection);
         dashDirection->mult(dashDirection, 5);
     }
-    if (inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 2.0 && !freezed)
+    if (inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 2.0 && !freezed && dashPower >= 10)
     {
         if (!bulletTimeSound->playing)
             bulletTimeSound->play(bulletTimeSound);
 
-        playerTexture->color = "White";
+        player->vptr->render = playerSpecialRender;
 
         GAME_TIME_TICK = 1.0 / 500.0;
         enterPressed = TRUE;
@@ -411,7 +418,8 @@ static void playerUpdate(ActorNode player, double delta)
     else
     {
         GAME_TIME_TICK = 1.0 / 60.0;
-        if (enterPressed && inmng.keyBoardEventType == KEY_UP)
+        player->vptr->render = normalRender;
+        if (enterPressed && inmng.keyBoardEventType == KEY_UP && !freezed)
         {
             enterPressed = FALSE;
             playerDashTargetCircle->visible = FALSE;
@@ -424,8 +432,13 @@ static void playerUpdate(ActorNode player, double delta)
                 memcpy(&(vel), &(player->vel), sizeof(Vector));
                 vel.mult(&(vel), delta * VEL_CONST * 25);
                 player->pos.add(&(player->pos), &(vel));
-                bulletTimeSound->stop(bulletTimeSound);
             }
+        }
+        if (freezed)
+        {
+            enterPressed = FALSE;
+            playerDashTargetCircle->visible = FALSE;
+            bulletTimeSound->stop(bulletTimeSound);
         }
     }
     // 技能条的长度更新
@@ -463,16 +476,67 @@ static void playerUpdate(ActorNode player, double delta)
     playerTexture->super.vptr->update((ComponentNode)playerTexture, &(player->pos));
     Vector *stripPos = newVector(player->pos.x, player->pos.y + playerTexture->getHeight(playerTexture) * 0.8);
     playerDashPowerStrip->super.vptr->update((ComponentNode)playerDashPowerStrip, stripPos);
+
+    //碰撞检测
+    if (player->isCollideWithActor(player, player2)){
+        GAME_TIME_TICK = 1.0 / 600.0;
+    }
+
+
     destoryVector(stripPos);
     // 销毁所有申请的，级别在Component以下的内存空间
     destoryVector(acc);
     destoryVector(dashDirection);
 }
 
+
+static void playerSpecialRender(ActorNode player){
+    ComponentNode currentComp = player->componentList;
+	while (currentComp && currentComp->vptr != NULL && currentComp->vptr->render != 0)
+	{
+		currentComp->vptr->render(currentComp);
+		currentComp = currentComp->next;
+	}
+
+    Texture *playerTextureDown = (Texture *)(player->getComponent(player, "player_texture_down"));
+    Texture *playerTextureUp = (Texture *)(player->getComponent(player, "player_texture_up"));
+    Texture *playerTextureRight = (Texture *)(player->getComponent(player, "player_texture_right"));
+    Texture *playerTextureLeft = (Texture *)(player->getComponent(player, "player_texture_left"));
+    Texture *playerTexture;
+    if (playerTextureDown->visible)
+        playerTexture = playerTextureDown;
+    else if (playerTextureUp->visible)
+        playerTexture = playerTextureUp;
+    else if (playerTextureLeft->visible)
+        playerTexture = playerTextureLeft;
+    else
+        playerTexture = playerTextureRight;
+
+    Vector originPos;
+    memcpy(&(originPos), &(playerTexture->pos), sizeof(Vector));
+
+    static double bias = 0;
+    double temp = ((rand() % (5 - 0 + 1)) + 0) / 50.0;
+    bias = abs(bias - temp) > 0.01 && abs(bias - temp) < 0.03 ? temp : bias;
+    playerTexture->pos.x -= bias;
+    playerTexture->color = "Cyan";
+    playerTexture->super.vptr->render((ComponentNode)playerTexture);
+
+    bias = ((rand() % (5 - 0 + 1)) + 0) / 30.0;
+    playerTexture->pos.x += bias;
+    playerTexture->color = "Red";
+    playerTexture->super.vptr->render((ComponentNode)playerTexture);
+
+    playerTexture->pos.x = originPos.x;
+    playerTexture->pos.y = originPos.y;
+    playerTexture->color = "White";
+}
+
 /// @brief 第二玩家更新方法
-/// @param player2 
-/// @param delta 
-static void player2Update(ActorNode player2, double delta){
+/// @param player2
+/// @param delta
+static void player2Update(ActorNode player2, double delta)
+{
 
     // 获取玩家在更新过过程中需要用到的组件
     Texture *player2TextureDown = (Texture *)(player2->getComponent(player2, "player2_texture_down"));
@@ -480,7 +544,7 @@ static void player2Update(ActorNode player2, double delta){
     Texture *player2TextureRight = (Texture *)(player2->getComponent(player2, "player2_texture_right"));
     Texture *player2TextureLeft = (Texture *)(player2->getComponent(player2, "player2_texture_left"));
     CollisionShape *player2CollisionShape = (CollisionShape *)(player2->getComponent(player2, "player2_collision_shape"));
-    Timer *freezSkillTimer = (Timer*)(player2->getComponent(player2, "freez_skill_timer"));
+    Timer *freezSkillTimer = (Timer *)(player2->getComponent(player2, "freez_skill_timer"));
     Audio *freezingFX = (Audio *)(player2->getComponent(player2, "freezing_fx"));
 
     // 部分量的定义
@@ -571,13 +635,15 @@ static void player2Update(ActorNode player2, double delta){
 
     // 空格键技能
     static bool spacePressing = FALSE;
-    if (inmng.keyStates[VK_SPACE] && !spacePressing){
+    if (inmng.keyStates[VK_SPACE] && !spacePressing)
+    {
         spacePressing = TRUE;
         freezed = TRUE;
         freezingFX->play(freezingFX);
         freezSkillTimer->start(freezSkillTimer);
     }
-    else{
+    else
+    {
         spacePressing = FALSE;
     }
 
@@ -626,16 +692,17 @@ static void pauseButtonUpdate(ActorNode button, double delta)
     }
 }
 
-
 /// @brief 冻结效果计时器
-/// @param hwnd 
-/// @param msg 
-/// @param timerID 
-/// @param dwTime 
-static void CALLBACK freezSkill(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwTime){
+/// @param hwnd
+/// @param msg
+/// @param timerID
+/// @param dwTime
+static void CALLBACK freezSkill(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwTime)
+{
     static int count = 0;
     count++;
-    if (count == 5){
+    if (count == 5)
+    {
         freezed = FALSE;
         count = 0;
         freezingFX->stop(freezingFX);
