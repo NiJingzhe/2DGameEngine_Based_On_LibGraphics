@@ -1,12 +1,5 @@
 #include "2DEngine.h"
 #include "scene_info.h"
-/*---------TODO---------
-1. 完成场景2的构建
-2. 实现平滑人物控制器                         finished
-3. 实现人物技能与技能槽机制                   finished
-4. 完成敌人NPC
-5. 为人物技能释放过程增加一定的视觉效果        finished
----------END TODO-------*/
 
 SceneNode scene2;
 
@@ -161,7 +154,7 @@ void createScene2(SceneNode *scene2)
     countDownPos = newVector(getww / 2, getwh * 8 / 10);
     countDownUI = newActor("count_down_ui", countDownPos);
     timer = newTimer(1, 1000, countDownUpdate);
-    countDownText = newUIText("02:00", countDownPos, "White", "Consolas", Bold, 50);
+    countDownText = newUIText("01:00", countDownPos, "White", "Consolas", Bold, 50);
     freezingFX = newAudio("./res/scene2/freezingfx.mp3", FALSE);
 
     // add component part
@@ -215,8 +208,24 @@ void createScene2(SceneNode *scene2)
 /// @param param
 static void setupScene_scene2(SceneNode scene2, void *param)
 {
-    countDown = 2 * 60 * 1000;
-    aliveTime = 0;
+
+    if (param != NULL)
+    {
+        if (*((bool *)param) == TRUE)
+        {
+            timer->start(timer);
+        }
+        else
+        {
+            countDown = 60 * 1000;
+            aliveTime = 0;
+        }
+    }
+    else
+    {
+        countDown = 60 * 1000;
+        aliveTime = 0;
+    }
 
     // background
     scene2BackgoundShape->enable = FALSE;
@@ -306,8 +315,8 @@ static void playerUpdate(ActorNode player, double delta)
     }
 
     // 键盘控制人物移动部分
-    Vector *acc = newVector((-inmng.keyStates[VK_NUMPAD4] + inmng.keyStates[VK_NUMPAD6]),
-                            (-inmng.keyStates[VK_NUMPAD5] + inmng.keyStates[VK_NUMPAD8]));
+    Vector *acc = newVector((-inmng.keyStates[VK_LEFT] + inmng.keyStates[VK_RIGHT]),
+                            (-inmng.keyStates[VK_DOWN] + inmng.keyStates[VK_UP]));
 
     acc->normalize(acc);
     acc->mult(acc, delta * ACC_CONST);
@@ -477,11 +486,17 @@ static void playerUpdate(ActorNode player, double delta)
     Vector *stripPos = newVector(player->pos.x, player->pos.y + playerTexture->getHeight(playerTexture) * 0.8);
     playerDashPowerStrip->super.vptr->update((ComponentNode)playerDashPowerStrip, stripPos);
 
-    //碰撞检测
-    if (player->isCollideWithActor(player, player2)){
+    // 碰撞检测
+    if (player->isCollideWithActor(player, player2))
+    {
         GAME_TIME_TICK = 1.0 / 600.0;
+        char param[255] = "ChaserWin";
+        if (scmng.getScene("scene3") == NULL)
+        {
+            scmng.loadScene(&scene3, createScene3, (void *)param);
+        }
+        scmng.switchTo("scene3", TRUE, TRUE, (void *)param, strlen(param) * sizeof(char));
     }
-
 
     destoryVector(stripPos);
     // 销毁所有申请的，级别在Component以下的内存空间
@@ -489,14 +504,14 @@ static void playerUpdate(ActorNode player, double delta)
     destoryVector(dashDirection);
 }
 
-
-static void playerSpecialRender(ActorNode player){
+static void playerSpecialRender(ActorNode player)
+{
     ComponentNode currentComp = player->componentList;
-	while (currentComp && currentComp->vptr != NULL && currentComp->vptr->render != 0)
-	{
-		currentComp->vptr->render(currentComp);
-		currentComp = currentComp->next;
-	}
+    while (currentComp && currentComp->vptr != NULL && currentComp->vptr->render != 0)
+    {
+        currentComp->vptr->render(currentComp);
+        currentComp = currentComp->next;
+    }
 
     Texture *playerTextureDown = (Texture *)(player->getComponent(player, "player_texture_down"));
     Texture *playerTextureUp = (Texture *)(player->getComponent(player, "player_texture_up"));
@@ -674,8 +689,9 @@ static void pauseButtonUpdate(ActorNode button, double delta)
         {
             buttonTexture->color = "Blue";
             if (scmng.getScene("scene1") == NULL)
-                scmng.loadScene(&scene1, createScene1);
-            scmng.switchTo("scene1", TRUE, FALSE, NULL, 0);
+                scmng.loadScene(&scene1, createScene1, "from pause");
+            scmng.switchTo("scene1", FALSE, TRUE, "from pause", strlen("from pause") * sizeof(char));
+            timer->stop(timer);
         }
         else if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_DOWN)
         {
@@ -732,27 +748,26 @@ static void countDownUIUpdate(ActorNode countDownUI, double delta)
 
     static char countDownString[255] = {'\0'};
     static int second = 0, minute = 2;
-    if (countDown >= 60 * 1000)
+    second = countDown / 1000;
+    minute = 0;
+    if (second == 60)
     {
-        second = (countDown - 60 * 1000) / 1000;
         minute = 1;
-        if (second == 60)
-        {
-            second = 0;
-            minute = 2;
-        }
+        second = 0;
     }
-    else
-    {
-        second = countDown / 1000;
-        minute = 0;
-    }
+
     sprintf(countDownString, "%02d : %02d", minute, second);
     text->setContent(text, countDownString);
 
     if (countDown == 0)
     {
         timer->stop(timer);
+        char param[255] = "EscaperWin";
+        if (scmng.getScene("scene3") == NULL)
+        {
+            scmng.loadScene(&scene3, createScene3, (void *)param);
+        }
+        scmng.switchTo("scene3", TRUE, TRUE, (void *)param, strlen(param) * sizeof(char));
         // 切换到解算界面
     }
 }

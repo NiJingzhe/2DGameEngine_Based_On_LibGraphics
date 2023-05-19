@@ -6,7 +6,7 @@ ScenesManager scenesManager;
 static void addScene(SceneNode scene);
 static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, size_t size);
 static SceneNode getScene(char *meta);
-static void loadScene(SceneNode *scene, CreateSceneFunction func);
+static void loadScene(SceneNode *scene, CreateSceneFunction func, void* param);
 static void checkSwitch();
 
 static void addScene(SceneNode scene)
@@ -74,9 +74,9 @@ static SceneNode getScene(char *meta)
 
 static void switchTo(char *target, bool unloadCur, bool setupNext, void *param, size_t size)
 {
+
     if (target == NULL || scenesManager.getScene(target) == NULL)
     {
-        printf("The scene %s have not been loaded\n", target);
         scenesManager.target = NULL;
         return;
     }
@@ -160,13 +160,13 @@ static void checkSwitch()
         scenesManager.currentScene->setup(scenesManager.currentScene, scenesManager.param);
 }
 
-static void loadScene(SceneNode *scene, CreateSceneFunction func)
+static void loadScene(SceneNode *scene, CreateSceneFunction func, void* param)
 {
 #if MEM_DEBUG
     printf("\nLOG:\nstart load scene...\n");
 #endif
     func(scene);
-    (*scene)->setup(*scene, NULL);
+    (*scene)->setup(*scene, param);
     addScene(*scene);
     return;
 }

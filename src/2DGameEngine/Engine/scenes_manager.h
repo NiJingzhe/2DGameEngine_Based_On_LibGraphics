@@ -19,7 +19,7 @@ typedef struct ScenesManager{
     SceneNode (*getScene)(char*);
     void (*switchTo)(char*, bool, bool, void*, size_t);
     void (*checkSwitch)();
-    void (*loadScene)(SceneNode*, CreateSceneFunction);
+    void (*loadScene)(SceneNode*, CreateSceneFunction, void*);
     void (*unloadScene)(char* target);
 } ScenesManager;
 
