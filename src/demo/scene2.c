@@ -148,14 +148,15 @@ void createScene2(SceneNode *scene2)
         "Red",
         1);
     player2CollisionShape = newCollisionShape((Shape *)player2collisionRect);
-    freezSkillTimer = newTimer(2, 500, freezSkill);
+    freezSkillTimer = newTimer(2, 2500, freezSkill);
+    freezingFX = newAudio("./res/scene2/freezingfx.mp3", FALSE);
 
     // countdownUI
     countDownPos = newVector(getww / 2, getwh * 8 / 10);
     countDownUI = newActor("count_down_ui", countDownPos);
     timer = newTimer(1, 1000, countDownUpdate);
     countDownText = newUIText("01:00", countDownPos, "White", "Consolas", Bold, 50);
-    freezingFX = newAudio("./res/scene2/freezingfx.mp3", FALSE);
+    
 
     // add component part
     scene2Backgound->addComponent(scene2Backgound, (ComponentNode)scene2BackgoundShape);
@@ -717,7 +718,7 @@ static void CALLBACK freezSkill(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwT
 {
     static int count = 0;
     count++;
-    if (count == 5)
+    if (count == 1)
     {
         freezed = FALSE;
         count = 0;

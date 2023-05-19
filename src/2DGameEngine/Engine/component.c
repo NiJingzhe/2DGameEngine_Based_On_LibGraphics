@@ -789,6 +789,10 @@ static void destoryTimer(struct Timer *timer)
 UIText *newUIText(char *content, Vector *pos, char *color, char *font, int style, int pointSize)
 {
 	UIText *uiText = (UIText *)calloc(1, sizeof(UIText));
+	#if MEM_DEBUG
+	MEM_BLOCK_NUM++;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
 	initUIText(uiText, content, *pos, color, font, style, pointSize);
 	return uiText;
 }

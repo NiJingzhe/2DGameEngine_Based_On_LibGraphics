@@ -39,7 +39,10 @@
 			"cstdint": "c",
 			"unordered_map": "c",
 			"utility": "c",
-			"typeinfo": "c"
+			"typeinfo": "c",
+			"cwchar": "c",
+			"cwctype": "c",
+			"exception": "c"
 		}
 	},
 	"launch": {
