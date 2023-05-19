@@ -65,6 +65,8 @@ ActorRender normalRender;
 // 玩家技能cd标志
 bool inCD1 = FALSE;
 bool inCD2 = FALSE;
+// dashPower
+double dashPower;
 /////////////////////////////// 场景全局量声明部分 ///////////////////////////////////////////
 /*------------------------------------------------------------------------------------------*/
 /////////////////////////////// 场景内Actor相关函数声明部分 //////////////////////////////////
@@ -156,7 +158,6 @@ void createScene2(SceneNode *scene2)
     countDownUI = newActor("count_down_ui", countDownPos);
     timer = newTimer(1, 1000, countDownUpdate);
     countDownText = newUIText("01:00", countDownPos, "White", "Consolas", Bold, 50);
-    
 
     // add component part
     scene2Backgound->addComponent(scene2Backgound, (ComponentNode)scene2BackgoundShape);
@@ -220,12 +221,16 @@ static void setupScene_scene2(SceneNode scene2, void *param)
         {
             countDown = 60 * 1000;
             aliveTime = 0;
+            dashPower = 90;
+            freezed = FALSE;
         }
     }
     else
     {
         countDown = 60 * 1000;
         aliveTime = 0;
+        dashPower = 90;
+        freezed = FALSE;
     }
 
     // background
@@ -305,7 +310,6 @@ static void playerUpdate(ActorNode player, double delta)
     Audio *bulletTimeSound = (Audio *)(player->getComponent(player, "bullet_time_sound"));
     // 部分量的定义
     static bool enterPressed = FALSE;
-    static double dashPower = 90;
     double ACC_CONST = 10;
     double VEL_CONST = 5;
 

@@ -19,6 +19,7 @@ aux_source_directory(src/2DGameEngine/Engine ENG_LIST)
 aux_source_directory(src/2DGameEngine/ CONF_LIST)
 
 add_compile_options(-std=c11)
+add_compile_options(-O3)
 # 将源代码添加到此项目的可执行文件。
 
 add_executable (2DGameEngine ${SRC_LIST} ${HEAD_LIST} ${ENG_LIST} ${CONF_LIST})
