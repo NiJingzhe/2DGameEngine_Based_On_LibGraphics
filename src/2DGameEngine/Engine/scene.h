@@ -7,15 +7,17 @@ typedef struct Scene {
 	ActorNode actorList;
 	char* meta;
 	struct Scene* next, * prev; 
-	char* switchTarget;
+	//char* switchTarget;                            need to be del later
 
 	void (*setMeta)(struct Scene*, char*);
 	char* (*getMeta)(struct Scene*);
 	void (*addActor)(struct Scene*, ActorNode);
 	ActorNode (*getActor)(struct Scene*, char*);
 	void (*delActor)(struct Scene*, char* meta);
-	void (*setSwitchTarget)(struct Scene*, char*);
+	//void (*setSwitchTarget)(struct Scene*, char*);
+	void (*setup)(struct Scene*, void*);
 	void (*update)(struct Scene*, double);
+	void (*exit)(struct Scene*);    
 	void (*render)(struct Scene*);
 
 } Scene, *SceneNode;

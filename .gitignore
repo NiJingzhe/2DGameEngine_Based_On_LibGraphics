@@ -1,6 +1,7 @@
 x64/
 .vs/
 build/
+build
 CMakeFiles/
 CMakeCache.txt
 Debug/

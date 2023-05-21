@@ -9,11 +9,10 @@
 #include "vector.h"
 #include "scene.h"
 #include "scenes_manager.h"
-#include <string.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <memory.h>
-#include <malloc.h>
+
+#define ENGINE_DEBUG (MEM_DEBUG || DEBUG)
+
+#define LOG(str) {printf("\nLOG: \n"); printf(str);}while(0)
 
 extern double GAME_TIME_TICK;
 

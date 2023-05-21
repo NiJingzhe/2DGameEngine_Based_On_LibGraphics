@@ -4,11 +4,18 @@
 #include "extgraph.h"
 #include "genlib.h"
 #include "simpio.h"
+#include "config.h"
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
 #include <stdarg.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <memory.h>
+#include <malloc.h>
+#include <time.h>
 
 #include <windows.h>
 #include <olectl.h>
@@ -19,8 +26,10 @@
 #include <winuser.h>
 
 #include <math.h>
+#pragma comment(lib,"winmm.lib")
 
-#define DEBUG   0
+#define MEM_DEBUG MEM_DEBUG_MODE
+#define DEBUG_MODE DEBUG || MEM_DEBUG
 
 #define fill(x) StartFilledRegion(x)
 #define endfill EndFilledRegion()
@@ -30,6 +39,9 @@
 #define PI 3.1415926535
 #define toDeg(x) ((x)/57.3)
 #define toRad(x) ((x)/PI * 180)
+
+extern int MEM_BLOCK_NUM;
+
 
 #endif
 
