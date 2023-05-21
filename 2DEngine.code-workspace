@@ -42,7 +42,8 @@
 			"typeinfo": "c",
 			"cwchar": "c",
 			"cwctype": "c",
-			"exception": "c"
+			"exception": "c",
+			"base_component.h": "c"
 		}
 	},
 	"launch": {

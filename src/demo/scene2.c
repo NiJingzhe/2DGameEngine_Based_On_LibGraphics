@@ -415,7 +415,7 @@ static void playerUpdate(ActorNode player, double delta)
         dashDirection->normalize(dashDirection);
         dashDirection->mult(dashDirection, 5);
     }
-    if (inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 2.0 && !freezed && dashPower >= 10)
+    if (inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 2.0 && !freezed && dashPower >= 45)
     {
         if (!bulletTimeSound->playing)
             bulletTimeSound->play(bulletTimeSound);
@@ -456,7 +456,7 @@ static void playerUpdate(ActorNode player, double delta)
         }
     }
     // 技能条的长度更新
-    dashPower = dashPower < 90.0 ? dashPower + 50 * delta : 90.0;
+    dashPower = dashPower < 90.0 ? dashPower + 4 * delta : 90.0;
     ((Rect *)(playerDashPowerStrip->shape))->width = (dashPower / 90.0) * playerTextureDown->getWidth(playerTextureDown);
     // 人物纹理颜色与可见性改变
     if (player->vel.length(&(player->vel)) >= 1.5 && !freezed)
