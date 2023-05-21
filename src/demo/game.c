@@ -1,30 +1,45 @@
 #include "2DEngine.h"
-#include "scene1.h"
-#include "scene2.h"
+#include "scene_info.h"
 
-void Main() {
-	InitGraphics();
-    //InitConsole();
+void Main()
+{
+    InitGraphics();
+#if ENGINE_DEBUG
+    InitConsole();
+#endif
+#if ENGINE_DEBUG
+    LOG("Enter Game Init--------------------------------------------------------------------------------------------------------------------------");
+#endif
+    srand(time(0));
     initInputManager();
     initScenesManager();
-    setupScene_scene1();
-    setupScene_scene2();
-
-    scmng.addScene(scene1);
-    scmng.addScene(scene2);
+    scmng.loadScene(&scene1, createScene1, NULL);
     scmng.currentScene = scene1;
+    scmng.currentScene->setup(scmng.currentScene, NULL);
+#if ENGINE_DEBUG
+    LOG("Game init finished!----------------------------------------------------------------------------------------------------------------------");
+#endif
 }
 
-void EngineUpdate(double delta) {
-    scmng.checkSwitch(scmng.currentScene);
+void EngineUpdate(double delta)
+{
+    scmng.checkSwitch();
     scmng.currentScene->update(scmng.currentScene, delta);
     clearEvent();
 }
 
-void Render() {
+void Render()
+{
     scmng.currentScene->render(scmng.currentScene);
 }
 
-void Free() {
+void Free()
+{
+#if ENGINE_DEBUG
+    LOG("Enter Free-------------------------------------------------------------------------------------------------------------------------------");
+#endif
     destroyScenesManager();
+#if ENGINE_DEBUG
+    LOG("Finish Free------------------------------------------------------------------------------------------------------------------------------");
+#endif
 }
