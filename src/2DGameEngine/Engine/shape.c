@@ -13,6 +13,7 @@ static void setShapePos(Shape *s, Vector *pos);
 static Vector *getShapePos(Shape *s);
 static const int returnEmptyShape();
 static bool isCollideWith(Shape *shape1, Shape *shape2);
+static Vector *getCollisionVector(Shape *s1, Shape *s2);
 
 static void initRect(Rect *rect, Vector pos, double angle, double width, double height, bool fill, char *color, double density);
 static void renderRect(Shape *s);
@@ -25,49 +26,41 @@ static const int returnCircleType();
 /*-----------------------------------------Private Function---------------------------------------*/
 static bool isRectCollide(Rect *rect1, Rect *rect2)
 {
-
-	// ��ȡ�������ε�����������ϵ�µ�λ�������Լ�rect1����ָ��rect2���ĵ�����
 	Vector pos1 = rect1->super.pos;
 	Vector pos2 = rect2->super.pos;
 	Vector *delta_p = newVector(pos1.x - pos2.x, pos1.y - pos2.y);
 
-	// ��ȡ�����Ƕ�
 	double angle1 = rect1->super.angle;
 	double angle2 = rect2->super.angle;
 
-	// ��ȡrect1�ĸ����������rect1���ĵ�λ��������ƽ����rect1�߳���ϵ��
-	Vector *vertex[4] = {0};
-	vertex[0] = newVector(-rect1->width / 2, rect1->height / 2);
-	vertex[1] = newVector(rect1->width / 2, rect1->height / 2);
-	vertex[2] = newVector(rect1->width / 2, -rect1->height / 2);
-	vertex[3] = newVector(-rect1->width / 2, -rect1->height / 2);
+	Vector vertex[4] = {0};
+	memcpy(&vertex[0], rect1->super.vertices[0], sizeof(Vector));
+	memcpy(&vertex[1], rect1->super.vertices[1], sizeof(Vector));
+	memcpy(&vertex[2], rect1->super.vertices[2], sizeof(Vector));
+	memcpy(&vertex[3], rect1->super.vertices[3], sizeof(Vector));
 
-	// ��rect1�Ķ�������任����rect2����Ϊԭ�㣬ƽ����rect2�߳�������ϵ��
 	delta_p->rotate(delta_p, -angle2);
 	for (int i = 0; i < 4; ++i)
 	{
-		vertex[i]->rotate(vertex[i], angle1 - angle2);
-		vertex[i]->add(vertex[i], delta_p);
+		vertex[i].rotate(&vertex[i], angle1 - angle2);
+		vertex[i].add(&vertex[i], delta_p);
 	}
 
-	// ��ȡrect1��rect2ϵ�µ�����ͶӰ��Χ
-	double rect1X_min = vertex[0]->x, rect1X_max = vertex[0]->x;
-	double rect1Y_min = vertex[0]->y, rect1Y_max = vertex[0]->y;
+	double rect1X_min = vertex[0].x, rect1X_max = vertex[0].x;
+	double rect1Y_min = vertex[0].y, rect1Y_max = vertex[0].y;
 	for (int i = 1; i < 4; ++i)
 	{
-		rect1X_min = rect1X_min >= vertex[i]->x ? vertex[i]->x : rect1X_min;
-		rect1Y_min = rect1Y_min >= vertex[i]->y ? vertex[i]->y : rect1Y_min;
-		rect1X_max = rect1X_max <= vertex[i]->x ? vertex[i]->x : rect1X_max;
-		rect1Y_max = rect1Y_max <= vertex[i]->y ? vertex[i]->y : rect1Y_max;
+		rect1X_min = rect1X_min >= vertex[i].x ? vertex[i].x : rect1X_min;
+		rect1Y_min = rect1Y_min >= vertex[i].y ? vertex[i].y : rect1Y_min;
+		rect1X_max = rect1X_max <= vertex[i].x ? vertex[i].x : rect1X_max;
+		rect1Y_max = rect1Y_max <= vertex[i].y ? vertex[i].y : rect1Y_max;
 	}
 
-	// ��ȡrect2��������������ϵ�������ϵ�ͶӰ��Χ
 	double rect2X_min = -rect2->width / 2;
 	double rect2X_max = -rect2X_min;
 	double rect2Y_min = -rect2->height / 2;
 	double rect2Y_max = -rect2Y_min;
 
-	// �ж�Ͷ�������Ƿ��ص�
 	double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);
 	double deltaYTotal = fmax(rect2Y_max, rect1Y_max) - fmin(rect2Y_min, rect1Y_min);
 	double rect2DeltaX = rect2X_max - rect2X_min;
@@ -75,8 +68,6 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 	double rect1DeltaX = rect1X_max - rect1X_min;
 	double rect1DeltaY = rect1Y_max - rect1Y_min;
 
-	for (int i = 0; i < 4; ++i)
-		destoryVector(vertex[i]);
 	destoryVector(delta_p);
 
 	if (rect1DeltaX + rect2DeltaX >= deltaXTotal && rect1DeltaY + rect2DeltaY >= deltaYTotal)
@@ -131,6 +122,129 @@ static bool isRectCircleCollide(Rect *rect_, Circle *circle)
 	return (cornerDistance_sq <= (circle->radius * circle->radius));
 }
 
+int isIntersect(Vector v1, Vector v2, Vector v3, Vector v4)
+{
+	double cross1 = (v4.x - v3.x) * (v1.y - v3.y) - (v4.y - v3.y) * (v1.x - v3.x);
+	double cross2 = (v4.x - v3.x) * (v2.y - v3.y) - (v4.y - v3.y) * (v2.x - v3.x);
+	double cross3 = (v2.x - v1.x) * (v3.y - v1.y) - (v2.y - v1.y) * (v3.x - v1.x);
+	double cross4 = (v2.x - v1.x) * (v4.y - v1.y) - (v2.y - v1.y) * (v4.x - v1.x);
+	if (cross1 * cross2 < 0 && cross3 * cross4 < 0)
+	{
+		return 1; // 两条有向线段相交
+	}
+	else
+	{
+		return 0; // 两条有向线段不相交
+	}
+}
+
+Vector *getCircleCollsionVector(Circle *c1, Circle *c2)
+{
+	Vector *v = newVector(c1->super.pos.x - c2->super.pos.x, c1->super.pos.y - c2->super.pos.y);
+	v->normalize(v);
+	return v;
+}
+
+Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
+{
+	// 获取两个rect的pos
+	Vector pos1 = rect1->super.pos;
+	Vector pos2 = rect2->super.pos;
+
+	double halfDiagonalLengthofRect2;
+	halfDiagonalLengthofRect2 = sqrt(rect2->width * rect2->width + rect2->height * rect2->height) / 2;
+
+	int i;
+	for (i = 0; i < 4; ++i)
+	{
+		if (halfDiagonalLengthofRect2 > sqrt((rect1->super.vertices[i]->x - pos2.x) * (rect1->super.vertices[i]->x - pos2.x) +
+											 (rect1->super.vertices[i]->y - pos2.y) * (rect1->super.vertices[i]->y - pos2.y)))
+		{
+			break;
+		}
+	}
+
+	Vector *v;
+
+	if (i == 4)
+	{
+
+		// 在rect2坐标系下判断rect1UnderRect2与rect2的四条边是否相交
+		Vector rect2Vertex[4] = {0};
+		memcpy(&rect2Vertex[0], rect2->super.vertices[0], sizeof(Vector));
+		memcpy(&rect2Vertex[1], rect2->super.vertices[1], sizeof(Vector));
+		memcpy(&rect2Vertex[2], rect2->super.vertices[2], sizeof(Vector));
+		memcpy(&rect2Vertex[3], rect2->super.vertices[3], sizeof(Vector));
+
+		// 将顶点坐标从rect2坐标系变换到世界坐标系
+		for (int i = 0; i < 4; ++i)
+		{
+			rect2Vertex[i].rotate(&rect2Vertex[i], rect2->super.angle);
+			rect2Vertex[i].add(&rect2Vertex[i], &(rect2->super.pos));
+		}
+
+		// 判断以pos1和pos2为起点终点的有向线段和rect2的四条边是否相交，是则计算边向量的法向量，并返回
+		if (isIntersect(pos1, pos2, rect2Vertex[0], rect2Vertex[1]))
+		{
+			v = newVector(rect2Vertex[1].y - rect2Vertex[0].y, rect2Vertex[0].x - rect2Vertex[1].x);
+		}
+		else if (isIntersect(pos1, pos2, rect2Vertex[1], rect2Vertex[2]))
+		{
+			v = newVector(rect2Vertex[2].y - rect2Vertex[1].y, rect2Vertex[1].x - rect2Vertex[2].x);
+		}
+		else if (isIntersect(pos1, pos2, rect2Vertex[2], rect2Vertex[3]))
+		{
+			v = newVector(rect2Vertex[3].y - rect2Vertex[2].y, rect2Vertex[2].x - rect2Vertex[3].x);
+		}
+		else if (isIntersect(pos1, pos2, rect2Vertex[3], rect2Vertex[0]))
+		{
+			v = newVector(rect2Vertex[0].y - rect2Vertex[3].y, rect2Vertex[3].x - rect2Vertex[0].x);
+		}
+	}
+	else
+	{
+		// 重复以上步骤，但是编程对rect1操作
+		Vector rect1Vertex[4] = {0};
+		memcpy(&rect1Vertex[0], rect1->super.vertices[0], sizeof(Vector));
+		memcpy(&rect1Vertex[1], rect1->super.vertices[1], sizeof(Vector));
+		memcpy(&rect1Vertex[2], rect1->super.vertices[2], sizeof(Vector));
+		memcpy(&rect1Vertex[3], rect1->super.vertices[3], sizeof(Vector));
+
+		for (int i = 0; i < 4; ++i)
+		{
+			rect1Vertex[i].rotate(&rect1Vertex[i], rect1->super.angle);
+			rect1Vertex[i].add(&rect1Vertex[i], &(rect1->super.pos));
+		}
+
+		if (isIntersect(pos1, pos2, rect1Vertex[0], rect1Vertex[1]))
+		{
+			v = newVector(rect1Vertex[1].y - rect1Vertex[0].y, rect1Vertex[0].x - rect1Vertex[1].x);
+		}
+		else if (isIntersect(pos1, pos2, rect1Vertex[1], rect1Vertex[2]))
+		{
+			v = newVector(rect1Vertex[2].y - rect1Vertex[1].y, rect1Vertex[1].x - rect1Vertex[2].x);
+		}
+		else if (isIntersect(pos1, pos2, rect1Vertex[2], rect1Vertex[3]))
+		{
+			v = newVector(rect1Vertex[3].y - rect1Vertex[2].y, rect1Vertex[2].x - rect1Vertex[3].x);
+		}
+		else if (isIntersect(pos1, pos2, rect1Vertex[3], rect1Vertex[0]))
+		{
+			v = newVector(rect1Vertex[0].y - rect1Vertex[3].y, rect1Vertex[3].x - rect1Vertex[0].x);
+		}
+	}
+
+	v->normalize(v);
+	return v;
+}
+
+Vector *getRectCircleCollisionVector(Rect *r, Circle *c)
+{
+	Vector *v = newVector(r->super.pos.x - c->super.pos.x, r->super.pos.y - c->super.pos.y);
+	v->normalize(v);
+	return v;
+}
+
 /*--------------------------------------Public Function------------------------------------------*/
 Shape *newShape(Vector *pos, double angle, bool fill, char *color, double density)
 {
@@ -155,7 +269,9 @@ static void initShape(Shape *shape, Vector pos, double angle, bool fill, char *c
 	shape->getPos = getShapePos;
 	shape->setAngle = setShapeAngle;
 	shape->setPos = setShapePos;
+	shape->getCollisionVector = getCollisionVector;
 	shape->isCollideWith = isCollideWith;
+	shape->vertices = NULL;
 
 	shape->vptr = (shapevTable *)calloc(1, sizeof(shapevTable));
 #if MEM_DEBUG
@@ -218,6 +334,41 @@ static bool isCollideWith(Shape *shape1, Shape *shape2)
 	else
 	{
 		return FALSE;
+	}
+}
+
+static Vector *getCollisionVector(Shape *s1, Shape *s2)
+{
+	int shapeType1 = s1->vptr->getShape();
+	int shapeType2 = s2->vptr->getShape();
+
+	if (shapeType1 == RECT && shapeType2 == RECT)
+	{
+		Rect *rect1 = (Rect *)s1;
+		Rect *rect2 = (Rect *)s2;
+		return getRectCollisionVector(rect1, rect2);
+	}
+	else if (shapeType1 == CIRCLE && shapeType2 == CIRCLE)
+	{
+		Circle *circle1 = (Circle *)s1;
+		Circle *circle2 = (Circle *)s2;
+		return getCircleCollsionVector(circle1, circle2);
+	}
+	else if (shapeType1 == RECT && shapeType2 == CIRCLE)
+	{
+		Rect *rect = (Rect *)s1;
+		Circle *circle = (Circle *)s2;
+		return getRectCircleCollisionVector(rect, circle);
+	}
+	else if (shapeType1 == CIRCLE && shapeType2 == RECT)
+	{
+		Rect *rect = (Rect *)s2;
+		Circle *circle = (Circle *)s1;
+		return getRectCircleCollisionVector(rect, circle);
+	}
+	else
+	{
+		return NULL;
 	}
 }
 
@@ -285,6 +436,21 @@ static void initRect(Rect *rect, Vector pos, double angle, double width, double 
 	}
 	rect->super.vptr->render = renderRect;
 	rect->super.vptr->getShape = returnRectType;
+	rect->super.vertices = (Vector **)calloc(4, sizeof(Vector *));
+#if MEM_DEBUG
+	MEM_BLOCK_NUM += 4;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+	if (rect->super.vertices == NULL)
+	{
+		printf("Cannot allocate memory for vertices of rect shape\n");
+		return;
+	}
+	rect->super.vertices[0] = newVector(-width / 2, height / 2);
+	rect->super.vertices[1] = newVector(width / 2, height / 2);
+	rect->super.vertices[2] = newVector(width / 2, -height / 2);
+	rect->super.vertices[3] = newVector(-width / 2, -height / 2);
+
 	destoryShape(shapeptr);
 
 	rect->width = width;
@@ -298,36 +464,31 @@ static void renderRect(Shape *s)
 
 	Rect *rect = (Rect *)s;
 
-	Vector *vertex[4] = {0};
-	vertex[0] = newVector(-rect->width / 2, rect->height / 2);
-	vertex[1] = newVector(rect->width / 2, rect->height / 2);
-	vertex[2] = newVector(rect->width / 2, -rect->height / 2);
-	vertex[3] = newVector(-rect->width / 2, -rect->height / 2);
+	Vector vertex[4] = {0};
+	memcpy(&vertex[0], rect->super.vertices[0], sizeof(Vector));
+	memcpy(&vertex[1], rect->super.vertices[1], sizeof(Vector));
+	memcpy(&vertex[2], rect->super.vertices[2], sizeof(Vector));
+	memcpy(&vertex[3], rect->super.vertices[3], sizeof(Vector));
 
 	for (int i = 0; i < 4; ++i)
 	{
-		vertex[i]->rotate(vertex[i], rect->super.angle);
-		vertex[i]->add(vertex[i], &(rect->super.pos));
+		vertex[i].rotate(&vertex[i], rect->super.angle);
+		vertex[i].add(&vertex[i], &(rect->super.pos));
 	}
 
 	SetPenColor(rect->super.color);
 	SetPenSize(1);
-	MovePen(vertex[0]->x, vertex[0]->y);
+	MovePen(vertex[0].x, vertex[0].y);
 	if (rect->super.fill)
 		fill(rect->super.density);
 
-	DrawLine(vertex[1]->x - vertex[0]->x, vertex[1]->y - vertex[0]->y);
-	DrawLine(vertex[2]->x - vertex[1]->x, vertex[2]->y - vertex[1]->y);
-	DrawLine(vertex[3]->x - vertex[2]->x, vertex[3]->y - vertex[2]->y);
-	DrawLine(vertex[0]->x - vertex[3]->x, vertex[0]->y - vertex[3]->y);
+	DrawLine(vertex[1].x - vertex[0].x, vertex[1].y - vertex[0].y);
+	DrawLine(vertex[2].x - vertex[1].x, vertex[2].y - vertex[1].y);
+	DrawLine(vertex[3].x - vertex[2].x, vertex[3].y - vertex[2].y);
+	DrawLine(vertex[0].x - vertex[3].x, vertex[0].y - vertex[3].y);
 
 	if (rect->super.fill)
 		endfill;
-
-	for (int i = 0; i < 4; ++i)
-	{
-		destoryVector(vertex[i]);
-	}
 }
 
 static const int returnRectType()
@@ -337,12 +498,24 @@ static const int returnRectType()
 
 void destoryRect(Rect *rt)
 {
-	// destoryShape(&(rt->super));
 	free(rt->super.vptr);
 #if MEM_DEBUG
 	MEM_BLOCK_NUM--;
 	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
 #endif
+
+	for (int i = 0; i < 4; ++i)
+	{
+		destoryVector(rt->super.vertices[i]);
+		rt->super.vertices[i] = NULL;
+	}
+
+	free(rt->super.vertices);
+#if MEM_DEBUG
+	MEM_BLOCK_NUM -= 4;
+	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+
 	free(rt);
 #if MEM_DEBUG
 	MEM_BLOCK_NUM--;

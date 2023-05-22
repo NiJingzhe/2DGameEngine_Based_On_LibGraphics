@@ -204,4 +204,5 @@ void destoryScene(Scene *s)
 	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
 #endif
 	s = NULL;
+	return;
 }

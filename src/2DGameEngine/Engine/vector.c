@@ -9,6 +9,7 @@ static void rotate(Vector *v, double angle);
 static double getAngle(Vector *v);
 static double length(Vector *v);
 static void normalize(Vector *v);
+static Vector* getOrthogonal(Vector *v);
 
 Vector *newVector(double x, double y)
 {
@@ -31,6 +32,7 @@ static void initVector(Vector *v, double x, double y)
 	v->rotate = rotate;
 	v->getAngle = getAngle;
 	v->length = length;
+	v->getOrthogonal = getOrthogonal;
 	v->normalize = normalize;
 	v->destoryVector = destoryVector;
 }
@@ -92,6 +94,12 @@ static void normalize(Vector *v)
 	double len = v->length(v);
 	v->x /= len;
 	v->y /= len;
+}
+
+static Vector* getOrthogonal(Vector *v)
+{
+	Vector *v1 = newVector(-v->y, v->x);
+	return v1;
 }
 
 void destoryVector(Vector *v)
