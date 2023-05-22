@@ -1,11 +1,11 @@
 #include "collision_shape.h"
 #include "base_component.h"
 
-
 static void initCollisionShape(CollisionShape *c, Shape *shape);
 static void renderCollisionShape(Component *c);
 static void updateCollisionShape(Component *c, ...);
 static bool isCollideWith(CollisionShape *s1, CollisionShape *s2);
+static Vector *getCollisionVector(CollisionShape *cs1, CollisionShape *cs2);
 static const int returnCollisionShape();
 static void setCollisionShapePos(CollisionShape *c, Vector *pos);
 static Vector *getCollisionShapePos(CollisionShape *c);
@@ -44,6 +44,21 @@ static void initCollisionShape(CollisionShape *c, Shape *shape)
 		printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
 #endif
 		memcpy(c->shape->vptr, shape->vptr, sizeof(shapevTable));
+
+		//为自身shape属性下的顶点数组开辟新空间，并内存拷贝
+		c->shape->vertices = (Vector **)calloc(4, sizeof(Vector*));
+#if MEM_DEBUG
+		MEM_BLOCK_NUM += 4;
+		printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+		for (int i = 0; i < 4; ++i){
+			c->shape->vertices[i] = (Vector *)calloc(1, sizeof(Vector));
+			memcpy(c->shape->vertices[i], shape->vertices[i], sizeof(Vector));
+#if MEM_DEBUG
+			MEM_BLOCK_NUM++;
+			printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
+#endif
+		}
 		break;
 
 	case CIRCLE:
@@ -99,6 +114,7 @@ static void initCollisionShape(CollisionShape *c, Shape *shape)
 	c->visible = FALSE;
 
 	c->isCollideWith = isCollideWith;
+	c->getCollisionVector = getCollisionVector;
 }
 
 static void renderCollisionShape(Component *c)
@@ -139,6 +155,11 @@ static bool isCollideWith(CollisionShape *s1, CollisionShape *s2)
 	{
 		return FALSE;
 	}
+}
+
+static Vector *getCollisionVector(CollisionShape *cs1, CollisionShape *cs2)
+{
+	return cs1->shape->getCollisionVector(cs1->shape, cs2->shape);
 }
 
 void setCollisionShapePos(CollisionShape *c, Vector *pos)

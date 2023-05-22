@@ -15,12 +15,15 @@ typedef struct Shape {
 	char* color;
 	double density;
 
+	//顶点数组
+	Vector** vertices;
+
 	void (*setAngle)(struct Shape*, double);
 	double (*getAngle)(struct Shape*);
 	void (*setPos)(struct Shape*, Vector*);
 	Vector* (*getPos)(struct Shape*);
 	bool (*isCollideWith)(struct Shape*, struct Shape*);
-	//Vector* (*getCollisionVector)(struct Shape*, struct Shape*);
+	Vector* (*getCollisionVector)(struct Shape*, struct Shape*);
 
 	struct shapevTable* vptr;
 } Shape;

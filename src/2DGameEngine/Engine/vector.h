@@ -11,6 +11,7 @@ typedef struct Vector{
 	double (*getAngle)(struct Vector*);
 	double (*length)(struct Vector*);
 	void (*normalize)(struct Vector*);
+	struct Vector* (*getOrthogonal)(struct Vector*);
 	void (*destoryVector)(struct Vector*);
 
 } Vector;
