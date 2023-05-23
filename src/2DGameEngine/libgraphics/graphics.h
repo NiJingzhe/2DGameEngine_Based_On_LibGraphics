@@ -118,6 +118,15 @@ void DrawLine(double dx, double dy);
 
 void DrawArc(double r, double start, double sweep);
 
+
+/*
+* Function: LoadBmp
+* Usage: LoadBmp("./res/scene1/background_far.bmp", 0, 0, 100, 100);
+* --------------------------------
+*/
+void LoadBmp(const char* bmp_path, double x, double y, double width, double height);
+
+
 /*
  * Functions: GetWindowWidth, GetWindowHeight
  * Usage: width = GetWindowWidth();

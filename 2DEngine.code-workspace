@@ -43,7 +43,9 @@
 			"cwchar": "c",
 			"cwctype": "c",
 			"exception": "c",
-			"base_component.h": "c"
+			"base_component.h": "c",
+			"startup_button.h": "c",
+			"scene_info.h": "c"
 		}
 	},
 	"launch": {

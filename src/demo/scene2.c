@@ -13,16 +13,16 @@ CollisionShape *scene2BackgoundShape;
 // 暂停按钮Actor
 Vector *pauseButtonPos;
 ActorNode pauseButton;
-Texture *pauseButtonTexture;
+charTexture *pauseButtonTexture;
 
 // 创建Player
 Vector *playerPos;
 ActorNode player;
 // playerTexture
-Texture *playerTextureDown;
-Texture *playerTextureUp;
-Texture *playerTextureRight;
-Texture *playerTextureLeft;
+charTexture *playerTextureDown;
+charTexture *playerTextureUp;
+charTexture *playerTextureRight;
+charTexture *playerTextureLeft;
 // playerCollisionShape
 Rect *collisionRect;
 CollisionShape *playerCollisionShape;
@@ -36,10 +36,10 @@ Audio *bulletTimeSound;
 Vector *player2Pos;
 ActorNode player2;
 // player2Texture
-Texture *player2TextureDown;
-Texture *player2TextureUp;
-Texture *player2TextureRight;
-Texture *player2TextureLeft;
+charTexture *player2TextureDown;
+charTexture *player2TextureUp;
+charTexture *player2TextureRight;
+charTexture *player2TextureLeft;
 // player2CollisionShape
 Rect *player2collisionRect;
 CollisionShape *player2CollisionShape;
@@ -99,15 +99,15 @@ void createScene2(SceneNode *scene2)
     // pause button
     pauseButtonPos = newVector(getww / 12, getwh * 7 / 8);
     pauseButton = newActor("pause_button", pauseButtonPos);
-    pauseButtonTexture = newTexture("./res/scene2/pause_button_texture.txt", pauseButtonPos, "White", 1);
+    pauseButtonTexture = newcharTexture("./res/scene2/pause_button_texture.txt", pauseButtonPos, "White", 1);
 
     // player1
     playerPos = newVector(getww / 2, getwh / 2);
     player = newActor("player", playerPos);
-    playerTextureDown = newTexture("./res/scene2/player_down.txt", playerPos, "White", 1);
-    playerTextureUp = newTexture("./res/scene2/player_up.txt", playerPos, "White", 1);
-    playerTextureRight = newTexture("./res/scene2/player_right.txt", playerPos, "White", 1);
-    playerTextureLeft = newTexture("./res/scene2/player_left.txt", playerPos, "White", 1);
+    playerTextureDown = newcharTexture("./res/scene2/player_down.txt", playerPos, "White", 1);
+    playerTextureUp = newcharTexture("./res/scene2/player_up.txt", playerPos, "White", 1);
+    playerTextureRight = newcharTexture("./res/scene2/player_right.txt", playerPos, "White", 1);
+    playerTextureLeft = newcharTexture("./res/scene2/player_left.txt", playerPos, "White", 1);
     collisionRect = newRect(
         playerPos,
         0,
@@ -138,10 +138,10 @@ void createScene2(SceneNode *scene2)
     // player2
     player2Pos = newVector(getww / 2, getwh / 5);
     player2 = newActor("player2", player2Pos);
-    player2TextureDown = newTexture("./res/scene2/player_down.txt", player2Pos, "Cyan", 1);
-    player2TextureUp = newTexture("./res/scene2/player_up.txt", player2Pos, "Cyan", 1);
-    player2TextureRight = newTexture("./res/scene2/player_right.txt", player2Pos, "Cyan", 1);
-    player2TextureLeft = newTexture("./res/scene2/player_left.txt", player2Pos, "Cyan", 1);
+    player2TextureDown = newcharTexture("./res/scene2/player_down.txt", player2Pos, "Cyan", 1);
+    player2TextureUp = newcharTexture("./res/scene2/player_up.txt", player2Pos, "Cyan", 1);
+    player2TextureRight = newcharTexture("./res/scene2/player_right.txt", player2Pos, "Cyan", 1);
+    player2TextureLeft = newcharTexture("./res/scene2/player_left.txt", player2Pos, "Cyan", 1);
     player2collisionRect = newRect(
         player2Pos,
         0,
@@ -300,10 +300,10 @@ extern double GAME_TIME_TICK;
 static void playerUpdate(ActorNode player, double delta)
 {
     // 获取玩家在更新过过程中需要用到的组件
-    Texture *playerTextureDown = (Texture *)(player->getComponent(player, "player_texture_down"));
-    Texture *playerTextureUp = (Texture *)(player->getComponent(player, "player_texture_up"));
-    Texture *playerTextureRight = (Texture *)(player->getComponent(player, "player_texture_right"));
-    Texture *playerTextureLeft = (Texture *)(player->getComponent(player, "player_texture_left"));
+    charTexture *playerTextureDown = (charTexture *)(player->getComponent(player, "player_texture_down"));
+    charTexture *playerTextureUp = (charTexture *)(player->getComponent(player, "player_texture_up"));
+    charTexture *playerTextureRight = (charTexture *)(player->getComponent(player, "player_texture_right"));
+    charTexture *playerTextureLeft = (charTexture *)(player->getComponent(player, "player_texture_left"));
     CollisionShape *playerCollisionShape = (CollisionShape *)(player->getComponent(player, "player_collision_shape"));
     CollisionShape *playerDashTargetCircle = (CollisionShape *)(player->getComponent(player, "player_dash_circle"));
     CollisionShape *playerDashPowerStrip = (CollisionShape *)(player->getComponent(player, "player_dash_power_strip"));
@@ -392,7 +392,7 @@ static void playerUpdate(ActorNode player, double delta)
         }
     }
 
-    Texture *playerTexture;
+    charTexture *playerTexture;
     if (playerTextureDown->visible)
         playerTexture = playerTextureDown;
     else if (playerTextureUp->visible)
@@ -518,11 +518,11 @@ static void playerSpecialRender(ActorNode player)
         currentComp = currentComp->next;
     }
 
-    Texture *playerTextureDown = (Texture *)(player->getComponent(player, "player_texture_down"));
-    Texture *playerTextureUp = (Texture *)(player->getComponent(player, "player_texture_up"));
-    Texture *playerTextureRight = (Texture *)(player->getComponent(player, "player_texture_right"));
-    Texture *playerTextureLeft = (Texture *)(player->getComponent(player, "player_texture_left"));
-    Texture *playerTexture;
+    charTexture *playerTextureDown = (charTexture *)(player->getComponent(player, "player_texture_down"));
+    charTexture *playerTextureUp = (charTexture *)(player->getComponent(player, "player_texture_up"));
+    charTexture *playerTextureRight = (charTexture *)(player->getComponent(player, "player_texture_right"));
+    charTexture *playerTextureLeft = (charTexture *)(player->getComponent(player, "player_texture_left"));
+    charTexture *playerTexture;
     if (playerTextureDown->visible)
         playerTexture = playerTextureDown;
     else if (playerTextureUp->visible)
@@ -559,10 +559,10 @@ static void player2Update(ActorNode player2, double delta)
 {
 
     // 获取玩家在更新过过程中需要用到的组件
-    Texture *player2TextureDown = (Texture *)(player2->getComponent(player2, "player2_texture_down"));
-    Texture *player2TextureUp = (Texture *)(player2->getComponent(player2, "player2_texture_up"));
-    Texture *player2TextureRight = (Texture *)(player2->getComponent(player2, "player2_texture_right"));
-    Texture *player2TextureLeft = (Texture *)(player2->getComponent(player2, "player2_texture_left"));
+    charTexture *player2TextureDown = (charTexture *)(player2->getComponent(player2, "player2_texture_down"));
+    charTexture *player2TextureUp = (charTexture *)(player2->getComponent(player2, "player2_texture_up"));
+    charTexture *player2TextureRight = (charTexture *)(player2->getComponent(player2, "player2_texture_right"));
+    charTexture *player2TextureLeft = (charTexture *)(player2->getComponent(player2, "player2_texture_left"));
     CollisionShape *player2CollisionShape = (CollisionShape *)(player2->getComponent(player2, "player2_collision_shape"));
     Timer *freezSkillTimer = (Timer *)(player2->getComponent(player2, "freez_skill_timer"));
     Audio *freezingFX = (Audio *)(player2->getComponent(player2, "freezing_fx"));
@@ -643,7 +643,7 @@ static void player2Update(ActorNode player2, double delta)
         }
     }
 
-    Texture *playerTexture;
+    charTexture *playerTexture;
     if (player2TextureDown->visible)
         playerTexture = player2TextureDown;
     else if (player2TextureUp->visible)
@@ -682,7 +682,7 @@ static void pauseButtonUpdate(ActorNode button, double delta)
     double mouseX = inmng.mouseX;
     double mouseY = inmng.mouseY;
 
-    Texture *buttonTexture = (Texture *)(button->getComponent(button, "pause_button_texture"));
+    charTexture *buttonTexture = (charTexture *)(button->getComponent(button, "pause_button_texture"));
     Vector pos = *(buttonTexture->getPos(buttonTexture));
     double width = buttonTexture->getWidth(buttonTexture);
     double height = buttonTexture->getHeight(buttonTexture);

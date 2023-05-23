@@ -13,6 +13,7 @@
 #define ENGINE_DEBUG (MEM_DEBUG || DEBUG)
 
 #define LOG(str) {printf("\nLOG: \n"); printf(str);}while(0)
+#define to255(x) ((x) / 255.0)
 
 extern double GAME_TIME_TICK;
 

@@ -1,10 +1,5 @@
 #ifndef __PUBLIC_HEADERS_H__
 #define __PUBLIC_HEADERS_H__
-#include "graphics.h"
-#include "extgraph.h"
-#include "genlib.h"
-#include "simpio.h"
-#include "config.h"
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +19,11 @@
 #include <ole2.h>
 #include <ocidl.h>
 #include <winuser.h>
+#include "graphics.h"
+#include "extgraph.h"
+#include "genlib.h"
+#include "simpio.h"
+#include "config.h"
 
 #include <math.h>
 #pragma comment(lib,"winmm.lib")

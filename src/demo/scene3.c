@@ -10,11 +10,11 @@ CollisionShape *scene3BackgroundShape;
 
 Vector *resultPos;
 ActorNode result;
-Texture *resultTexture;
+charTexture *resultTexture;
 
 Vector *replayButtonPos;
 ActorNode replayButton;
-Texture *replayButtonTexture;
+charTexture *replayButtonTexture;
 
 
 static void setupScene_scene3(SceneNode scene3, void *param);
@@ -34,11 +34,11 @@ void createScene3(SceneNode *scene3)
 
     resultPos = newVector(getww / 2, getwh * 3 / 4);
     result = newActor("replayup_result", resultPos);
-    resultTexture = newTexture("./res/scene3/chaserwin_texture.txt", resultPos, "White", 18);
+    resultTexture = newcharTexture("./res/scene3/chaserwin_texture.txt", resultPos, "White", 18);
 
     replayButtonPos = newVector(getww / 2, getwh * 4 / 10);
     replayButton = newActor("replay_button", replayButtonPos);
-    replayButtonTexture = newTexture("./res/scene3/replay_button.txt", replayButtonPos, "White", 5);
+    replayButtonTexture = newcharTexture("./res/scene3/replay_button.txt", replayButtonPos, "White", 5);
 
     scene3Background->addComponent(scene3Background, (ComponentNode)scene3BackgroundShape);
     result->addComponent(result, (ComponentNode)resultTexture);
@@ -90,7 +90,7 @@ static void resultRenderChaserWin(ActorNode result)
 		currentComp = currentComp->next;
 	}
 
-    Texture *resultTexture = (Texture*)(result->getComponent(result, "result_texture"));
+    charTexture *resultTexture = (charTexture*)(result->getComponent(result, "result_texture"));
     Vector originPos;
     memcpy(&(originPos), &(resultTexture->pos), sizeof(Vector));
 
@@ -121,7 +121,7 @@ static void resultRenderEscaperWin(ActorNode result)
 		currentComp = currentComp->next;
 	}
 
-    Texture *resultTexture = (Texture*)(result->getComponent(result, "result_texture"));
+    charTexture *resultTexture = (charTexture*)(result->getComponent(result, "result_texture"));
     Vector originPos;
     memcpy(&(originPos), &(resultTexture->pos), sizeof(Vector));
 
@@ -149,7 +149,7 @@ static void replayButtonUpdate(ActorNode button, double delta)
     double mouseX = inmng.mouseX;
     double mouseY = inmng.mouseY;
 
-    Texture *buttonTexture = (Texture *)(button->getComponent(button, "replay_button_texture"));
+    charTexture *buttonTexture = (charTexture *)(button->getComponent(button, "replay_button_texture"));
     Vector pos = *(buttonTexture->getPos(buttonTexture));
     double width = buttonTexture->getWidth(buttonTexture);
     double height = buttonTexture->getHeight(buttonTexture);
@@ -158,6 +158,7 @@ static void replayButtonUpdate(ActorNode button, double delta)
     {
         if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP)
         {
+            printf("to scene1");
             if (scmng.getScene("scene1") == NULL)
                 scmng.loadScene(&scene1, createScene1, NULL);
             scmng.switchTo("scene1", TRUE, TRUE, NULL, 0);

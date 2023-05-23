@@ -8,10 +8,11 @@
 //自定义组件宏定义序号需要写在这里
 #define EMPTY_COMPONENT 0
 #define COLLISION_SHAPE 1
-#define TEXTURE 2
+#define CHARTEXTURE 2
 #define AUDIO 3
 #define TIMER 4
 #define UITEXT 5
+#define PICTEXTURE 6
 
 
 typedef struct Component

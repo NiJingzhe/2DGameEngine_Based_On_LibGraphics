@@ -1,18 +1,18 @@
-#include "texture.h"
+#include "chartexture.h"
 #include "base_component.h"
-static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int pointSize);
+static void initTexture(charTexture *t, char *resPath, Vector pos, char *color, int pointSize);
 static void renderTexture(Component *c);
 static void updateTexture(Component *c, ...); // ... should contain and only contain a Vector pointer represents the position of texture
-static void setTexturePos(Texture *t, Vector *pos);
-static void resetTexture(Texture *t, char *resPath);
-static Vector *getTexturePos(Texture *t);
-static double getWidth(Texture *t);
-static double getHeight(Texture *t);
+static void setTexturePos(charTexture *t, Vector *pos);
+static void resetTexture(charTexture *t, char *resPath);
+static Vector *getTexturePos(charTexture *t);
+static double getWidth(charTexture *t);
+static double getHeight(charTexture *t);
 static const int returnTexture();
 
-Texture *newTexture(char *resPath, Vector *pos, char *color, int pointSize)
+charTexture *newcharTexture(char *resPath, Vector *pos, char *color, int pointSize)
 {
-	Texture *t = (Texture *)calloc(1, sizeof(Texture));
+	charTexture *t = (charTexture *)calloc(1, sizeof(charTexture));
 #if MEM_DEBUG
 	MEM_BLOCK_NUM++;
 	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
@@ -21,7 +21,7 @@ Texture *newTexture(char *resPath, Vector *pos, char *color, int pointSize)
 	return t;
 }
 
-static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int pointSize)
+static void initTexture(charTexture *t, char *resPath, Vector pos, char *color, int pointSize)
 {
 
 	Component *super = newComponent(renderTexture, updateTexture);
@@ -57,7 +57,7 @@ static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int 
 	FILE *textureFile = fopen(resPath, "r");
 	if (textureFile == NULL)
 	{
-		printf("CANNOT OPEN TEXTURE! PLEASE CHAECK YOUR PATH!");
+		printf("CANNOT OPEN CHARTEXTURE! PLEASE CHAECK YOUR PATH!");
 		return;
 	}
 
@@ -96,12 +96,12 @@ static void initTexture(Texture *t, char *resPath, Vector pos, char *color, int 
 	SetPointSize(pointSize_);
 }
 
-static void resetTexture(Texture *t, char *resPath)
+static void resetTexture(charTexture *t, char *resPath)
 {
 	FILE *textureFile = fopen(resPath, "r");
 	if (textureFile == NULL)
 	{
-		printf("CANNOT OPEN TEXTURE! PLEASE CHAECK YOUR PATH!");
+		printf("CANNOT OPEN CHARTEXTURE! PLEASE CHAECK YOUR PATH!");
 		return;
 	}
 
@@ -158,7 +158,7 @@ static void resetTexture(Texture *t, char *resPath)
 
 static void updateTexture(Component *c, ...)
 {
-	Texture *t = (Texture *)c;
+	charTexture *t = (charTexture *)c;
 	Vector *pos = NULL;
 	va_list argList;
 	va_start(argList, c);
@@ -169,7 +169,7 @@ static void updateTexture(Component *c, ...)
 
 static void renderTexture(Component *c)
 {
-	Texture *t = (Texture *)c;
+	charTexture *t = (charTexture *)c;
 	if (t->visible)
 	{
 		if (t->textureString == NULL)
@@ -195,32 +195,32 @@ static void renderTexture(Component *c)
 	}
 }
 
-static void setTexturePos(Texture *t, Vector *pos)
+static void setTexturePos(charTexture *t, Vector *pos)
 {
 	t->pos = *pos;
 }
 
-static Vector *getTexturePos(Texture *t)
+static Vector *getTexturePos(charTexture *t)
 {
 	return &(t->pos);
 }
 
-static double getHeight(Texture *t)
+static double getHeight(charTexture *t)
 {
 	return t->height;
 }
 
-static double getWidth(Texture *t)
+static double getWidth(charTexture *t)
 {
 	return t->width;
 }
 
 static const int returnTexture()
 {
-	return TEXTURE;
+	return CHARTEXTURE;
 }
 
-void destoryTexture(Texture *t)
+void destorycharTexture(charTexture *t)
 {
 	free(t->super.vptr);
 #if MEM_DEBUG
