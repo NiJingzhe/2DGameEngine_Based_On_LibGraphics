@@ -328,7 +328,7 @@ void LoadBmp(const char *bmp_path, double center_x, double center_y, double widt
 
     if (hBitmap == NULL)
     {
-        MessageBox(NULL, "加载图像失败", "错误", MB_OK | MB_ICONERROR);
+        Error("FAILED TO LOAD BMP FILE!\n");
         return;
     }
 
@@ -336,7 +336,7 @@ void LoadBmp(const char *bmp_path, double center_x, double center_y, double widt
     HDC memDC = CreateCompatibleDC(osdc);
     if (memDC == NULL)
     {
-        MessageBox(NULL, "创建兼容DC失败", "错误", MB_OK | MB_ICONERROR);
+        Error("FAILED TO CREATE DC!\n");
         DeleteObject(hBitmap);
         return;
     }

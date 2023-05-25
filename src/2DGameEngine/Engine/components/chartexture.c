@@ -57,7 +57,7 @@ static void initTexture(charTexture *t, char *resPath, Vector pos, char *color, 
 	FILE *textureFile = fopen(resPath, "r");
 	if (textureFile == NULL)
 	{
-		printf("CANNOT OPEN CHARTEXTURE! PLEASE CHAECK YOUR PATH!");
+		Error("CANNOT OPEN CHARTEXTURE! PLEASE CHAECK YOUR PATH!\n");
 		return;
 	}
 
@@ -101,7 +101,7 @@ static void resetTexture(charTexture *t, char *resPath)
 	FILE *textureFile = fopen(resPath, "r");
 	if (textureFile == NULL)
 	{
-		printf("CANNOT OPEN CHARTEXTURE! PLEASE CHAECK YOUR PATH!");
+		Error("CANNOT OPEN CHARTEXTURE! PLEASE CHAECK YOUR PATH!\n");
 		return;
 	}
 
