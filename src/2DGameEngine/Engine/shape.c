@@ -43,6 +43,7 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 	for (int i = 0; i < 4; ++i)
 	{
 		vertex[i].rotate(&vertex[i], angle1 - angle2);
+		vertex[i].mult(&vertex[1], 1.2);
 		vertex[i].add(&vertex[i], delta_p);
 	}
 
@@ -56,9 +57,9 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 		rect1Y_max = rect1Y_max <= vertex[i].y ? vertex[i].y : rect1Y_max;
 	}
 
-	double rect2X_min = -rect2->width / 2;
+	double rect2X_min = -rect2->width / 2 - 0.15;
 	double rect2X_max = -rect2X_min;
-	double rect2Y_min = -rect2->height / 2;
+	double rect2Y_min = -rect2->height / 2 - 0.15;
 	double rect2Y_max = -rect2Y_min;
 
 	double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);
@@ -122,20 +123,13 @@ static bool isRectCircleCollide(Rect *rect_, Circle *circle)
 	return (cornerDistance_sq <= (circle->radius * circle->radius));
 }
 
-int isIntersect(Vector v1, Vector v2, Vector v3, Vector v4)
-{
-	double cross1 = (v4.x - v3.x) * (v1.y - v3.y) - (v4.y - v3.y) * (v1.x - v3.x);
-	double cross2 = (v4.x - v3.x) * (v2.y - v3.y) - (v4.y - v3.y) * (v2.x - v3.x);
-	double cross3 = (v2.x - v1.x) * (v3.y - v1.y) - (v2.y - v1.y) * (v3.x - v1.x);
-	double cross4 = (v2.x - v1.x) * (v4.y - v1.y) - (v2.y - v1.y) * (v4.x - v1.x);
-	if (cross1 * cross2 < 0 && cross3 * cross4 < 0)
-	{
-		return 1; // 两条有向线段相交
-	}
-	else
-	{
-		return 0; // 两条有向线段不相交
-	}
+bool isIntersect(Vector a, Vector b, Vector c, Vector d){
+	double u, v, w, z;
+	u = (c.x - a.x) * (b.y - a.y) - (b.x - a.x) * (c.y - a.y);
+	v = (d.x - a.x) * (b.y - a.y) - (b.x - a.x) * (d.y - a.y);
+	w = (a.x - c.x) * (d.y - c.y) - (d.x - c.x) * (a.y - c.y);
+	z = (b.x - c.x) * (d.y - c.y) - (d.x - c.x) * (b.y - c.y);
+	return (u * v <= 0.002 && w * z <= 0.002);
 }
 
 Vector *getCircleCollsionVector(Circle *c1, Circle *c2)
@@ -155,21 +149,33 @@ Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 	halfDiagonalLengthofRect2 = sqrt(rect2->width * rect2->width + rect2->height * rect2->height) / 2;
 
 	int i;
+	Vector rect1Vertex_[4] = {0};
+	double minDist = 9999;
+	Vector minDistVertex;
+	bool surfaceContact = FALSE;
 	for (i = 0; i < 4; ++i)
-	{
-		if (halfDiagonalLengthofRect2 > sqrt((rect1->super.vertices[i]->x - pos2.x) * (rect1->super.vertices[i]->x - pos2.x) +
-											 (rect1->super.vertices[i]->y - pos2.y) * (rect1->super.vertices[i]->y - pos2.y)))
+	{	
+		memcpy(&rect1Vertex_[i], rect1->super.vertices[i], sizeof(Vector));
+		rect1Vertex_[i].rotate(&rect1Vertex_[i], rect1->super.angle);
+	    rect1Vertex_[i].add(&rect1Vertex_[i], &(rect1->super.pos));
+		double dist = sqrt((rect1Vertex_[i].x - pos2.x) * (rect1Vertex_[i].x - pos2.x) + (rect1Vertex_[i].y - pos2.y) * (rect1Vertex_[i].y - pos2.y));
+		if (dist < minDist)
 		{
-			break;
+		 	minDist = dist;
+		 	minDistVertex = rect1Vertex_[i];
+		}
+		if (halfDiagonalLengthofRect2 > dist)
+		{
+			surfaceContact = TRUE;
 		}
 	}
 
-	Vector *v;
+	Vector *v = NULL;
 
-	if (i == 4)
+	if (surfaceContact)
 	{
-
-		// 在rect2坐标系下判断rect1UnderRect2与rect2的四条边是否相交
+		// printf("\nLOG:\nrect2 side");
+		//  在rect2坐标系下判断rect1UnderRect2与rect2的四条边是否相交
 		Vector rect2Vertex[4] = {0};
 		memcpy(&rect2Vertex[0], rect2->super.vertices[0], sizeof(Vector));
 		memcpy(&rect2Vertex[1], rect2->super.vertices[1], sizeof(Vector));
@@ -182,28 +188,28 @@ Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 			rect2Vertex[i].rotate(&rect2Vertex[i], rect2->super.angle);
 			rect2Vertex[i].add(&rect2Vertex[i], &(rect2->super.pos));
 		}
-
 		// 判断以pos1和pos2为起点终点的有向线段和rect2的四条边是否相交，是则计算边向量的法向量，并返回
-		if (isIntersect(pos1, pos2, rect2Vertex[0], rect2Vertex[1]))
+		if (isIntersect(minDistVertex, pos2, rect2Vertex[0], rect2Vertex[1]))
 		{
 			v = newVector(rect2Vertex[1].y - rect2Vertex[0].y, rect2Vertex[0].x - rect2Vertex[1].x);
 		}
-		else if (isIntersect(pos1, pos2, rect2Vertex[1], rect2Vertex[2]))
+		else if (isIntersect(minDistVertex, pos2, rect2Vertex[1], rect2Vertex[2]))
 		{
 			v = newVector(rect2Vertex[2].y - rect2Vertex[1].y, rect2Vertex[1].x - rect2Vertex[2].x);
 		}
-		else if (isIntersect(pos1, pos2, rect2Vertex[2], rect2Vertex[3]))
+		else if (isIntersect(minDistVertex, pos2, rect2Vertex[2], rect2Vertex[3]))
 		{
 			v = newVector(rect2Vertex[3].y - rect2Vertex[2].y, rect2Vertex[2].x - rect2Vertex[3].x);
 		}
-		else if (isIntersect(pos1, pos2, rect2Vertex[3], rect2Vertex[0]))
+		else if (isIntersect(minDistVertex, pos2, rect2Vertex[3], rect2Vertex[0]))
 		{
 			v = newVector(rect2Vertex[0].y - rect2Vertex[3].y, rect2Vertex[3].x - rect2Vertex[0].x);
 		}
 	}
 	else
 	{
-		// 重复以上步骤，但是编程对rect1操作
+		// 重复以上步骤，但是对rect1操作
+		// printf("\nLOG:\nrect1 side");
 		Vector rect1Vertex[4] = {0};
 		memcpy(&rect1Vertex[0], rect1->super.vertices[0], sizeof(Vector));
 		memcpy(&rect1Vertex[1], rect1->super.vertices[1], sizeof(Vector));
@@ -234,7 +240,15 @@ Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 		}
 	}
 
-	v->normalize(v);
+	if (v != NULL)
+	{
+		v->normalize(v);
+		if (0 > (v->x * (pos1.x - pos2.x) + v->y * (pos1.y - pos2.y)))
+		{
+			v->mult(v, -1);
+		}
+	}
+
 	return v;
 }
 
