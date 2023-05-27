@@ -1,10 +1,4 @@
-#include "2DEngine.h"
-#include "scene_info.h"
-#include "startup_title.h"
-#include "startup_button.h"
-#include "scene1_bgm.h"
-#include "background_pic.h"
-
+#include "scene1.h"
 SceneNode scene1;
 
 Vector *scene1BackgroundPos;

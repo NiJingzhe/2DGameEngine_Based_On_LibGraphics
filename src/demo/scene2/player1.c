@@ -1,5 +1,6 @@
 #include "player1.h"
 #include "player2.h"
+#include "room1_bkgnd.h"
 #include "scene_info.h"
 
 // 创建Player
@@ -22,12 +23,12 @@ Audio *bulletTimeSound;
 
 ActorRender normalRender;
 extern double GAME_TIME_TICK;
-double dashPower;
 bool freezed = FALSE;
 
+static double dashPower;
+static bool skillEnabled = FALSE;
 static void playerUpdate(ActorNode player, double delta);
 static void playerSpecialRender(ActorNode player);
-
 
 void createPlayer1()
 {
@@ -41,7 +42,7 @@ void createPlayer1()
     collisionRect = newRect(
         playerPos,
         0,
-        playerTextureDown->getWidth(playerTextureDown), playerTextureDown->getHeight(playerTextureDown),
+        playerTextureDown->getWidth(playerTextureDown) * 0.8, playerTextureDown->getHeight(playerTextureDown) * 0.8,
         FALSE,
         "Red",
         1);
@@ -101,7 +102,7 @@ void setupPlayer1(void *param)
     playerDashTargetShape->enable = FALSE;
     playerDashTargetShape->setMeta((ComponentNode)playerDashTargetShape, "player_dash_circle");
     // dashPowerStrip
-    playerDashPowerStrip->visible = TRUE;
+    playerDashPowerStrip->visible = FALSE;
     playerDashPowerStrip->enable = FALSE;
     playerDashPowerStrip->setMeta((ComponentNode)playerDashPowerStrip, "player_dash_power_strip");
     // Audio
@@ -109,6 +110,25 @@ void setupPlayer1(void *param)
     // update function
     player->vptr->update = playerUpdate;
     normalRender = player->vptr->render;
+
+    
+    if (param != NULL)
+    {
+        if (*((bool *)param) == TRUE)
+        {
+            ;
+        }
+        else
+        {
+            dashPower = 90;
+            freezed = FALSE;
+        }
+    }
+    else
+    {
+        dashPower = 90;
+        freezed = FALSE;
+    }
 }
 
 /// @brief 玩家更新方法
@@ -143,14 +163,37 @@ static void playerUpdate(ActorNode player, double delta)
     acc->normalize(acc);
     acc->mult(acc, delta * ACC_CONST);
     Vector vel;
-    if (!inmng.keyStates[VK_RETURN] || player->vel.length(&(player->vel)) >= 2.0)
+    if (!(inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 1.5 && !freezed && dashPower >= 45 && skillEnabled))
     {
         player->vel.add(&(player->vel), acc);
     }
     memcpy(&(vel), &(player->vel), sizeof(Vector));
     vel.mult(&(vel), delta * VEL_CONST);
+
+    //在处理完玩家速度后，叠加到玩家位置之前做碰撞处理
+    Vector *collisionVector;
+    if ((collisionVector = player->isCollideWithActor(player, room1Background)) != NULL)
+    {
+        CollisionShape *icePointCollisionShape = (CollisionShape*)room1Background->getComponent(room1Background, "room1_skillpoint_ice");
+        CollisionShape *lighteningPointCollisionShape = (CollisionShape*)room1Background->getComponent(room1Background, "room1_skillpoint_lightening");
+        if (playerCollisionShape->isCollideWith(playerCollisionShape, lighteningPointCollisionShape)){
+            skillEnabled = TRUE;
+        }
+        else if (!playerCollisionShape->isCollideWith(playerCollisionShape, icePointCollisionShape)){
+            double collisionVectorAngle = collisionVector->getAngle(collisionVector);
+            vel.rotate(&(vel), -collisionVectorAngle);
+            vel.x = vel.x < 0 ? 0 : vel.x;
+            vel.rotate(&(vel), collisionVectorAngle);
+        }
+
+    }
+    destoryVector(collisionVector);
+    if (skillEnabled){
+        playerDashPowerStrip->visible = TRUE;
+    }
+
     player->pos.add(&(player->pos), &(vel));
-    if (!inmng.keyStates[VK_RETURN] || player->vel.length(&(player->vel)) >= 2.0)
+    if (!(inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 1.5 && !freezed && dashPower >= 45 && skillEnabled))
         player->vel.mult(&(player->vel), 0.9);
 
     if (fabs(player->vel.x) <= 0.1)
@@ -232,7 +275,7 @@ static void playerUpdate(ActorNode player, double delta)
         dashDirection->normalize(dashDirection);
         dashDirection->mult(dashDirection, 5);
     }
-    if (inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 2.0 && !freezed && dashPower >= 45)
+    if (inmng.keyStates[VK_RETURN] && player->vel.length(&(player->vel)) <= 1.5 && !freezed && dashPower >= 45 && skillEnabled)
     {
         if (!bulletTimeSound->playing)
             bulletTimeSound->play(bulletTimeSound);
@@ -275,6 +318,7 @@ static void playerUpdate(ActorNode player, double delta)
     // 技能条的长度更新
     dashPower = dashPower < 90.0 ? dashPower + 4 * delta : 90.0;
     ((Rect *)(playerDashPowerStrip->shape))->width = (dashPower / 90.0) * playerTextureDown->getWidth(playerTextureDown);
+    //printf("\nLOG:\nplayerDashPowerStrip->shape->width is: %lf\n", ((Rect *)(playerDashPowerStrip->shape))->width);
     // 人物纹理颜色与可见性改变
     if (player->vel.length(&(player->vel)) >= 1.5 && !freezed)
     {
@@ -307,7 +351,7 @@ static void playerUpdate(ActorNode player, double delta)
     playerTexture->super.vptr->update((ComponentNode)playerTexture, &(player->pos));
     Vector *stripPos = newVector(player->pos.x, player->pos.y + playerTexture->getHeight(playerTexture) * 0.8);
     playerDashPowerStrip->super.vptr->update((ComponentNode)playerDashPowerStrip, stripPos);
-
+    //printf("\nLOG:\nplayerDashPowerStrip->shape->width is: %lf\n", ((Rect *)(playerDashPowerStrip->shape))->width);
     // 碰撞检测
     if (player->isCollideWithActor(player, player2))
     {

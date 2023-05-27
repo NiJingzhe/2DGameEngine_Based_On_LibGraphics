@@ -26,7 +26,7 @@ typedef struct Actor {
 	void (*delComponent)(struct Actor*, char* meta);
 	ComponentNode (*getComponent)(struct Actor*, char* meta);
 
-	bool (*isCollideWithActor)(struct Actor*, struct Actor*);
+	Vector* (*isCollideWithActor)(struct Actor*, struct Actor*);
 	
 } Actor, *ActorNode;
 

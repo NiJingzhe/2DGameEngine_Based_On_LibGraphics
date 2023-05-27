@@ -158,7 +158,6 @@ static void replayButtonUpdate(ActorNode button, double delta)
     {
         if (inmng.mouseButtons[0] && inmng.mouseEventType == BUTTON_UP)
         {
-            printf("to scene1");
             if (scmng.getScene("scene1") == NULL)
                 scmng.loadScene(&scene1, createScene1, NULL);
             scmng.switchTo("scene1", TRUE, TRUE, NULL, 0);

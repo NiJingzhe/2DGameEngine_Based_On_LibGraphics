@@ -4,6 +4,8 @@
 
 extern ActorNode background_pic;
 extern picTexture *background;
+extern picTexture *backgroundWithText;
+extern Timer *switchTimer;
 void createBackgroundPic();
 void setupBackgroundPic(void* param);
 #endif

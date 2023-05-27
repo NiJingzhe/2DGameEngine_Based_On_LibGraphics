@@ -1,7 +1,6 @@
 #include "count_down.h"
 #include "scene_info.h"
 
-Vector *countDownPos;
 ActorNode countDownUI;
 Timer *timer;
 UIText *countDownText;
@@ -12,12 +11,13 @@ long long int countDown;
 long long int aliveTime;
 
 static void countDownUIUpdate(ActorNode countDownUI, double delta);
-static void CALLBACK countDownUpdate(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwTime);
+static void countDownUpdate();
 
 void createCountDown()
 {
     // countdownUI
-    countDownPos = newVector(getww / 2, getwh * 8 / 10);
+
+    Vector *countDownPos = newVector(getww / 2, getwh * 8 / 10);
     countDownUI = newActor("count_down_ui", countDownPos);
     timer = newTimer(1, 1000, countDownUpdate);
     countDownText = newUIText("01:00", countDownPos, "White", "Consolas", Bold, 50);
@@ -32,9 +32,26 @@ void setupCountDown(void *param)
 {
     // countdown ui
     timer->setMeta((ComponentNode)timer, "count_down_timer");
-    timer->start(timer);
     countDownText->setMeta((ComponentNode)countDownText, "count_down_text");
     countDownUI->vptr->update = countDownUIUpdate;
+
+    if (param != NULL)
+    {
+        if (*((bool *)param) == TRUE)
+        {
+            timer->start(timer);
+        }
+        else
+        {
+            countDown = 60 * 1000;
+            timer->start(timer);
+        }
+    }
+    else
+    {
+        countDown = 60 * 1000;
+        timer->start(timer);
+    }
 }
 
 static void countDownUIUpdate(ActorNode countDownUI, double delta)
@@ -68,7 +85,7 @@ static void countDownUIUpdate(ActorNode countDownUI, double delta)
     }
 }
 
-static void CALLBACK countDownUpdate(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwTime)
+static void countDownUpdate()
 {
     aliveTime++;
     countDown = countDown > 0 ? countDown - 1000 : 0;

@@ -43,7 +43,7 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 	for (int i = 0; i < 4; ++i)
 	{
 		vertex[i].rotate(&vertex[i], angle1 - angle2);
-		vertex[i].mult(&vertex[1], 1.2);
+		vertex[i].mult(&vertex[1], 1.01);
 		vertex[i].add(&vertex[i], delta_p);
 	}
 
@@ -57,9 +57,9 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 		rect1Y_max = rect1Y_max <= vertex[i].y ? vertex[i].y : rect1Y_max;
 	}
 
-	double rect2X_min = -rect2->width / 2 - 0.15;
+	double rect2X_min = -rect2->width / 2 - 0.1;
 	double rect2X_max = -rect2X_min;
-	double rect2Y_min = -rect2->height / 2 - 0.15;
+	double rect2Y_min = -rect2->height / 2 - 0.1;
 	double rect2Y_max = -rect2Y_min;
 
 	double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);

@@ -1,5 +1,7 @@
 #include "player2.h"
 #include "player1.h"
+#include "room1_bkgnd.h"
+#include "count_down.h"
 
 Vector *player2Pos;
 ActorNode player2;
@@ -14,7 +16,9 @@ CollisionShape *player2CollisionShape;
 Timer *freezSkillTimer;
 Audio *freezingFX;
 
-static void CALLBACK freezSkill(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwTime);
+static bool skillEnabled = FALSE;
+
+static void freezSkill();
 static void player2Update(ActorNode player2, double delta);
 
 void createPlayer2()
@@ -29,7 +33,7 @@ void createPlayer2()
     player2collisionRect = newRect(
         player2Pos,
         0,
-        player2TextureDown->getWidth(player2TextureDown), player2TextureDown->getHeight(player2TextureDown),
+        player2TextureDown->getWidth(player2TextureDown) * 0.8, player2TextureDown->getHeight(player2TextureDown) * 0.8,
         FALSE,
         "Red",
         1);
@@ -97,6 +101,26 @@ static void player2Update(ActorNode player2, double delta)
     player2->vel.add(&(player2->vel), acc);
     memcpy(&(vel), &(player2->vel), sizeof(Vector));
     vel.mult(&(vel), delta * VEL_CONST);
+
+    //获得速度后进行碰撞检查
+    Vector *collisionVector;
+    if ((collisionVector = player2->isCollideWithActor(player2, room1Background)) != NULL)
+    {
+        CollisionShape *icePointCollisionShape = (CollisionShape*)room1Background->getComponent(room1Background, "room1_skillpoint_ice");
+        CollisionShape *lighteningPointCollisionShape = (CollisionShape*)room1Background->getComponent(room1Background, "room1_skillpoint_lightening");
+        if (player2CollisionShape->isCollideWith(player2CollisionShape, icePointCollisionShape)){
+            skillEnabled = TRUE;
+        }
+        else if (!player2CollisionShape->isCollideWith(player2CollisionShape, lighteningPointCollisionShape)){
+            double collisionVectorAngle = collisionVector->getAngle(collisionVector);
+            vel.rotate(&(vel), -collisionVectorAngle);
+            vel.x = vel.x < 0 ? 0 : vel.x;
+            vel.rotate(&(vel), collisionVectorAngle);
+        }
+
+    }
+    destoryVector(collisionVector);
+
     player2->pos.add(&(player2->pos), &(vel));
     player2->vel.mult(&(player2->vel), 0.9);
 
@@ -168,12 +192,13 @@ static void player2Update(ActorNode player2, double delta)
 
     // 空格键技能
     static bool spacePressing = FALSE;
-    if (inmng.keyStates[VK_SPACE] && !spacePressing)
+    if (inmng.keyStates[VK_SPACE] && !spacePressing && skillEnabled)
     {
         spacePressing = TRUE;
         freezed = TRUE;
         freezingFX->play(freezingFX);
         freezSkillTimer->start(freezSkillTimer);
+        skillEnabled = FALSE;
     }
     else
     {
@@ -187,7 +212,7 @@ static void player2Update(ActorNode player2, double delta)
     destoryVector(acc);
 }
 
-static void CALLBACK freezSkill(HWND hwnd, UINT msg, UINT_PTR timerID, DWORD dwTime)
+static void freezSkill()
 {
     static int count = 0;
     count++;

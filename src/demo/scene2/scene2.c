@@ -1,9 +1,4 @@
-#include "2DEngine.h"
-#include "scene_info.h"
-#include "player1.h"
-#include "player2.h"
-#include "pause_button.h"
-#include "count_down.h"
+#include "scene2.h"
 
 SceneNode scene2;
 
@@ -31,18 +26,19 @@ void createScene2(SceneNode *scene2)
     destoryVector(scene2BackgoundPos);
     destoryShape((Shape *)scene2BackgoundRect);
     scene2Backgound->addComponent(scene2Backgound, (ComponentNode)scene2BackgoundShape);
+    (*scene2)->addActor((*scene2), scene2Backgound);
 
+    createRoom1Background();
     createPlayer1();
     createPlayer2();
     createCountDown();
     createPauseButton();
 
-    (*scene2)->addActor((*scene2), scene2Backgound);
+    (*scene2)->addActor((*scene2), room1Background);
     (*scene2)->addActor((*scene2), countDownUI);
     (*scene2)->addActor((*scene2), pauseButton);
     (*scene2)->addActor((*scene2), player);
     (*scene2)->addActor((*scene2), player2);
-
 }
 
 /// @brief 场景2的初始化函数，初始化各个Component的属性
@@ -50,32 +46,12 @@ void createScene2(SceneNode *scene2)
 /// @param param
 static void setupScene_scene2(SceneNode scene2, void *param)
 {
-
-    if (param != NULL)
-    {
-        if (*((bool *)param) == TRUE)
-        {
-            timer->start(timer);
-        }
-        else
-        {
-            countDown = 60 * 1000;
-            dashPower = 90;
-            freezed = FALSE;
-        }
-    }
-    else
-    {
-        countDown = 60 * 1000;
-        dashPower = 90;
-        freezed = FALSE;
-    }
-
     // background
     scene2BackgoundShape->enable = FALSE;
     scene2BackgoundShape->visible = TRUE;
     scene2BackgoundShape->setMeta((ComponentNode)scene2BackgoundShape, "scene2BackgoundShape");
 
+    setupRoom1Background(param);
     setupPlayer1(param);
     setupPlayer2(param);
     setupPauseButton(param);

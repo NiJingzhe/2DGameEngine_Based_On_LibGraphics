@@ -4,7 +4,6 @@
 #include "2DEngine.h"
 
 // 倒计时UI
-extern Vector *countDownPos;
 extern ActorNode countDownUI;
 extern Timer *timer;
 extern UIText *countDownText;

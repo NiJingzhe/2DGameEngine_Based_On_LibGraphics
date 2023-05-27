@@ -20,7 +20,6 @@ extern Rect *stripeRect;
 extern CollisionShape *playerDashPowerStrip;
 extern Audio *bulletTimeSound;
 
-extern double dashPower;
 extern bool freezed;
 
 void createPlayer1();
