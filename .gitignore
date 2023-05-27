@@ -5,7 +5,7 @@ build
 CMakeFiles/
 CMakeCache.txt
 Debug/
-*.code-workespace
+*.code-workspace
 .vscode/
 Release/
 *.filters
