@@ -142,10 +142,14 @@ static void updateCollisionShape(Component *c, ...)
 	{
 		double width = ((Rect *)cs->shape)->width;
 		double height = ((Rect *)cs->shape)->height;
-		((Rect *)cs->shape)->super.vertices[0] = newVector(-width / 2, height / 2);
-		((Rect *)cs->shape)->super.vertices[1] = newVector(width / 2, height / 2);
-		((Rect *)cs->shape)->super.vertices[2] = newVector(width / 2, -height / 2);
-		((Rect *)cs->shape)->super.vertices[3] = newVector(-width / 2, -height / 2);
+		((Rect *)cs->shape)->super.vertices[0]->x = -width / 2;
+		((Rect *)cs->shape)->super.vertices[0]->y = height / 2;
+		((Rect *)cs->shape)->super.vertices[1]->x = width / 2;
+		((Rect *)cs->shape)->super.vertices[1]->y = height / 2;
+		((Rect *)cs->shape)->super.vertices[2]->x = width / 2;
+		((Rect *)cs->shape)->super.vertices[2]->y = -height / 2;
+		((Rect *)cs->shape)->super.vertices[3]->x = -width / 2;
+		((Rect *)cs->shape)->super.vertices[3]->y = -height / 2;
 	}
 }
 
