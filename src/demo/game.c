@@ -1,5 +1,6 @@
 #include "2DEngine.h"
 #include "scene_info.h"
+#include "game_conf.h"
 
 void Main()
 {
@@ -13,12 +14,27 @@ void Main()
     srand(time(0));
     initInputManager();
     initScenesManager();
-    scmng.loadScene(&scene1, createScene1, NULL);
-    scmng.currentScene = scene1;
+    scmng.loadScene(&STARTUP_SCENE, STARTUP_SCENE_CREATOR, NULL);
+    scmng.currentScene = STARTUP_SCENE;
     scmng.currentScene->setup(scmng.currentScene, NULL);
 #if ENGINE_DEBUG
     LOG("Game init finished!----------------------------------------------------------------------------------------------------------------------");
 #endif
+}
+
+void CALLBACK TimerCallBack(HWND a, UINT b, UINT_PTR id, DWORD d)
+{
+    if (switchTimer != NULL && id == switchTimer->id)
+    {
+        switchTimer->callBackFunction();
+    }
+    if (timer != NULL && id == timer->id)
+    {
+        timer->callBackFunction();
+    }
+    if (freezSkillTimer != NULL && id == freezSkillTimer->id){
+        freezSkillTimer->callBackFunction();
+    }
 }
 
 void EngineUpdate(double delta)

@@ -1,7 +1,7 @@
 #include "base_component.h"
 //自定义组件的头文件需要包含于此
 #include "collision_shape.h"
-#include "texture.h"
+#include "chartexture.h"
 #include "uitext.h"
 #include "timer.h"
 #include "audio.h"
@@ -87,8 +87,8 @@ void destoryComponent(Component *c)
 		destoryCollisionShape((CollisionShape *)c);
 		break;
 
-	case TEXTURE:
-		destoryTexture((Texture *)c);
+	case CHARTEXTURE:
+		destorycharTexture((charTexture *)c);
 		break;
 
 	case AUDIO:

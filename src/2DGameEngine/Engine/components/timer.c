@@ -1,7 +1,7 @@
 #include "timer.h"
 #include "base_component.h"
 
-static void initTimer(struct Timer *timer, int id, int interval, TIMERPROC callbackFunction);
+static void initTimer(struct Timer *timer, int id, int interval, TimerProcFunc callbackFunction);
 static void renderTimer(Component *c);
 static void updateTimer(Component *c, ...);
 static void start(struct Timer *timer);
@@ -9,15 +9,14 @@ static void stop(struct Timer *timer);
 static void setInterval(struct Timer *timer, int interval);
 static const int returnTimerType(ComponentNode c);
 
-
-Timer *newTimer(int id, int interval, TIMERPROC callBackFunction)
+Timer *newTimer(int id, int interval, TimerProcFunc callBackFunction)
 {
 	Timer *timer = (Timer *)malloc(sizeof(Timer));
 	initTimer(timer, id, interval, callBackFunction);
 	return timer;
 }
 
-static void initTimer(struct Timer *timer, int id, int interval, TIMERPROC callbackFunction)
+static void initTimer(struct Timer *timer, int id, int interval, TimerProcFunc callbackFunction)
 {
 	Component *super = newComponent(renderTimer, updateTimer);
 	memcpy(&(timer->super), super, sizeof(Component));
@@ -38,6 +37,7 @@ static void initTimer(struct Timer *timer, int id, int interval, TIMERPROC callb
 	timer->super.vptr->getComponentType = returnTimerType;
 	timer->callBackFunction = callbackFunction;
 	timer->interval = interval;
+	timer->id = id;
 	timer->enable = FALSE;
 
 	timer->start = start;
@@ -59,14 +59,22 @@ static void updateTimer(Component *c, ...)
 
 static void start(struct Timer *timer)
 {
-	timer->enable = TRUE;
-	startTimer(timer->id, timer->interval, timer->callBackFunction);
+	if (!timer->enable)
+	{
+		timer->enable = TRUE;
+		startTimer(timer->id, timer->interval, TimerCallBack);
+		printf("\nLOG:\ntimer %s enabled, its id is: %d", timer->super.meta, timer->id);
+	}
 }
 
 static void stop(struct Timer *timer)
 {
-	timer->enable = FALSE;
-	cancelTimer(timer->id);
+	if (timer->enable)
+	{
+		timer->enable = FALSE;
+		cancelTimer(timer->id);
+		printf("\nLOG:\ntimer %s disabled its id is: %d", timer->super.meta, timer->id);
+	}
 }
 
 static void setInterval(struct Timer *timer, int interval)
@@ -75,7 +83,7 @@ static void setInterval(struct Timer *timer, int interval)
 	{
 		cancelTimer(timer->id);
 		timer->interval = interval;
-		startTimer(timer->id, timer->interval, timer->callBackFunction);
+		startTimer(timer->id, timer->interval, TimerCallBack);
 	}
 	else
 	{
@@ -92,6 +100,7 @@ void destoryTimer(struct Timer *timer)
 {
 	if (timer->enable)
 	{
+		timer->enable = FALSE;
 		cancelTimer(timer->id);
 	}
 	free(timer->super.vptr);

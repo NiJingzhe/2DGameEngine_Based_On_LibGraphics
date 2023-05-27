@@ -63,7 +63,7 @@ static void initUIText(struct UIText *uiText, char *content, Vector pos, char *c
 	uiText->getPos = getUITextPos;
 	uiText->getWidth = getUITextWidth;
 	uiText->setMeta = uiText->super.setMeta;
-	uiText->getMeta - uiText->super.getMeta;
+	uiText->getMeta = uiText->super.getMeta;
 }
 
 static void setUITextPos(UIText *t, Vector *pos)

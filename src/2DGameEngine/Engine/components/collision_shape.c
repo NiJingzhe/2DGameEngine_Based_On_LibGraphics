@@ -45,13 +45,14 @@ static void initCollisionShape(CollisionShape *c, Shape *shape)
 #endif
 		memcpy(c->shape->vptr, shape->vptr, sizeof(shapevTable));
 
-		//为自身shape属性下的顶点数组开辟新空间，并内存拷贝
-		c->shape->vertices = (Vector **)calloc(4, sizeof(Vector*));
+		// 为自身shape属性下的顶点数组开辟新空间，并内存拷贝
+		c->shape->vertices = (Vector **)calloc(4, sizeof(Vector *));
 #if MEM_DEBUG
 		MEM_BLOCK_NUM += 4;
 		printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
 #endif
-		for (int i = 0; i < 4; ++i){
+		for (int i = 0; i < 4; ++i)
+		{
 			c->shape->vertices[i] = (Vector *)calloc(1, sizeof(Vector));
 			memcpy(c->shape->vertices[i], shape->vertices[i], sizeof(Vector));
 #if MEM_DEBUG
@@ -136,6 +137,16 @@ static void updateCollisionShape(Component *c, ...)
 	cs->shape->setPos(cs->shape, pos);
 	cs->setPos(cs, pos);
 	va_end(argList);
+
+	if (cs->shape->vptr->getShape() == RECT)
+	{
+		double width = ((Rect *)cs->shape)->width;
+		double height = ((Rect *)cs->shape)->height;
+		((Rect *)cs->shape)->super.vertices[0] = newVector(-width / 2, height / 2);
+		((Rect *)cs->shape)->super.vertices[1] = newVector(width / 2, height / 2);
+		((Rect *)cs->shape)->super.vertices[2] = newVector(width / 2, -height / 2);
+		((Rect *)cs->shape)->super.vertices[3] = newVector(-width / 2, -height / 2);
+	}
 }
 
 static bool isCollideWith(CollisionShape *s1, CollisionShape *s2)
