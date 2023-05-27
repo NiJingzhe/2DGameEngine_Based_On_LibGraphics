@@ -66,7 +66,7 @@ void setupScene_scene3(SceneNode scene3, void *param)
     result->vptr->render = resultRenderChaserWin;
 
     if (param != NULL && strcmp((char*)param, "EscaperWin") == 0){
-        resultTexture->resetTexture(resultTexture, "./res/scene3/escapewin_texture.txt");
+        resultTexture->resetTexture(resultTexture, "./res/scene3/escaperwin_texture.txt");
         result->vptr->render = resultRenderEscaperWin;
     }
     else if (param == NULL){
