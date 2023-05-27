@@ -63,7 +63,6 @@ static void start(struct Timer *timer)
 	{
 		timer->enable = TRUE;
 		startTimer(timer->id, timer->interval, TimerCallBack);
-		printf("\nLOG:\ntimer %s enabled, its id is: %d", timer->super.meta, timer->id);
 	}
 }
 
@@ -73,7 +72,6 @@ static void stop(struct Timer *timer)
 	{
 		timer->enable = FALSE;
 		cancelTimer(timer->id);
-		printf("\nLOG:\ntimer %s disabled its id is: %d", timer->super.meta, timer->id);
 	}
 }
 
