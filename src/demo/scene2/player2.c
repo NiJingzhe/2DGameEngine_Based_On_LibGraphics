@@ -104,8 +104,9 @@ static void player2Update(ActorNode player2, double delta)
 
     //获得速度后进行碰撞检查
     Vector *collisionVector;
-    if ((collisionVector = player2->isCollideWithActor(player2, room1Background)) != NULL)
+    if (player2->isCollideWithActor(player2, room1Background))
     {
+        collisionVector = player2->getCollisionVector(player2, room1Background);
         CollisionShape *icePointCollisionShape = (CollisionShape *)room1Background->getComponent(room1Background, "room1_skillpoint_ice");
         CollisionShape *lighteningPointCollisionShape = (CollisionShape *)room1Background->getComponent(room1Background, "room1_skillpoint_lightening");
         if (player2CollisionShape->isCollideWith(player2CollisionShape, icePointCollisionShape))

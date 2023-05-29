@@ -14,7 +14,8 @@ static char *getActorMeta(Actor *actor);
 static void renderActor(Actor *actor);
 static const int returnActorType();
 static void updateActor(Actor *actor, double delta);
-static Vector* isCollideWithActor(Actor *a1, Actor *a2);
+static bool isCollideWithActor(Actor *a1, Actor *a2);
+static Vector* getCollisionVector(Actor *a1, Actor *a2);
 
 Actor *newActor(char *meta, Vector *pos)
 {
@@ -60,6 +61,7 @@ static void initActor(Actor *actor, char *meta, Vector pos)
 	actor->delComponent = delComponent;
 	actor->getComponent = getComponent;
 	actor->isCollideWithActor = isCollideWithActor;
+	actor->getCollisionVector = getCollisionVector;
 	actor->vptr->render = renderActor;
 	actor->vptr->update = updateActor;
 }
@@ -191,7 +193,7 @@ static ComponentNode getComponent(Actor *actor, char *meta)
 	}
 }
 
-static Vector* isCollideWithActor(Actor *a1, Actor *a2)
+static Vector* getCollisionVector(Actor *a1, Actor *a2)
 {
 
 	ComponentNode a1CurrentComp = a1->componentList, a2CurrentComp = a2->componentList;
@@ -222,6 +224,30 @@ static Vector* isCollideWithActor(Actor *a1, Actor *a2)
 		a1CurrentComp = a1CurrentComp->next;
 	}
 	return collisionVec;
+}
+
+static bool isCollideWithActor(Actor *a1, Actor *a2)
+{
+
+	ComponentNode a1CurrentComp = a1->componentList, a2CurrentComp = a2->componentList;
+	bool collisionResult = FALSE;
+
+	while (a1CurrentComp)
+	{
+		a2CurrentComp = a2->componentList;
+		while (a2CurrentComp)
+		{
+			if (a1CurrentComp->vptr->getComponentType() == COLLISION_SHAPE &&
+				a2CurrentComp->vptr->getComponentType() == COLLISION_SHAPE)
+			{
+
+				collisionResult |= ((CollisionShape *)a1CurrentComp)->isCollideWith(((CollisionShape *)a1CurrentComp), ((CollisionShape *)a2CurrentComp));
+			}
+			a2CurrentComp = a2CurrentComp->next;
+		}
+		a1CurrentComp = a1CurrentComp->next;
+	}
+	return collisionResult;
 }
 
 void destoryActor(Actor *actor)
