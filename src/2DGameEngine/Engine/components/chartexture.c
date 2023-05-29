@@ -184,8 +184,12 @@ static void renderTexture(Component *c)
 		SetPointSize(t->pointSize);
 		for (int i = 0; i < t->lineNumber; ++i)
 		{
-			MovePen(t->pos.x - t->width / 2.0, t->pos.y + (double)(t->lineNumber / 2 - i) * (t->height / t->lineNumber));
+			double width = TextStringWidth(t->textureString[i]);
+			double height = width / strlen(t->textureString[i]) * 1.01 * t->lineNumber;
+			MovePen(t->pos.x - width / 2.0, t->pos.y + (double)(t->lineNumber / 2 - i) * (height / t->lineNumber));
 			DrawTextString(t->textureString[i]);
+			t->width = width;
+			t->height = height;
 		}
 		SetPointSize(pointSize_);
 	}

@@ -123,7 +123,8 @@ static bool isRectCircleCollide(Rect *rect_, Circle *circle)
 	return (cornerDistance_sq <= (circle->radius * circle->radius));
 }
 
-bool isIntersect(Vector a, Vector b, Vector c, Vector d){
+bool isIntersect(Vector a, Vector b, Vector c, Vector d)
+{
 	double u, v, w, z;
 	u = (c.x - a.x) * (b.y - a.y) - (b.x - a.x) * (c.y - a.y);
 	v = (d.x - a.x) * (b.y - a.y) - (b.x - a.x) * (d.y - a.y);
@@ -137,6 +138,14 @@ Vector *getCircleCollsionVector(Circle *c1, Circle *c2)
 	Vector *v = newVector(c1->super.pos.x - c2->super.pos.x, c1->super.pos.y - c2->super.pos.y);
 	v->normalize(v);
 	return v;
+}
+
+bool pointInBox(Vector point, Vector boxPos, double width, double height, double angle){
+	Vector *pointUnderBox = newVector(point.x - boxPos.x, point.y - boxPos.y);
+	pointUnderBox->rotate(pointUnderBox, -angle);
+	bool result = (pointUnderBox->x >= -width/2 && pointUnderBox->x <= width/2 && pointUnderBox->y >= -height/2 && pointUnderBox->y <= height/2);
+	destoryVector(pointUnderBox);
+	return result;
 }
 
 Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
@@ -154,21 +163,28 @@ Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 	Vector minDistVertex;
 	bool surfaceContact = FALSE;
 	for (i = 0; i < 4; ++i)
-	{	
+	{
 		memcpy(&rect1Vertex_[i], rect1->super.vertices[i], sizeof(Vector));
 		rect1Vertex_[i].rotate(&rect1Vertex_[i], rect1->super.angle);
-	    rect1Vertex_[i].add(&rect1Vertex_[i], &(rect1->super.pos));
+		rect1Vertex_[i].add(&rect1Vertex_[i], &(rect1->super.pos));
 		double dist = sqrt((rect1Vertex_[i].x - pos2.x) * (rect1Vertex_[i].x - pos2.x) + (rect1Vertex_[i].y - pos2.y) * (rect1Vertex_[i].y - pos2.y));
-		if (dist < minDist)
+		if (dist <= minDist && !pointInBox(rect1Vertex_[i], pos2, rect2->width, rect2->height, rect2->super.angle - rect1->super.angle))
 		{
-		 	minDist = dist;
-		 	minDistVertex = rect1Vertex_[i];
+			minDist = dist;
+			minDistVertex = rect1Vertex_[i];
 		}
 		if (halfDiagonalLengthofRect2 > dist)
 		{
 			surfaceContact = TRUE;
 		}
 	}
+	// if (minDist >= 9000){
+	// 	Vector *collisionVector  = newVector(0,0);
+	// 	collisionVector->x = pos1.x - pos2.x;
+	// 	collisionVector->y = pos1.y - pos2.y;
+	// 	collisionVector->normalize(collisionVector);
+	// 	return collisionVector;
+	// }
 
 	Vector *v = NULL;
 

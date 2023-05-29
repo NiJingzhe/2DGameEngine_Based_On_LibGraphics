@@ -171,8 +171,9 @@ static void playerUpdate(ActorNode player, double delta)
 
     // 在处理完玩家速度后，叠加到玩家位置之前做碰撞处理
     Vector *collisionVector;
-    if ((collisionVector = player->isCollideWithActor(player, room1Background)) != NULL)
+    if (player->isCollideWithActor(player, room1Background))
     {
+        collisionVector = player->getCollisionVector(player, room1Background);
         CollisionShape *icePointCollisionShape = (CollisionShape *)room1Background->getComponent(room1Background, "room1_skillpoint_ice");
         CollisionShape *lighteningPointCollisionShape = (CollisionShape *)room1Background->getComponent(room1Background, "room1_skillpoint_lightening");
         if (playerCollisionShape->isCollideWith(playerCollisionShape, lighteningPointCollisionShape))
