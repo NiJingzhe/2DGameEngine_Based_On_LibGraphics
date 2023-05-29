@@ -53,4 +53,8 @@ void MouseEvent(int x, int y, int button, int event) {
 	inputManager.mouseButtons[2] = button == VK_RBUTTON;
 
 	inputManager.mouseEventType = event;
+
+	#if MOUSE_DEBUG
+		printf("\nLOG:\nMouse Event: %d, mouse position: (%lf, %lf)", event, inputManager.mouseX, inputManager.mouseY);
+	#endif
 }

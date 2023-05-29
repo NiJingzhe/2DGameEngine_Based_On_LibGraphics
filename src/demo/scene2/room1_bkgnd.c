@@ -60,7 +60,7 @@ void setupRoom1Background(void *param)
     room1SkillPointCollisionList[1]->setMeta((ComponentNode)room1SkillPointCollisionList[1], "room1_skillpoint_lightening");
     room1WallCollisionList[0]->visible = FALSE;
     room1WallCollisionList[0]->setMeta((ComponentNode)room1WallCollisionList[0], "room1_wall");
-    room1WallCollisionList[1]->visible = TRUE;
+    room1WallCollisionList[1]->visible = FALSE;
     room1WallCollisionList[1]->setMeta((ComponentNode)room1WallCollisionList[1], "room1_wall");
     room1WallCollisionList[2]->visible = FALSE;
     room1WallCollisionList[2]->setMeta((ComponentNode)room1WallCollisionList[2], "room1_wall");

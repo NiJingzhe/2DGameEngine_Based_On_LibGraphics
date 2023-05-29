@@ -113,9 +113,7 @@ const int returnActorType()
 
 void updateActor(Actor *actor, double delta)
 {	
-#if DEBUG_MODE
-	printf("\nLOG:\nEnter default Actor update, update actor: %s\n", actor->meta);
-#endif
+	return;
 }
 
 static void addComponent(Actor *actor, ComponentNode comp)
