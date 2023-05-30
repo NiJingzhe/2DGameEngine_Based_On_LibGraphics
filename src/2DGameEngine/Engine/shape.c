@@ -2,6 +2,8 @@
 #include "vector.h"
 #include "shape.h"
 
+double COLLISION_MERGEN = 1.1;
+
 static bool isRectCollide(Rect *rect1, Rect *rect2);
 static bool isCircleCollide(Circle *circle1, Circle *circle2);
 static bool isRectCircleCollide(Rect *rect_, Circle *circle);
@@ -43,7 +45,7 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 	for (int i = 0; i < 4; ++i)
 	{
 		vertex[i].rotate(&vertex[i], angle1 - angle2);
-		vertex[i].mult(&vertex[1], 1.01);
+		vertex[i].mult(&vertex[1], COLLISION_MERGEN);
 		vertex[i].add(&vertex[i], delta_p);
 	}
 
@@ -57,9 +59,11 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 		rect1Y_max = rect1Y_max <= vertex[i].y ? vertex[i].y : rect1Y_max;
 	}
 
-	double rect2X_min = -rect2->width / 2 - 0.1;
+	double rect2X_min = -rect2->width / 2;
+	rect2X_min *= COLLISION_MERGEN;
 	double rect2X_max = -rect2X_min;
-	double rect2Y_min = -rect2->height / 2 - 0.1;
+	double rect2Y_min = -rect2->height / 2;
+	rect2Y_min *= COLLISION_MERGEN;
 	double rect2Y_max = -rect2Y_min;
 
 	double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);
@@ -504,6 +508,8 @@ static void renderRect(Shape *s)
 	{
 		vertex[i].rotate(&vertex[i], rect->super.angle);
 		vertex[i].add(&vertex[i], &(rect->super.pos));
+		vertex[i].x = (vertex[i].x - globalCamera.position.x) * globalCamera.zoom + getww/2;
+		vertex[i].y = (vertex[i].y - globalCamera.position.y) * globalCamera.zoom + getwh/2;
 	}
 
 	SetPenColor(rect->super.color);
@@ -591,16 +597,22 @@ static void renderCircle(Shape *s)
 
 	SetEraseMode(FALSE);
 	Circle *circle = (Circle *)s;
-	MovePen(circle->super.pos.x + circle->radius, circle->super.pos.y);
+	Vector* renderPos = newVector(0,0);
+	renderPos->x = (circle->super.pos.x - globalCamera.position.x) * globalCamera.zoom + getww/2;
+	renderPos->y = (circle->super.pos.y - globalCamera.position.y) * globalCamera.zoom + getwh/2;
+	double renderRadius = circle->radius * globalCamera.zoom;
+	MovePen(renderPos->x - renderRadius, renderPos->y);
 	SetPenColor(circle->super.color);
 	SetPenSize(1);
 	if (circle->super.fill)
 		fill(circle->super.density);
 
-	DrawArc(circle->radius, 0, 360);
+	DrawArc(renderRadius, 0, 360);
 
 	if (circle->super.fill)
 		endfill;
+	
+	destoryVector(renderPos);
 }
 
 static const int returnCircleType()

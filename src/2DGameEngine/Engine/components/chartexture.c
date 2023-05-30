@@ -181,12 +181,15 @@ static void renderTexture(Component *c)
 		int pointSize_ = GetPointSize();
 		SetFont("Courier New");
 		SetStyle(Bold);
-		SetPointSize(t->pointSize);
+		SetPointSize(t->pointSize * globalCamera.zoom);
 		for (int i = 0; i < t->lineNumber; ++i)
 		{
 			double width = TextStringWidth(t->textureString[i]);
 			double height = width / strlen(t->textureString[i]) * 1.01 * t->lineNumber;
-			MovePen(t->pos.x - width / 2.0, t->pos.y + (double)(t->lineNumber / 2 - i) * (height / t->lineNumber));
+			Vector* posUnderCam = newVector(0,0);
+			posUnderCam->x = (t->pos.x - globalCamera.position.x)*globalCamera.zoom + getww / 2;
+			posUnderCam->y = (t->pos.y - globalCamera.position.y)*globalCamera.zoom + getwh / 2;
+			MovePen(posUnderCam->x - width / 2.0, posUnderCam->y + (double)(t->lineNumber / 2 - i) * (height / t->lineNumber));
 			DrawTextString(t->textureString[i]);
 			t->width = width;
 			t->height = height;

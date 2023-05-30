@@ -2,10 +2,13 @@
 #define __SHAPE_H__
 #include "vector.h"
 #include "public_headers.h"
+#include "camera.h"
 
 #define EMPTY_SHAPE 0
 #define RECT 1
 #define CIRCLE 2
+
+extern double COLLISION_MERGEN;
 /*---------------------------Shape Type----------------------------*/
 typedef struct Shape {
 	

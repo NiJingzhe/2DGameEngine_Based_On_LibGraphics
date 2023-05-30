@@ -254,6 +254,9 @@ void destoryActor(Actor *actor)
 	printf("\nLOG:\n	Enter destoryActor, destorying actor: %s\n", actor->meta);
 	#endif
 	ComponentNode currentComponent = actor->componentList;
+	if (currentComponent == NULL) {
+		return;
+	}
 	while (currentComponent->next)
 	{
 		currentComponent = currentComponent->next;
