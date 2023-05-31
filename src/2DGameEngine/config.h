@@ -2,7 +2,7 @@
 #define __CONFIG_H__
 
 #define DEBUG 0
-#define MEM_DEBUG_MODE  0
+#define MEM_DEBUG_MODE  1
 #define MOUSE_POS_DEBUG 0
 
 #endif
