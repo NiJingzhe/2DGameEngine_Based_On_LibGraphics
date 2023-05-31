@@ -11,3 +11,4 @@ Release/
 *.filters
 *.vcxproj*
 *.sln
+.vscode/
