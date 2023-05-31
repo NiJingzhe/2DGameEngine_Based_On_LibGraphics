@@ -14,7 +14,7 @@ void Main()
     srand(time(0));
     initInputManager();
     initScenesManager();
-    initCamera(getww/2, getwh/2, 1.0);
+    initCamera(getww/2, getwh/2, 1);
     scmng.loadScene(&STARTUP_SCENE, STARTUP_SCENE_CREATOR, NULL);
     scmng.currentScene = STARTUP_SCENE;
     scmng.currentScene->setup(scmng.currentScene, NULL);

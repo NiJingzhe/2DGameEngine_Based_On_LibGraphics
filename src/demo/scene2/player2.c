@@ -33,7 +33,7 @@ void createPlayer2()
     player2collisionRect = newRect(
         player2Pos,
         0,
-        player2TextureDown->getWidth(player2TextureDown) * 0.8, player2TextureDown->getHeight(player2TextureDown) * 0.8,
+        player2TextureDown->getWidth(player2TextureDown), player2TextureDown->getHeight(player2TextureDown),
         FALSE,
         "Red",
         1);
@@ -64,7 +64,7 @@ void setupPlayer2(void *param)
     player2TextureRight->setMeta((ComponentNode)player2TextureRight, "player2_texture_right");
     player2TextureLeft->visible = FALSE;
     player2TextureLeft->setMeta((ComponentNode)player2TextureLeft, "player2_texture_left");
-    player2CollisionShape->visible = FALSE;
+    player2CollisionShape->visible = TRUE;
     player2CollisionShape->enable = TRUE;
     player2CollisionShape->setMeta((ComponentNode)player2CollisionShape, "player2_collision_shape");
     freezSkillTimer->setMeta((ComponentNode)freezSkillTimer, "freez_skill_timer");
