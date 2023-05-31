@@ -17,7 +17,7 @@ void createScene1(SceneNode *scene1)
     (*scene1)->setup = setupScene_scene1;
 
     scene1BackgroundPos = newVector(getww / 2, getwh / 2);
-    scene1BackgroundRect = newRect(scene1BackgroundPos, 0, getww, getwh, TRUE, "Black", 1);
+    scene1BackgroundRect = newRect(scene1BackgroundPos, 0, getww*100, getwh*100, TRUE, "Black", 1);
     scene1Background = newActor("scene1Background", scene1BackgroundPos);
     scene1BackgroundShape = newCollisionShape((Shape *)scene1BackgroundRect);
     scene1Background->addComponent(scene1Background, (ComponentNode)scene1BackgroundShape);

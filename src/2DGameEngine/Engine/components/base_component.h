@@ -4,6 +4,7 @@
 #include "public_headers.h"
 #include "Vector.h"
 #include "shape.h"
+#include "camera.h"
 
 //自定义组件宏定义序号需要写在这里
 #define EMPTY_COMPONENT 0

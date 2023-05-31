@@ -113,9 +113,7 @@ const int returnActorType()
 
 void updateActor(Actor *actor, double delta)
 {	
-#if DEBUG_MODE
-	printf("\nLOG:\nEnter default Actor update, update actor: %s\n", actor->meta);
-#endif
+	return;
 }
 
 static void addComponent(Actor *actor, ComponentNode comp)
@@ -256,6 +254,9 @@ void destoryActor(Actor *actor)
 	printf("\nLOG:\n	Enter destoryActor, destorying actor: %s\n", actor->meta);
 	#endif
 	ComponentNode currentComponent = actor->componentList;
+	if (currentComponent == NULL) {
+		return;
+	}
 	while (currentComponent->next)
 	{
 		currentComponent = currentComponent->next;

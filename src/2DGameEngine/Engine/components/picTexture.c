@@ -79,7 +79,11 @@ static void renderTexture(Component *c)
     picTexture *t = (picTexture *)c;
     if (t->visible)
     {
-        LoadBmp(t->resPath, t->pos.x, t->pos.y, t->width, t->height);
+        Vector *renderPos = newVector(0,0);
+        renderPos->x = (t->pos.x - globalCamera.position.x) * globalCamera.zoom + getww / 2;
+        renderPos->y = (t->pos.y - globalCamera.position.y) * globalCamera.zoom + getwh / 2;
+        LoadBmp(t->resPath, renderPos->x, renderPos->y, t->width * globalCamera.zoom, t->height * globalCamera.zoom);
+        destoryVector(renderPos);
     }
     else
     {

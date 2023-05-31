@@ -42,7 +42,7 @@ void createPlayer1()
     collisionRect = newRect(
         playerPos,
         0,
-        playerTextureDown->getWidth(playerTextureDown) * 0.8, playerTextureDown->getHeight(playerTextureDown) * 0.8,
+        playerTextureDown->getWidth(playerTextureDown), playerTextureDown->getHeight(playerTextureDown),
         FALSE,
         "Red",
         1);
