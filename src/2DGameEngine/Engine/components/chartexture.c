@@ -190,6 +190,7 @@ static void renderTexture(Component *c)
 			posUnderCam->x = (t->pos.x - globalCamera.position.x)*globalCamera.zoom + getww / 2;
 			posUnderCam->y = (t->pos.y - globalCamera.position.y)*globalCamera.zoom + getwh / 2;
 			MovePen(posUnderCam->x - width / 2.0, posUnderCam->y + (double)(t->lineNumber / 2 - i) * (height / t->lineNumber));
+			destoryVector(posUnderCam);
 			DrawTextString(t->textureString[i]);
 			t->width = width;
 			t->height = height;
