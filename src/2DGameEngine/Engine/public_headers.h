@@ -1,10 +1,5 @@
 #ifndef __PUBLIC_HEADERS_H__
 #define __PUBLIC_HEADERS_H__
-#include "graphics.h"
-#include "extgraph.h"
-#include "genlib.h"
-#include "simpio.h"
-#include "config.h"
 #include <conio.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,12 +19,18 @@
 #include <ole2.h>
 #include <ocidl.h>
 #include <winuser.h>
+#include "graphics.h"
+#include "extgraph.h"
+#include "genlib.h"
+#include "simpio.h"
+#include "config.h"
 
 #include <math.h>
 #pragma comment(lib,"winmm.lib")
 
 #define MEM_DEBUG MEM_DEBUG_MODE
-#define DEBUG_MODE DEBUG || MEM_DEBUG
+#define MOUSE_DEBUG MOUSE_POS_DEBUG
+#define DEBUG_MODE DEBUG || MEM_DEBUG || MOUSE_POS_DEBUG
 
 #define fill(x) StartFilledRegion(x)
 #define endfill EndFilledRegion()

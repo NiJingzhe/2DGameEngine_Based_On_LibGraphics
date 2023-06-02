@@ -15,6 +15,7 @@ static void renderActor(Actor *actor);
 static const int returnActorType();
 static void updateActor(Actor *actor, double delta);
 static bool isCollideWithActor(Actor *a1, Actor *a2);
+static Vector* getCollisionVector(Actor *a1, Actor *a2);
 
 Actor *newActor(char *meta, Vector *pos)
 {
@@ -60,6 +61,7 @@ static void initActor(Actor *actor, char *meta, Vector pos)
 	actor->delComponent = delComponent;
 	actor->getComponent = getComponent;
 	actor->isCollideWithActor = isCollideWithActor;
+	actor->getCollisionVector = getCollisionVector;
 	actor->vptr->render = renderActor;
 	actor->vptr->update = updateActor;
 }
@@ -110,18 +112,8 @@ const int returnActorType()
 }
 
 void updateActor(Actor *actor, double delta)
-{
-	// printf("\nLOG:\n	Enter updateActor, update actor: %s\n", actor->meta);
-	Vector *vel = actor->getVel(actor);
-	actor->pos.add(&(actor->pos), vel);
-	actor->setPos(actor, &(actor->pos));
-
-	Component *currentComp = actor->componentList;
-	while (currentComp)
-	{
-		currentComp->vptr->update(currentComp, actor->getPos(actor));
-		currentComp = currentComp->next;
-	}
+{	
+	return;
 }
 
 static void addComponent(Actor *actor, ComponentNode comp)
@@ -199,6 +191,39 @@ static ComponentNode getComponent(Actor *actor, char *meta)
 	}
 }
 
+static Vector* getCollisionVector(Actor *a1, Actor *a2)
+{
+
+	ComponentNode a1CurrentComp = a1->componentList, a2CurrentComp = a2->componentList;
+	Vector *collisionVec = NULL;
+
+	while (a1CurrentComp)
+	{
+		a2CurrentComp = a2->componentList;
+		while (a2CurrentComp)
+		{
+			if (a1CurrentComp->vptr->getComponentType() == COLLISION_SHAPE &&
+				a2CurrentComp->vptr->getComponentType() == COLLISION_SHAPE)
+			{
+
+				if (((CollisionShape *)a1CurrentComp)->isCollideWith(((CollisionShape *)a1CurrentComp), ((CollisionShape *)a2CurrentComp)))
+				{
+					//Vector* tempColVec = 
+					if (collisionVec == NULL)
+						collisionVec = ((CollisionShape *)a1CurrentComp)->getCollisionVector(((CollisionShape *)a1CurrentComp), ((CollisionShape *)a2CurrentComp));
+					else{
+						collisionVec->add(collisionVec, ((CollisionShape *)a1CurrentComp)->getCollisionVector(((CollisionShape *)a1CurrentComp), ((CollisionShape *)a2CurrentComp)));
+						collisionVec->normalize(collisionVec);
+					}
+				}
+			}
+			a2CurrentComp = a2CurrentComp->next;
+		}
+		a1CurrentComp = a1CurrentComp->next;
+	}
+	return collisionVec;
+}
+
 static bool isCollideWithActor(Actor *a1, Actor *a2)
 {
 
@@ -213,8 +238,8 @@ static bool isCollideWithActor(Actor *a1, Actor *a2)
 			if (a1CurrentComp->vptr->getComponentType() == COLLISION_SHAPE &&
 				a2CurrentComp->vptr->getComponentType() == COLLISION_SHAPE)
 			{
-				collisionResult = collisionResult || 
-					((CollisionShape *)a1CurrentComp)->isCollideWith(((CollisionShape *)a1CurrentComp), ((CollisionShape *)a2CurrentComp));
+
+				collisionResult |= ((CollisionShape *)a1CurrentComp)->isCollideWith(((CollisionShape *)a1CurrentComp), ((CollisionShape *)a2CurrentComp));
 			}
 			a2CurrentComp = a2CurrentComp->next;
 		}
@@ -229,6 +254,9 @@ void destoryActor(Actor *actor)
 	printf("\nLOG:\n	Enter destoryActor, destorying actor: %s\n", actor->meta);
 	#endif
 	ComponentNode currentComponent = actor->componentList;
+	if (currentComponent == NULL) {
+		return;
+	}
 	while (currentComponent->next)
 	{
 		currentComponent = currentComponent->next;

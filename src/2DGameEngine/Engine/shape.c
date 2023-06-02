@@ -2,6 +2,8 @@
 #include "vector.h"
 #include "shape.h"
 
+double COLLISION_MERGEN = 1.01;
+
 static bool isRectCollide(Rect *rect1, Rect *rect2);
 static bool isCircleCollide(Circle *circle1, Circle *circle2);
 static bool isRectCircleCollide(Rect *rect_, Circle *circle);
@@ -67,6 +69,10 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 	double rect2DeltaY = rect2Y_max - rect2Y_min;
 	double rect1DeltaX = rect1X_max - rect1X_min;
 	double rect1DeltaY = rect1Y_max - rect1Y_min;
+	rect1DeltaX *= COLLISION_MERGEN;
+	rect1DeltaY *= COLLISION_MERGEN;
+	rect2DeltaX *= COLLISION_MERGEN;
+	rect2DeltaY *= COLLISION_MERGEN;
 
 	destoryVector(delta_p);
 
@@ -122,19 +128,31 @@ static bool isRectCircleCollide(Rect *rect_, Circle *circle)
 	return (cornerDistance_sq <= (circle->radius * circle->radius));
 }
 
-int isIntersect(Vector v1, Vector v2, Vector v3, Vector v4)
+bool isIntersect(Vector a, Vector b, Vector c, Vector d)
 {
-	double cross1 = (v4.x - v3.x) * (v1.y - v3.y) - (v4.y - v3.y) * (v1.x - v3.x);
-	double cross2 = (v4.x - v3.x) * (v2.y - v3.y) - (v4.y - v3.y) * (v2.x - v3.x);
-	double cross3 = (v2.x - v1.x) * (v3.y - v1.y) - (v2.y - v1.y) * (v3.x - v1.x);
-	double cross4 = (v2.x - v1.x) * (v4.y - v1.y) - (v2.y - v1.y) * (v4.x - v1.x);
-	if (cross1 * cross2 < 0 && cross3 * cross4 < 0)
+	double u, v, w, z;
+	u = (c.x - a.x) * (b.y - a.y) - (b.x - a.x) * (c.y - a.y);
+	v = (d.x - a.x) * (b.y - a.y) - (b.x - a.x) * (d.y - a.y);
+	w = (a.x - c.x) * (d.y - c.y) - (d.x - c.x) * (a.y - c.y);
+	z = (b.x - c.x) * (d.y - c.y) - (d.x - c.x) * (b.y - c.y);
+	return (u * v <= 0.002 && w * z <= 0.002);
+}
+
+double pointToSegementDist(Vector point, Vector s1, Vector s2)
+{
+	double delta_y = s2.y - s1.y;
+	double delta_x = s2.x - s1.x;
+	double k, b;
+	if (delta_x != 0)
 	{
-		return 1; // 两条有向线段相交
+		k = delta_y / delta_x;
+		b = s1.y - k * s1.x;
+		double dist = fabs(k * point.x - point.y + b) / sqrt(k * k + 1);
+		return dist;
 	}
 	else
 	{
-		return 0; // 两条有向线段不相交
+		return fabs(point.x - s1.x);
 	}
 }
 
@@ -145,96 +163,168 @@ Vector *getCircleCollsionVector(Circle *c1, Circle *c2)
 	return v;
 }
 
+bool pointInBox(Vector point, Vector boxPos, double width, double height, double angle)
+{
+	Vector *pointUnderBox = newVector(point.x - boxPos.x, point.y - boxPos.y);
+	pointUnderBox->rotate(pointUnderBox, -angle);
+	bool result = (pointUnderBox->x >= -width / 2 && pointUnderBox->x <= width / 2 && pointUnderBox->y >= -height / 2 && pointUnderBox->y <= height / 2);
+	destoryVector(pointUnderBox);
+	return result;
+}
+
 Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 {
-	// 获取两个rect的pos
+
 	Vector pos1 = rect1->super.pos;
 	Vector pos2 = rect2->super.pos;
+	Vector *delta_p = newVector(pos1.x - pos2.x, pos1.y - pos2.y);
 
-	double halfDiagonalLengthofRect2;
-	halfDiagonalLengthofRect2 = sqrt(rect2->width * rect2->width + rect2->height * rect2->height) / 2;
+	double angle1 = rect1->super.angle;
+	double angle2 = rect2->super.angle;
 
-	int i;
-	for (i = 0; i < 4; ++i)
+	Vector vertex[4] = {0};
+	memcpy(&vertex[0], rect1->super.vertices[0], sizeof(Vector));
+	memcpy(&vertex[1], rect1->super.vertices[1], sizeof(Vector));
+	memcpy(&vertex[2], rect1->super.vertices[2], sizeof(Vector));
+	memcpy(&vertex[3], rect1->super.vertices[3], sizeof(Vector));
+
+	delta_p->rotate(delta_p, -angle2);
+	for (int i = 0; i < 4; ++i)
 	{
-		if (halfDiagonalLengthofRect2 > sqrt((rect1->super.vertices[i]->x - pos2.x) * (rect1->super.vertices[i]->x - pos2.x) +
-											 (rect1->super.vertices[i]->y - pos2.y) * (rect1->super.vertices[i]->y - pos2.y)))
-		{
-			break;
-		}
+		vertex[i].rotate(&vertex[i], angle1 - angle2);
+		vertex[i].add(&vertex[i], delta_p);
 	}
 
-	Vector *v;
-
-	if (i == 4)
+	double rect1X_min = vertex[0].x, rect1X_max = vertex[0].x;
+	double rect1Y_min = vertex[0].y, rect1Y_max = vertex[0].y;
+	for (int i = 1; i < 4; ++i)
 	{
+		rect1X_min = rect1X_min >= vertex[i].x ? vertex[i].x : rect1X_min;
+		rect1Y_min = rect1Y_min >= vertex[i].y ? vertex[i].y : rect1Y_min;
+		rect1X_max = rect1X_max <= vertex[i].x ? vertex[i].x : rect1X_max;
+		rect1Y_max = rect1Y_max <= vertex[i].y ? vertex[i].y : rect1Y_max;
+	}
 
-		// 在rect2坐标系下判断rect1UnderRect2与rect2的四条边是否相交
-		Vector rect2Vertex[4] = {0};
-		memcpy(&rect2Vertex[0], rect2->super.vertices[0], sizeof(Vector));
-		memcpy(&rect2Vertex[1], rect2->super.vertices[1], sizeof(Vector));
-		memcpy(&rect2Vertex[2], rect2->super.vertices[2], sizeof(Vector));
-		memcpy(&rect2Vertex[3], rect2->super.vertices[3], sizeof(Vector));
+	double rect2X_min = -rect2->width / 2;
+	double rect2X_max = -rect2X_min;
+	double rect2Y_min = -rect2->height / 2;
+	double rect2Y_max = -rect2Y_min;
 
-		// 将顶点坐标从rect2坐标系变换到世界坐标系
+	double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);
+	double deltaYTotal = fmax(rect2Y_max, rect1Y_max) - fmin(rect2Y_min, rect1Y_min);
+	double rect2DeltaX = rect2X_max - rect2X_min;
+	double rect2DeltaY = rect2Y_max - rect2Y_min;
+	double rect1DeltaX = rect1X_max - rect1X_min;
+	double rect1DeltaY = rect1Y_max - rect1Y_min;
+	rect1DeltaX *= COLLISION_MERGEN;
+	rect1DeltaY *= COLLISION_MERGEN;
+	rect2DeltaX *= COLLISION_MERGEN;
+	rect2DeltaY *= COLLISION_MERGEN;
+
+	destoryVector(delta_p);
+
+	Vector *v = NULL;
+
+	Vector verticesofRect1[4];
+	memcpy(&(verticesofRect1[0]), rect1->super.vertices[0], sizeof(Vector));
+	memcpy(&(verticesofRect1[1]), rect1->super.vertices[1], sizeof(Vector));
+	memcpy(&(verticesofRect1[2]), rect1->super.vertices[2], sizeof(Vector));
+	memcpy(&(verticesofRect1[3]), rect1->super.vertices[3], sizeof(Vector));
+	verticesofRect1[0].rotate(&(verticesofRect1[0]), angle1);
+	verticesofRect1[1].rotate(&(verticesofRect1[1]), angle1);
+	verticesofRect1[2].rotate(&(verticesofRect1[2]), angle1);
+	verticesofRect1[3].rotate(&(verticesofRect1[3]), angle1);
+	verticesofRect1[0].add(&(verticesofRect1[0]), &pos1);
+	verticesofRect1[1].add(&(verticesofRect1[1]), &pos1);
+	verticesofRect1[2].add(&(verticesofRect1[2]), &pos1);
+	verticesofRect1[3].add(&(verticesofRect1[3]), &pos1);
+
+	Vector verticesofRect2[4];
+	memcpy(&(verticesofRect2[0]), rect2->super.vertices[0], sizeof(Vector));
+	memcpy(&(verticesofRect2[1]), rect2->super.vertices[1], sizeof(Vector));
+	memcpy(&(verticesofRect2[2]), rect2->super.vertices[2], sizeof(Vector));
+	memcpy(&(verticesofRect2[3]), rect2->super.vertices[3], sizeof(Vector));
+	verticesofRect2[0].rotate(&(verticesofRect2[0]), angle2);
+	verticesofRect2[1].rotate(&(verticesofRect2[1]), angle2);
+	verticesofRect2[2].rotate(&(verticesofRect2[2]), angle2);
+	verticesofRect2[3].rotate(&(verticesofRect2[3]), angle2);
+	verticesofRect2[0].add(&(verticesofRect2[0]), &pos2);
+	verticesofRect2[1].add(&(verticesofRect2[1]), &pos2);
+	verticesofRect2[2].add(&(verticesofRect2[2]), &pos2);
+	verticesofRect2[3].add(&(verticesofRect2[3]), &pos2);
+
+	if (rect1DeltaX + rect2DeltaX >= 1.1 * deltaXTotal && rect1DeltaY + rect2DeltaY >= 1.1 * deltaYTotal)
+	{
+		double minVertextoCenterDist = 9999;
+		double vertextoCenterDist;
+		int minIndex_;
+		for (int i = 0; i < 4; ++i){
+			vertextoCenterDist = sqrt((pos1.x - verticesofRect2[i].x) * (pos1.x - verticesofRect2[i].x) + 
+									 (pos1.y - verticesofRect2[i].y) * (pos1.y - verticesofRect2[i].y));
+			if (vertextoCenterDist < minVertextoCenterDist)
+			{
+				minVertextoCenterDist = vertextoCenterDist;
+				minIndex_ = i;
+			}
+		}
+		Vector minDistVertex;
+		memcpy(&minDistVertex, &(verticesofRect2[minIndex_]), sizeof(Vector));
+
+		double minSegemntToVertexDist = 9999;
+		double segmentToVertexDist;
+		int minIndex;
 		for (int i = 0; i < 4; ++i)
 		{
-			rect2Vertex[i].rotate(&rect2Vertex[i], rect2->super.angle);
-			rect2Vertex[i].add(&rect2Vertex[i], &(rect2->super.pos));
+			segmentToVertexDist = pointToSegementDist(minDistVertex, verticesofRect1[i], verticesofRect1[(i + 1) % 4]);
+			if (segmentToVertexDist < minSegemntToVertexDist)
+			{
+				minSegemntToVertexDist = segmentToVertexDist;
+				minIndex = i;
+			}
 		}
-
-		// 判断以pos1和pos2为起点终点的有向线段和rect2的四条边是否相交，是则计算边向量的法向量，并返回
-		if (isIntersect(pos1, pos2, rect2Vertex[0], rect2Vertex[1]))
-		{
-			v = newVector(rect2Vertex[1].y - rect2Vertex[0].y, rect2Vertex[0].x - rect2Vertex[1].x);
-		}
-		else if (isIntersect(pos1, pos2, rect2Vertex[1], rect2Vertex[2]))
-		{
-			v = newVector(rect2Vertex[2].y - rect2Vertex[1].y, rect2Vertex[1].x - rect2Vertex[2].x);
-		}
-		else if (isIntersect(pos1, pos2, rect2Vertex[2], rect2Vertex[3]))
-		{
-			v = newVector(rect2Vertex[3].y - rect2Vertex[2].y, rect2Vertex[2].x - rect2Vertex[3].x);
-		}
-		else if (isIntersect(pos1, pos2, rect2Vertex[3], rect2Vertex[0]))
-		{
-			v = newVector(rect2Vertex[0].y - rect2Vertex[3].y, rect2Vertex[3].x - rect2Vertex[0].x);
-		}
+		v = newVector(verticesofRect1[minIndex].y - verticesofRect1[(minIndex + 1) % 4].y, verticesofRect1[(minIndex + 1) % 4].x - verticesofRect1[minIndex].x);
 	}
 	else
 	{
-		// 重复以上步骤，但是编程对rect1操作
-		Vector rect1Vertex[4] = {0};
-		memcpy(&rect1Vertex[0], rect1->super.vertices[0], sizeof(Vector));
-		memcpy(&rect1Vertex[1], rect1->super.vertices[1], sizeof(Vector));
-		memcpy(&rect1Vertex[2], rect1->super.vertices[2], sizeof(Vector));
-		memcpy(&rect1Vertex[3], rect1->super.vertices[3], sizeof(Vector));
+		double minVertextoCenterDist = 9999;
+		double vertextoCenterDist;
+		int minIndex_;
+		for (int i = 0; i < 4; ++i){
+			vertextoCenterDist = sqrt((pos2.x - verticesofRect1[i].x) * (pos2.x - verticesofRect1[i].x) + 
+									 (pos2.y - verticesofRect1[i].y) * (pos2.y - verticesofRect1[i].y));
+			if (vertextoCenterDist < minVertextoCenterDist)
+			{
+				minVertextoCenterDist = vertextoCenterDist;
+				minIndex_ = i;
+			}
+		}
+		Vector minDistVertex;
+		memcpy(&minDistVertex, &(verticesofRect1[minIndex_]), sizeof(Vector));
 
+		double minSegemntToVertexDist = 9999;
+		double segmentToVertexDist;
+		int minIndex;
 		for (int i = 0; i < 4; ++i)
 		{
-			rect1Vertex[i].rotate(&rect1Vertex[i], rect1->super.angle);
-			rect1Vertex[i].add(&rect1Vertex[i], &(rect1->super.pos));
+			segmentToVertexDist = pointToSegementDist(minDistVertex, verticesofRect2[i], verticesofRect2[(i + 1) % 4]);
+			if (segmentToVertexDist < minSegemntToVertexDist)
+			{
+				minSegemntToVertexDist = segmentToVertexDist;
+				minIndex = i;
+			}
 		}
+		v = newVector(verticesofRect2[minIndex].y - verticesofRect2[(minIndex + 1) % 4].y, verticesofRect2[(minIndex + 1) % 4].x - verticesofRect2[minIndex].x);
+	}
 
-		if (isIntersect(pos1, pos2, rect1Vertex[0], rect1Vertex[1]))
+	if (v != NULL)
+	{
+		v->normalize(v);
+		if (0 > (v->x * (pos1.x - pos2.x) + v->y * (pos1.y - pos2.y)))
 		{
-			v = newVector(rect1Vertex[1].y - rect1Vertex[0].y, rect1Vertex[0].x - rect1Vertex[1].x);
-		}
-		else if (isIntersect(pos1, pos2, rect1Vertex[1], rect1Vertex[2]))
-		{
-			v = newVector(rect1Vertex[2].y - rect1Vertex[1].y, rect1Vertex[1].x - rect1Vertex[2].x);
-		}
-		else if (isIntersect(pos1, pos2, rect1Vertex[2], rect1Vertex[3]))
-		{
-			v = newVector(rect1Vertex[3].y - rect1Vertex[2].y, rect1Vertex[2].x - rect1Vertex[3].x);
-		}
-		else if (isIntersect(pos1, pos2, rect1Vertex[3], rect1Vertex[0]))
-		{
-			v = newVector(rect1Vertex[0].y - rect1Vertex[3].y, rect1Vertex[3].x - rect1Vertex[0].x);
+			v->mult(v, -1);
 		}
 	}
 
-	v->normalize(v);
 	return v;
 }
 
@@ -474,6 +564,8 @@ static void renderRect(Shape *s)
 	{
 		vertex[i].rotate(&vertex[i], rect->super.angle);
 		vertex[i].add(&vertex[i], &(rect->super.pos));
+		vertex[i].x = (vertex[i].x - globalCamera.position.x) * globalCamera.zoom + getww / 2;
+		vertex[i].y = (vertex[i].y - globalCamera.position.y) * globalCamera.zoom + getwh / 2;
 	}
 
 	SetPenColor(rect->super.color);
@@ -561,16 +653,22 @@ static void renderCircle(Shape *s)
 
 	SetEraseMode(FALSE);
 	Circle *circle = (Circle *)s;
-	MovePen(circle->super.pos.x + circle->radius, circle->super.pos.y);
+	Vector *renderPos = newVector(0, 0);
+	renderPos->x = (circle->super.pos.x - globalCamera.position.x) * globalCamera.zoom + getww / 2;
+	renderPos->y = (circle->super.pos.y - globalCamera.position.y) * globalCamera.zoom + getwh / 2;
+	double renderRadius = circle->radius * globalCamera.zoom;
+	MovePen(renderPos->x + renderRadius, renderPos->y);
 	SetPenColor(circle->super.color);
 	SetPenSize(1);
 	if (circle->super.fill)
 		fill(circle->super.density);
 
-	DrawArc(circle->radius, 0, 360);
+	DrawArc(renderRadius, 0, 360);
 
 	if (circle->super.fill)
 		endfill;
+
+	destoryVector(renderPos);
 }
 
 static const int returnCircleType()

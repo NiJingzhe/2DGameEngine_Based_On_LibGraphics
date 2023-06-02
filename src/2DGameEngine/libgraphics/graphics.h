@@ -138,6 +138,8 @@ double GetWindowHeight(void);
  * These functions return the current x and y positions.
  */
 
+void LoadBmp(const char *bmp_path, double center_x, double center_y, double width, double height);
+
 double GetCurrentX(void);
 double GetCurrentY(void);
 
@@ -145,6 +147,7 @@ void startTimer(int id,int timeinterval, TIMERPROC callback);
 void cancelTimer(int id);
 
 void Main();
+void CALLBACK TimerCallBack(HWND a, UINT b, UINT_PTR c, DWORD d);
 void EngineUpdate(double delta);
 void Render();
 void Free();
