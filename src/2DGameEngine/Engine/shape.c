@@ -163,15 +163,6 @@ Vector *getCircleCollsionVector(Circle *c1, Circle *c2)
 	return v;
 }
 
-bool pointInBox(Vector point, Vector boxPos, double width, double height, double angle)
-{
-	Vector *pointUnderBox = newVector(point.x - boxPos.x, point.y - boxPos.y);
-	pointUnderBox->rotate(pointUnderBox, -angle);
-	bool result = (pointUnderBox->x >= -width / 2 && pointUnderBox->x <= width / 2 && pointUnderBox->y >= -height / 2 && pointUnderBox->y <= height / 2);
-	destoryVector(pointUnderBox);
-	return result;
-}
-
 Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 {
 
@@ -253,7 +244,7 @@ Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 	verticesofRect2[2].add(&(verticesofRect2[2]), &pos2);
 	verticesofRect2[3].add(&(verticesofRect2[3]), &pos2);
 
-	if (rect1DeltaX + rect2DeltaX >= 1.1 * deltaXTotal && rect1DeltaY + rect2DeltaY >= 1.1 * deltaYTotal)
+	if (rect1DeltaX + rect2DeltaX >= 1.01 * deltaXTotal && rect1DeltaY + rect2DeltaY >= 1.01 * deltaYTotal)
 	{
 		double minVertextoCenterDist = 9999;
 		double vertextoCenterDist;
