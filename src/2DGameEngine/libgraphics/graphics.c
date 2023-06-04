@@ -2095,7 +2095,6 @@ int WINAPI WinMain(HINSTANCE hThisInstance,
     Free();
     FreeConsole();
     return messages.wParam;
-    ;
 }
 
 void registerKeyboardEvent(KeyboardEventCallback callback)

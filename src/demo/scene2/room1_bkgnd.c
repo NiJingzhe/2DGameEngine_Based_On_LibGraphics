@@ -31,7 +31,7 @@ void createRoom1Background()
     destoryVector(wallPos);
 
     wallPos = newVector(getww * 16.6 / 20, getwh * 8.52 / 20);
-    Rect *wall2Rect = newRect(wallPos, 0, 1.1, 4.8, FALSE, "Green", 1);
+    Rect *wall2Rect = newRect(wallPos, toDeg(20), 1.1, 4.8, FALSE, "Green", 1);
     room1WallCollisionList[1] = newCollisionShape((Shape *)wall2Rect);
     destoryShape((Shape *)wall2Rect);
     destoryVector(wallPos);

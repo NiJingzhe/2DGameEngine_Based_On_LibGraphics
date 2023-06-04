@@ -13,6 +13,7 @@
 #ifndef _graphics_h
 #define _graphics_h
 #include <winuser.h>
+#include <process.h>
 /*
  * Overview
  * --------

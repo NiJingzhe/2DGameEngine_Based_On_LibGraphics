@@ -4,6 +4,7 @@ project ("2DGameEngine")
 
 #根据自己的需要更改编译选项
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -O3")
+add_compile_options(-std=c11)
 #根据自己的需要更改目标文件名称
 set(TARGET_NAME CyberRunner)
 
