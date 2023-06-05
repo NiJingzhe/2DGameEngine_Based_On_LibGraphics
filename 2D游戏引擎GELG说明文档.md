@@ -1,4 +1,4 @@
-![](./readme_resources/report_cover.png)
+![](./readme_resources/report_cover-repo.png)
 
 
 # ***A 2D Game Engine Based on LibGraphics***
@@ -41,7 +41,9 @@
    int c;
  } child;
  ```
- 在这样一个定义下，`child`可以被认为**继承自**父类`father`，因为child的内存分布首先是一块`super`，然后是属于`child`自己新产生的成员变量`c`。我们依然可以使用一个`father *ptr;`来指向一个`child`，并访问其父类中的内容，这就实现了符合定义的一种**继承**
+ 在这样一个定义下，`child`可以被认为**继承自**父类`father`，因为child的内存分布首先是一块`super`，然后是属于`child`自己新产生的成员变量`c`。我们依然可以使用一个`father *ptr;`来指向一个`child`，并访问其父类中的内容，这就实现了符合定义的一种**继承**，下图有更加形象的说明：
+ 
+ ![继承](./readme_resources/jicheng%20.png)
 
  - **多态**： 在实现了继承的基础上如何实现类似Cpp中父类虚函数可以由子类覆盖实现从而达到不同的子类具有不同功能的**多态**效果呢？
  我们可以考虑给上文中定义的`father`结构体添加一个**虚函数表**，其定义如下
@@ -122,41 +124,20 @@
   矩形和圆都需要渲染但是它们的渲染方式并不相同，我们通过覆写父类虚函数的方式实现**多态**，具体实现如下(注意在`initRect`和 `initCircle`中对`super`的`vptr`的操作)：
   ```C
  /*Shape.c的一部分*/
- Shape *newShape(Vector *pos, double angle, bool fill, char *color, double density)
- {
-	Shape *s = (Shape *)calloc(1, sizeof(Shape));
- #if MEM_DEBUG
-	MEM_BLOCK_NUM  ;
-	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
- #endif
-	initShape(s, *pos, angle, fill, color, density);
-	return s;
- }
-
  static void initShape(Shape *shape, Vector pos, double angle, bool fill, char *color, double density)
  {
  //...
+    //为vTable分配空间
 	shape-vptr = (shapevTable *)calloc(1, sizeof(shapevTable));
  #if MEM_DEBUG
 	MEM_BLOCK_NUM  ;
 	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
  #endif
+    //设置为默认的父类虚函数
 	shape-vptr-getShape = returnEmptyShape;
 	shape-vptr-render = NULL;
  }
  //...
-
- Rect *newRect(Vector *pos, double angle, double width, double height, bool fill, char *color, double density)
- {
-	Rect *rt = (Rect *)calloc(1, sizeof(Rect));
- #if MEM_DEBUG
-	MEM_BLOCK_NUM  ;
-	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
- #endif
-	initRect(rt, *pos, angle, width, height, fill, color, density);
-	return rt;
- }
-
  static void initRect(Rect *rect, Vector pos, double angle, double width, double height, bool fill, char *color, double density)
  {
    //...
@@ -165,25 +146,17 @@
 		printf("Cannot allocate memory for vptr of rect shape\n");
 		return;
 	}
+    //在Rect初始化函数中设置vTable中的函数指针为Rect的实际函数
 	rect-super.vptr-render = renderRect;
 	rect-super.vptr-getShape = returnRectType;
 	rect-super.vertices = (Vector **)calloc(4, sizeof(Vector *));
  }
-
- Circle *newCircle(Vector *pos, double angle, double radius, bool fill, char *color, double density)
- {
-	Circle *c = (Circle *)calloc(1, sizeof(Circle));
- #if MEM_DEBUG
-	MEM_BLOCK_NUM  ;
-	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
- #endif
-	initCircle(c, *pos, angle, radius, fill, color, density);
-	return c;
- }
+//...
 
  static void initCircle(Circle *circle, Vector pos, double angle, double radius, bool fill, char *color, double density)
  {
    //...
+    //在Rect初始化函数中设置vTable中的函数指针为Rect的实际函数
 	circle-super.vptr-render = renderCircle;
 	circle-super.vptr-getShape = returnCircleType;
 	destoryShape(shapeptr);
@@ -230,10 +203,12 @@
 
  ### **3. 相对完善的碰撞检测以及完全自定义的碰撞响应**
  
- - **相对完善碰撞检测**： 要实现基于几何的碰撞检测而非基于网格的碰撞检测，我们需要用到一些图形学知识。在这里我们使用**AABB**配合**分离轴定理**实现碰撞检测和碰撞接触面的法向量求解。
+ - **相对完善碰撞检测**： 要实现基于几何的碰撞检测而非基于网格的碰撞检测，我们需要用到一些图形学知识。在这里我们使用**AABB**配合**分离轴定理**实现碰撞检测和碰撞接触面的法向量求解。下图解释了如何使用AABB和SAT实现任意角度矩形碰撞检测的方法：
+![AABB与SAT的解释](./readme_resources/AABB%E8%A7%A3%E9%87%8A.png)
  
- - **完全自定义的碰撞响应**： 因为碰撞检测只返回碰撞与否，获取碰撞向量只返回碰撞法向量。开发者可以在编写游戏对象更新逻辑时通过调用这两个函数，在已知是否碰撞和碰撞法向量的基础上自己编写场景需要的碰撞响应方式。
-- 有关碰撞检测算法的相关代码可以参考 [shape.c](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics/blob/master/src/2DGameEngine/Engine/shape.c) 中的`isCollideWith`函数和`getCollisionVector`函数，这里不再赘述。
+ - **完全自定义的碰撞响应**： 因为碰撞检测只返回碰撞与否，获取碰撞向量只返回碰撞法向量。开发者可以在编写游戏对象更新逻辑时通过调用这两个函数，在已知是否碰撞和碰撞法向量的基础上自己编写场景需要的碰撞响应方式。我们可以选择根据碰撞向量进行对应的物理行为模拟，也可以仅仅是作为一个进入某区域的检测，这在最后的demo截图中都有体现。
+
+- 有关碰撞检测算法的相关代码可以参考 [shape.c](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics/blob/master/src/2DGameEngine/Engine/shape.c) 中的`isCollideWith`函数和`getCollisionVector`函数，这里不再赘述。（如果这里的超链接无法点击可以看文末的仓库链接）
 
 ### **4. 添加用户相机，画面显示的内容是相机视角内容**
 
@@ -776,6 +751,8 @@ src
 
 ## ***Part V :  Demo Screenshots***
 - **1. 碰撞检测**
+
+展现了任意角度矩形的碰撞检测（绿色是墙体，现在小人不能再向右移动了）
 ![碰撞检测](./readme_resources/碰撞.png)
 
 - **2. 文字UI组件（我是说倒计时）**
@@ -800,13 +777,19 @@ src
 - **5. 任意规模字符画的加载，为你的游戏增强表现力**
 ![字符画](readme_resources/大规模字符纹理.png)
 
+- **6. 快速便捷的游戏开发**
+
+使用我们的引擎可以快速构建一个场景，下面是仅仅使用100+行代码实现有背景图动效，有字符纹理动效，能够响应键盘事件，有定时器，有背景音乐播放的开始界面的例子（就是上面用于说明相机功能的那个场景）。其中有很多重复性的代码，在Copilot等工具的加持下可以在3分钟内完成这个场景的构建。
+![少代码](./readme_resources/%E7%99%BE%E4%BD%99%E8%A1%8C%E4%BB%A3%E7%A0%81.png)
+
 - 还有一些别的特性无法通过截图展示，比如**场景间传参**，**场景复用**，**场景加载卸载**，**组件化开发逻辑**等等，可以在代码中找到相关的实现。
 
 ### ***附录A :  小组成员贡献***
-- 倪旌哲： 完成游戏引擎基本框架的开发，完成两个表现引擎能力的demo的开发
-- 庞笑义：参与表现引擎能力的demo开发，完成demo的开始界面与解算界面。
-- 何婕：参与引擎部分组件的开发，参与demo开发，完成游戏界面的设计和开发
+- 倪旌哲： 完成游戏引擎基本框架的开发，完成两个表现引擎能力的demo的开发 (45%)
+- 庞笑义：参与表现引擎能力的demo开发，完成demo的开始界面与解算界面。    (29%)
+- 何婕：参与引擎部分组件的开发，参与demo开发，完成游戏界面的设计和开发  (26%)
 
 ### ***附录B :  全部代码***
-由于代码过多，在这里只放上仓库链接
-[仓库地址](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics)
+由于代码过多(4300+ lines)，在这里只放上仓库链接
+[仓库地址](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics)：https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics
+（[前面的访问不到的话可以试试这个](https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics)：https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics）
