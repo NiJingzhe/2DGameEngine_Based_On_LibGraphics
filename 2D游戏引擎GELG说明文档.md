@@ -1,4 +1,4 @@
-![](./readme_resources/report_cover.png)
+![](./readme_resources/report_cover-repo.png)
 
 
 # ***A 2D Game Engine Based on LibGraphics***
@@ -41,7 +41,9 @@
    int c;
  } child;
  ```
- 在这样一个定义下，`child`可以被认为**继承自**父类`father`，因为child的内存分布首先是一块`super`，然后是属于`child`自己新产生的成员变量`c`。我们依然可以使用一个`father *ptr;`来指向一个`child`，并访问其父类中的内容，这就实现了符合定义的一种**继承**
+ 在这样一个定义下，`child`可以被认为**继承自**父类`father`，因为child的内存分布首先是一块`super`，然后是属于`child`自己新产生的成员变量`c`。我们依然可以使用一个`father *ptr;`来指向一个`child`，并访问其父类中的内容，这就实现了符合定义的一种**继承**，下图有更加形象的说明：
+ 
+ ![继承](./readme_resources/jicheng%20.png)
 
  - **多态**： 在实现了继承的基础上如何实现类似Cpp中父类虚函数可以由子类覆盖实现从而达到不同的子类具有不同功能的**多态**效果呢？
  我们可以考虑给上文中定义的`father`结构体添加一个**虚函数表**，其定义如下
@@ -122,41 +124,20 @@
   矩形和圆都需要渲染但是它们的渲染方式并不相同，我们通过覆写父类虚函数的方式实现**多态**，具体实现如下(注意在`initRect`和 `initCircle`中对`super`的`vptr`的操作)：
   ```C
  /*Shape.c的一部分*/
- Shape *newShape(Vector *pos, double angle, bool fill, char *color, double density)
- {
-	Shape *s = (Shape *)calloc(1, sizeof(Shape));
- #if MEM_DEBUG
-	MEM_BLOCK_NUM  ;
-	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
- #endif
-	initShape(s, *pos, angle, fill, color, density);
-	return s;
- }
-
  static void initShape(Shape *shape, Vector pos, double angle, bool fill, char *color, double density)
  {
  //...
+    //为vTable分配空间
 	shape-vptr = (shapevTable *)calloc(1, sizeof(shapevTable));
  #if MEM_DEBUG
 	MEM_BLOCK_NUM  ;
 	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
  #endif
+    //设置为默认的父类虚函数
 	shape-vptr-getShape = returnEmptyShape;
 	shape-vptr-render = NULL;
  }
  //...
-
- Rect *newRect(Vector *pos, double angle, double width, double height, bool fill, char *color, double density)
- {
-	Rect *rt = (Rect *)calloc(1, sizeof(Rect));
- #if MEM_DEBUG
-	MEM_BLOCK_NUM  ;
-	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
- #endif
-	initRect(rt, *pos, angle, width, height, fill, color, density);
-	return rt;
- }
-
  static void initRect(Rect *rect, Vector pos, double angle, double width, double height, bool fill, char *color, double density)
  {
    //...
@@ -165,25 +146,17 @@
 		printf("Cannot allocate memory for vptr of rect shape\n");
 		return;
 	}
+    //在Rect初始化函数中设置vTable中的函数指针为Rect的实际函数
 	rect-super.vptr-render = renderRect;
 	rect-super.vptr-getShape = returnRectType;
 	rect-super.vertices = (Vector **)calloc(4, sizeof(Vector *));
  }
-
- Circle *newCircle(Vector *pos, double angle, double radius, bool fill, char *color, double density)
- {
-	Circle *c = (Circle *)calloc(1, sizeof(Circle));
- #if MEM_DEBUG
-	MEM_BLOCK_NUM  ;
-	printf("\nLOG:\n MEM_BLOCK_NUM: %d", MEM_BLOCK_NUM);
- #endif
-	initCircle(c, *pos, angle, radius, fill, color, density);
-	return c;
- }
+//...
 
  static void initCircle(Circle *circle, Vector pos, double angle, double radius, bool fill, char *color, double density)
  {
    //...
+    //在Rect初始化函数中设置vTable中的函数指针为Rect的实际函数
 	circle-super.vptr-render = renderCircle;
 	circle-super.vptr-getShape = returnCircleType;
 	destoryShape(shapeptr);
@@ -230,10 +203,12 @@
 
  ### **3. 相对完善的碰撞检测以及完全自定义的碰撞响应**
  
- - **相对完善碰撞检测**： 要实现基于几何的碰撞检测而非基于网格的碰撞检测，我们需要用到一些图形学知识。在这里我们使用**AABB**配合**分离轴定理**实现碰撞检测和碰撞接触面的法向量求解。
+ - **相对完善碰撞检测**： 要实现基于几何的碰撞检测而非基于网格的碰撞检测，我们需要用到一些图形学知识。在这里我们使用**AABB**配合**分离轴定理**实现碰撞检测和碰撞接触面的法向量求解。下图解释了如何使用AABB和SAT实现任意角度矩形碰撞检测的方法：
+![AABB与SAT的解释](./readme_resources/AABB%E8%A7%A3%E9%87%8A.png)
  
- - **完全自定义的碰撞响应**： 因为碰撞检测只返回碰撞与否，获取碰撞向量只返回碰撞法向量。开发者可以在编写游戏对象更新逻辑时通过调用这两个函数，在已知是否碰撞和碰撞法向量的基础上自己编写场景需要的碰撞响应方式。
-- 有关碰撞检测算法的相关代码可以参考 [shape.c](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics/blob/master/src/2DGameEngine/Engine/shape.c) 中的`isCollideWith`函数和`getCollisionVector`函数，这里不再赘述。
+ - **完全自定义的碰撞响应**： 因为碰撞检测只返回碰撞与否，获取碰撞向量只返回碰撞法向量。开发者可以在编写游戏对象更新逻辑时通过调用这两个函数，在已知是否碰撞和碰撞法向量的基础上自己编写场景需要的碰撞响应方式。我们可以选择根据碰撞向量进行对应的物理行为模拟，也可以仅仅是作为一个进入某区域的检测，这在最后的demo截图中都有体现。
+
+- 有关碰撞检测算法的相关代码可以参考 [shape.c](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics/blob/master/src/2DGameEngine/Engine/shape.c) 中的`isCollideWith`函数和`getCollisionVector`函数，这里不再赘述。（如果这里的超链接无法点击可以看文末的仓库链接）
 
 ### **4. 添加用户相机，画面显示的内容是相机视角内容**
 
@@ -369,7 +344,7 @@ typedef struct actorvTable {
     void (*unloadScene)(char* target);
 } ScenesManager;
  ```
-可以看见，所有的场景其实时存储在一个`scenesList`的**链表**中，除此之外场景管理器有一个场景节点成员`currentScenes`指向**当前场景**，引擎只会执行`currentScenes`的更新逻辑和渲染逻辑，所以通过改变`currentScenes`就可以实现场景的切换。但是考虑场景的加载和卸载，就要做更多的操作。
+可以看见，所有的场景其实都存储在一个`scenesList`的**链表**中，除此之外场景管理器有一个场景节点成员`currentScenes`指向**当前场景**，引擎只会执行`currentScenes`的更新逻辑和渲染逻辑，所以通过改变`currentScenes`就可以实现场景的切换。但是考虑场景的加载和卸载，就要做更多的操作。
 
 其中`switchTo`函数接受的四个参数分别表示：**目标场景**、**是否销毁当前场景**、**是否要初始化目标场景**、**参数对象**、**参数size**。这个函数的具体实现如下：
  ```C
@@ -555,7 +530,7 @@ void updateActor(Actor *actor, double delta)
 由此可见，这个框架并不是静态的，开发者可以根据自己的需求在组件层面上进行扩展，从而实现更多的功能。
 
 ## ***Part III :  Structure Of This Engine***
-*申明：本引擎依然存在诸多缺陷，仅仅作为大作业交差和自己平日玩乐的项目，如果跑着跑着出了什么问题都是很正常的*
+*为什么第三部分不是功能亮点？因为第二章说的功能全是亮点*
 
 ### **1. 架构图**
 ![架构图](./readme_resources/架构图.png)
@@ -574,43 +549,43 @@ void updateActor(Actor *actor, double delta)
 ### **3. 相关文件说明**
 ```bash
 2DGameEngine
-        ├─ config.h                      #配置文件
-        ├─ Engine
-        │   ├─ 2DEngine.c                #游戏全局数值，例如时间步长
-        │   ├─ 2DEngine.h                #游戏引擎导出头文件
-        │   ├─ actor.c                   #演员相关函数
-        │   ├─ actor.h                   #演员相关定义
-        │   ├─ camera.c                  #摄像机相关函数
-        │   ├─ camera.h                  #摄像机相关定义
-        │   ├─ component.h               #组件的继承导出头文件
-        │   ├─ components 
-        │   │      ├─ audio.c            #音频组件
-        │   │      ├─ audio.h
-        │   │      ├─ base_component.c   #组件基类
-        │   │      ├─ base_component.h
-        │   │      ├─ chartexture.c      #字符纹理组件
-        │   │      ├─ chartexture.h
-        │   │      ├─ collision_shape.c  #碰撞形状组件
-        │   │      ├─ collision_shape.h
-        │   │      ├─ picTexture.c       #图片纹理组件
-        │   │      ├─ picTexture.h
-        │   │      ├─ timer.c            #计时器组件
-        │   │      ├─ timer.h
-        │   │      ├─ uitext.c           #ui文字组件
-        │   │      └─ uitext.h
-        │   ├─ input_manager.c           #输入管理器
-        │   ├─ input_manager.h           
-        │   ├─ public_headers.c          #游戏引擎内部公共定义和头文件
-        │   ├─ public_headers.h
-        │   ├─ scene.c                   #场景相关函数
-        │   ├─ scene.h                   #场景相关定义
-        │   ├─ scenes_manager.c          #场景管理器
-        │   ├─ scenes_manager.h
-        │   ├─ shape.c                   #亚组件对象：形状
-        │   ├─ shape.h                   #其中包含图形学的碰撞检测算法和基础图形的渲染方法
-        │   ├─ vector.c                  #向量运算库
-        │   └─ vector.h                  #向量相关定义
-        └─ libgraphics                   #以下是libgraphics库文件
+    ├─ config.h                      #配置文件，是否开启debug等配置
+    ├─ Engine
+    │   ├─ 2DEngine.c                #游戏全局数值，例如时间步长
+    │   ├─ 2DEngine.h                #游戏引擎导出头文件
+    │   ├─ actor.c                   #演员相关函数，增删查组件、默认的更新和渲染逻辑等
+    │   ├─ actor.h                   #演员相关定义
+    │   ├─ camera.c                  #摄像机相关函数、更改摄像机位置和缩放参数等方法
+    │   ├─ camera.h                  #摄像机相关定义
+    │   ├─ component.h               #组件的继承导出头文件
+    │   ├─ components                #每个组件在.c文件中都实现了对应的默认渲染逻辑
+    │   │      ├─ audio.c            #音频组件
+    │   │      ├─ audio.h
+    │   │      ├─ base_component.c   #组件基类
+    │   │      ├─ base_component.h   
+    │   │      ├─ chartexture.c      #字符纹理组件
+    │   │      ├─ chartexture.h      
+    │   │      ├─ collision_shape.c  #碰撞形状组件
+    │   │      ├─ collision_shape.h
+    │   │      ├─ picTexture.c       #图片纹理组件
+    │   │      ├─ picTexture.h
+    │   │      ├─ timer.c            #计时器组件
+    │   │      ├─ timer.h
+    │   │      ├─ uitext.c           #ui文字组件
+    │   │      └─ uitext.h
+    │   ├─ input_manager.c           #输入管理器
+    │   ├─ input_manager.h           
+    │   ├─ public_headers.c          #游戏引擎内部公共定义和头文件
+    │   ├─ public_headers.h
+    │   ├─ scene.c                   #场景相关函数
+    │   ├─ scene.h                   #场景相关定义
+    │   ├─ scenes_manager.c          #场景管理器
+    │   ├─ scenes_manager.h
+    │   ├─ shape.c                   #亚组件对象：形状
+    │   ├─ shape.h                   #其中包含图形学的碰撞检测算法和基础图形的渲染方法
+    │   ├─ vector.c                  #向量运算库
+    │   └─ vector.h                  #向量相关定义
+    └─ libgraphics                   #以下是libgraphics库文件
             ├─ exceptio.c
             ├─ exception.h
             ├─ extgraph.h
@@ -638,14 +613,93 @@ void updateActor(Actor *actor, double delta)
 *之后重复以上**第二步**和**第三步**，直到**窗体被关闭***
 
 - **第四步**：若窗体被关闭，引擎进入`Free`函数，开销毁对象释放内存。从销毁**场景**开始，递归的销毁每个场景内的**演员**与它们的**组件**，直到所有**场景**完成销毁，程序退出。
+  
+- **以下是包含了引擎主要函数实现的`game.c`文件中的代码**：
+```C
+#include "2DEngine.h"
+#include "scene_info.h"
+#include "game_conf.h"
+
+void Main()
+{
+    InitGraphics();            //初始化绘图窗口
+#if ENGINE_DEBUG
+    InitConsole();             //debug模式下也要打开控制台
+#endif
+#if ENGINE_DEBUG
+    LOG("Enter Game Init--------------------------------------------------------------------------------------------------------------------------");
+#endif
+    srand(time(0));            //初始化随机种子
+    initInputManager();        //初始化输入管理器
+    initScenesManager();       //初始化场景管理器
+    initCamera(getww/2, getwh/2, 1);     //初始化相机
+    //载入game_conf.h中配置的启动场景
+    scmng.loadScene(&STARTUP_SCENE, STARTUP_SCENE_CREATOR, NULL);
+    scmng.currentScene = STARTUP_SCENE;
+    //初始化启动场景
+    scmng.currentScene->setup(scmng.currentScene, NULL);
+#if ENGINE_DEBUG
+    LOG("Game init finished!----------------------------------------------------------------------------------------------------------------------");
+#endif
+}
+
+//所有的计时器回调处理
+void CALLBACK TimerCallBack(HWND a, UINT b, UINT_PTR id, DWORD d)
+{
+    if (switchTimer != NULL && id == switchTimer->id)
+    {
+        switchTimer->callBackFunction();
+    }
+    if (timer != NULL && id == timer->id)
+    {
+        timer->callBackFunction();
+    }
+    if (freezSkillTimer != NULL && id == freezSkillTimer->id){
+        freezSkillTimer->callBackFunction();
+    }
+}
+
+//引擎更新过程
+void EngineUpdate(double delta)
+{
+    //首先检查是否有场景跳转，有则执行
+    scmng.checkSwitch();
+    //执行当前场景的更新逻辑，实际上是递归访问场景内每个Actor的更新逻辑
+    scmng.currentScene->update(scmng.currentScene, delta);
+    //事件更新重置
+    clearEvent();
+}
+
+//引擎渲染过程
+void Render()
+{
+    //执行当前场景的渲染逻辑，实际上是递归访问场景内每个Actor的渲染逻辑
+    scmng.currentScene->render(scmng.currentScene);
+}
+
+//引擎释放内存过程
+void Free()
+{
+#if ENGINE_DEBUG
+    LOG("Enter Free-------------------------------------------------------------------------------------------------------------------------------");
+#endif
+    //执行场景管理器的的销毁逻辑，实际上是递归访问场景列表内场景内每个Actor的销毁逻辑
+    //最终销毁所有的场景
+    destroyScenesManager();
+#if ENGINE_DEBUG
+    LOG("Finish Free------------------------------------------------------------------------------------------------------------------------------");
+#endif
+}
+
+```
 
 
 ## ***Part IV :  Quick Start***
-### **1. 项目结构**
+### **1. 游戏项目结构**
 ```bash
 src
 │
-│---2DGameEngine              #引擎库
+│---2DGameEngine              #引擎库（也就是我们的大作业项目）
 │
 │---YourGameFolder            #你的项目
     │ 
@@ -697,6 +751,8 @@ src
 
 ## ***Part V :  Demo Screenshots***
 - **1. 碰撞检测**
+
+展现了任意角度矩形的碰撞检测（绿色是墙体，现在小人不能再向右移动了）
 ![碰撞检测](./readme_resources/碰撞.png)
 
 - **2. 文字UI组件（我是说倒计时）**
@@ -721,13 +777,19 @@ src
 - **5. 任意规模字符画的加载，为你的游戏增强表现力**
 ![字符画](readme_resources/大规模字符纹理.png)
 
+- **6. 快速便捷的游戏开发**
+
+使用我们的引擎可以快速构建一个场景，下面是仅仅使用100+行代码实现有背景图动效，有字符纹理动效，能够响应键盘事件，有定时器，有背景音乐播放的开始界面的例子（就是上面用于说明相机功能的那个场景）。其中有很多重复性的代码，在Copilot等工具的加持下可以在3分钟内完成这个场景的构建。
+![少代码](./readme_resources/%E7%99%BE%E4%BD%99%E8%A1%8C%E4%BB%A3%E7%A0%81.png)
+
 - 还有一些别的特性无法通过截图展示，比如**场景间传参**，**场景复用**，**场景加载卸载**，**组件化开发逻辑**等等，可以在代码中找到相关的实现。
 
 ### ***附录A :  小组成员贡献***
-- 倪旌哲： 完成游戏引擎基本框架的开发，完成两个表现引擎能力的demo的开发
-- 庞笑义：参与表现引擎能力的demo开发，完成demo的开始界面与解算界面。
-- 何婕：参与引擎部分组件的开发，参与demo开发，完成游戏界面的设计和开发
+- 倪旌哲： 完成游戏引擎基本框架的开发，完成两个表现引擎能力的demo的开发 (45%)
+- 庞笑义：参与表现引擎能力的demo开发，完成demo的开始界面与解算界面。    (29%)
+- 何婕：参与引擎部分组件的开发，参与demo开发，完成游戏界面的设计和开发  (26%)
 
 ### ***附录B :  全部代码***
-由于代码过多，在这里只放上仓库链接
-[仓库地址](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics)
+由于代码过多(4300+ lines)，在这里只放上仓库链接
+[仓库地址](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics)：https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics
+（[前面的访问不到的话可以试试这个](https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics)：https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics）
