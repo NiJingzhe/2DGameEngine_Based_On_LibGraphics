@@ -205,6 +205,81 @@
  
  - **相对完善碰撞检测**： 要实现基于几何的碰撞检测而非基于网格的碰撞检测，我们需要用到一些图形学知识。在这里我们使用**AABB**配合**分离轴定理**实现碰撞检测和碰撞接触面的法向量求解。下图解释了如何使用AABB和SAT实现任意角度矩形碰撞检测的方法：
 ![AABB与SAT的解释](./readme_resources/AABB%E8%A7%A3%E9%87%8A.png)
+具体的实现可以分为这几步：
+    1. `Shape`结构体中有一个属性是`Vector pos`，即形状的位置，同时有一个属性是`double angle`,表示矩形自身轴系相对世界坐标系的角度。根据两个待检测矩形的位置和角度，我们可以求解出一个矩形在另一个矩形下的坐标表示，实际上就是**以其中一个矩形的一对邻边作为轴系**，将这个矩形视作**AA**的，然后求解另一个矩形在这个轴系下的坐标表示，实际上就是**SAT**中所谓的分离出了一个轴系准备进行**AABB overlap检测**了。
+   
+    2. `Shape`结构体还有一个属性是`Vector *vertices`，即顶点数组，这个数组中存储了该形状的所有顶点，其坐标是顶点在形状自身坐标系下的描述。**这里假设被我们视作AA的矩形称作 `rect1` ，另一个非AABB的矩形为 `rect2`**。显然，`rect1`的**AABB**就是它本身，但是为了能更加有效的碰撞检测，我们令所有矩形的**AABB**都是与自身相似但对角线长度为自身`COLLISION_MERGE`倍的一个外扩矩形，这样可以有效的避免因为检测频率过低导致的互相穿过。那么要求解`rect2`的**AABB**就涉及到一些**向量变换**了：
+    
+         记 第一步中题到的坐标变换，即世界坐标系到`rect1`坐标系的平移变换称为 **$T_{world->rect1}$**，那么`rect2`在`rect1`坐标系下的坐标表示 $pos_{under-rect1}$ 就是 $T_{world->rect1} * pos_{rect2}$。但是这时候的`rect2`坐标系还是平行于`rect1`坐标系的，这时候我们需要一个旋转坐标系将`rect2`坐标系旋转到它在`rect1`下的角度表示，实际上这个角度是 `angle2 - angle1` ， 根据这个角度，我们得到了一个旋转矩阵 $Rot_{rect2->rect1}$ 于是只要将`rect2`的四个顶点经过 $Rot_{rect2->rect1}$ 的变换再叠加在 $pos_{under-rect1}$ 上即可获得`rect2`的四个顶点在`rect1`轴系下的表述
+        
+        得到`rect2`的顶点在`rect1`轴系下的坐标表述后，我们只要求解`rect2`四个顶点中**XY坐标最大最小值**即可构造一个矩形范围，这个矩形范围就是`rect2`在`rect1`轴系下的**AABB**
+        ```C
+        //rect1和rect2在世界坐标系下的坐标表示
+        Vector pos1 = rect1->super.pos;
+        Vector pos2 = rect2->super.pos;
+        //delta_p实际上包含里一个平移变换，从rect2的pos到rect1的pos
+        Vector *delta_p = newVector(pos1.x - pos2.x, pos1.y - pos2.y);
+
+        //求解相对角度
+        double angle1 = rect1->super.angle;
+        double angle2 = rect2->super.angle;
+
+        //求解顶点
+        Vector vertex[4] = {0};
+        memcpy(&vertex[0], rect1->super.vertices[0], sizeof(Vector));
+        memcpy(&vertex[1], rect1->super.vertices[1], sizeof(Vector));
+        memcpy(&vertex[2], rect1->super.vertices[2], sizeof(Vector));
+        memcpy(&vertex[3], rect1->super.vertices[3], sizeof(Vector));
+
+        //叠加旋转变换
+        delta_p->rotate(delta_p, -angle2);
+        for (int i = 0; i < 4; ++i)
+        {
+            //在顶点上叠加两个变换
+            vertex[i].rotate(&vertex[i], angle1 - angle2);
+            vertex[i].add(&vertex[i], delta_p);
+        }
+        ```
+
+    3. 得到 `rect1` 和 `rect2` 的**AABB**后，我们就需要检测他们是否在两个轴向上发生overlap，实际上传统的**SAT**算法中应该只在水平轴下做overlap检测，这里由于是矩形，邻边垂直，所以在一个正交轴系下可以同时在两个方向上做overlap，相当于是同时做了两次分离轴了。有关于overlap检测的具体方法其实来源于容斥原理，假设我们已知几个参数：
+        
+        $Width_{rect1}, Height_{rect1}, Width_{rect2}, Height_{rect2}$ 
+        
+        以及 $minA_{rect-i}, maxA_{rect-i}$ 其中$A = X或Y, i = 1或2$, 
+        
+        那么根据**容斥原理**，只要比较
+            
+        $Width_{rect1} + Width_{rect2}$ 与 $Max(maxX_{rect1}, maxX_{rect2}) - Min(minX_{rect1}, minX_{rect2})$ 
+        
+        的大小关系就能判断是否发生$X轴$上的overlap，$Y轴$同理。
+
+        ```C
+        double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);
+        double deltaYTotal = fmax(rect2Y_max, rect1Y_max) - fmin(rect2Y_min, rect1Y_min);
+        double rect2DeltaX = rect2X_max - rect2X_min;
+        double rect2DeltaY = rect2Y_max - rect2Y_min;
+        double rect1DeltaX = rect1X_max - rect1X_min;
+        double rect1DeltaY = rect1Y_max - rect1Y_min;
+
+        rect1DeltaX *= COLLISION_MERGEN;
+        rect1DeltaY *= COLLISION_MERGEN;
+        rect2DeltaX *= COLLISION_MERGEN;
+        rect2DeltaY *= COLLISION_MERGEN;
+
+        //容斥判断
+        if (rect1DeltaX + rect2DeltaX >= deltaXTotal && rect1DeltaY + rect2DeltaY >= deltaYTotal)
+            return TRUE;
+        else
+            return FALSE;
+        ```
+   
+    4. 根据**SAT**的理论，如果在所有的轴向上都检测到了overlap，那么就可以判断两个矩形发生了碰撞，否则就没有发生碰撞。但是上述流程中我们只检测了其中一个矩形的两个轴向，这时候我们只要调换矩形碰撞检测函数的参数顺序就可以实现对另一个矩形两个轴向的检测了。只要将两个计算结果与运算，就可以得到最后两个矩形是否碰撞的结果。
+
+    5. 判断完是否碰撞，就可以着手求解碰撞向量了。碰撞向量的求解首先在矩形与矩形的情况下首先是判断到底是谁的**边**受到了撞击，然后返回这个边的法向量。经过一定的实验就会发现，如果以边受撞击的矩形视作Axially Aligned，那么显然**两个AABB只有一条边重合**，但是如果把**角受碰撞**的矩形视作Axially Aligned，那么在这个轴系下**两个AABB将会发生一个比较大面积的重合**（看上面说明AABB的图就可以发现），我们可以根据求解这个重合区域的大小来判断哪个矩形是**边受碰撞**。
+    
+    6. 假设这里 `rect2` 边受到碰撞，那么是哪条边受到了碰撞呢？我们可以通过求解 `rect1` 离 `rect2` 最近的顶点到 `rect2` 每一条边的距离，**距离最短**的边就是受到碰撞的边。由此，我们就可以求得这条边的法向量，再经过方向矫正和归一化后，就成为了可以返回的碰撞法向量了。
+   
+    > *矩形与圆，圆与圆的碰撞检测核心就是到圆心距离与半径作比较，碰撞法向量就是一个径向单位向量，在此不做赘述。*
  
  - **完全自定义的碰撞响应**： 因为碰撞检测只返回碰撞与否，获取碰撞向量只返回碰撞法向量。开发者可以在编写游戏对象更新逻辑时通过调用这两个函数，在已知是否碰撞和碰撞法向量的基础上自己编写场景需要的碰撞响应方式。我们可以选择根据碰撞向量进行对应的物理行为模拟，也可以仅仅是作为一个进入某区域的检测，这在最后的demo截图中都有体现。
 
