@@ -33,7 +33,7 @@ void createPlayer2()
     player2collisionRect = newRect(
         player2Pos,
         0,
-        player2TextureDown->getWidth(player2TextureDown), player2TextureDown->getHeight(player2TextureDown),
+        player2TextureDown->getWidth(player2TextureDown)*1.05, player2TextureDown->getHeight(player2TextureDown) * 1.05,
         FALSE,
         "Red",
         1);
@@ -104,6 +104,7 @@ static void player2Update(ActorNode player2, double delta)
 
     //获得速度后进行碰撞检查
     Vector *collisionVector;
+    //COLLISION_MERGEN = 1.05;
     if (player2->isCollideWithActor(player2, room1Background))
     {
         collisionVector = player2->getCollisionVector(player2, room1Background);

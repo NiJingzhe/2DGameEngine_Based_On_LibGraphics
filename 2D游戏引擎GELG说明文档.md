@@ -164,10 +164,12 @@
  }
  //...
  ```
+有了这段代码后，第一是我们可以实现使用一个`Shape *shapeList`指向所有的形状，不论是矩形还是圆形，即实现了**继承**，同时也可以对每一个`shapeList`调用同样的`shapeList[i]->vptr->render()` 实现具体每个形状的渲染，即实现了**多态**。实现了代码在**形式上的统一**，但是**功能上的多样**，提高了代码复用程度，提高编码效率。
 
  ### **2. 杜绝内存泄漏，绝对的内存安全**
   确保没有内存泄漏需要从两个角度下功夫：第一是确保每次分配内存都有对应的释放内存的操作，第二是能够通过某种手段监控内存块的分配与释放。
- - **分配释放对应**： 通过上文中的代码我们可以看到，每次分配内存都会有对应的释放内存的操作，每一个创建对象分配内存的`newXXX()`函数下方就有声明一个`destoryXXX()`函数用于销毁该对象，改销毁行为是**递归**的，即销毁自身时首先销毁自己的父类或自身含有的可以销毁的低层级对象。这个函数会在释放内存的时候被调用，从而确保每次分配内存都有对应的释放内存的操作。并且我们对整个`libgraphics`的运行框架进行了少量修改，使得程序退出时会执行`Free()`函数，递归的释放所有内存块，防止内存泄漏。
+
+ - **分配释放对应**： 通过上文中的代码我们可以看到，每次分配内存都会有对应的释放内存的操作，每一个创建对象分配内存的`newXXX()`函数下方就有声明一个`destoryXXX()`函数用于销毁该对象，这个销毁行为是**递归**的，即销毁自身时首先销毁自己的父类或自身含有的可以销毁的低层级对象。这个函数会在释放内存的时候被调用，从而确保每次分配内存都有对应的释放内存的操作。并且我们对整个`libgraphics`的运行框架进行了少量修改，使得程序退出时会执行`Free()`函数，递归的释放所有内存块，防止内存泄漏。
  ```C
  int WINAPI WinMain(HINSTANCE hThisInstance,
                    HINSTANCE hPrevInstance,
@@ -178,10 +180,9 @@
     MSG messages; /* Here messages to the application are saved */
     Main();
     g_looping = TRUE;
-    /* New comments: Run the Game loop, g_looping will be false when process get the message WM_DESTORY*/
     while (g_looping)
     {
-        while ( // GetMessage(&messages, NULL, 0, 0)
+        while (
             PeekMessage(&messages, NULL, 0, 0, PM_REMOVE))
         {
             /* Translate virtual-key messages into character messages */
@@ -674,8 +675,7 @@ void updateActor(Actor *actor, double delta)
             ├─ simpio.c
             ├─ simpio.h
             ├─ strlib.c
-            ├─ strlib.h
-            └─ tags
+            └─ strlib.h
 ```
 
 ### **4. 框架流程**
@@ -812,7 +812,7 @@ src
 ### **2. 开发者要做什么？**
 - **第一步**：在`game_conf.h`中设置游戏的启动场景
 
-- **第二步**：根据`demo`创建`game.c`
+- **第二步**：根据`demo`创建`game.c`，并写入对应模板
 
 - **第三步**：根据`demo`创建`scene_info.h`
 
@@ -828,10 +828,10 @@ src
 - **1. 碰撞检测**
 
 展现了任意角度矩形的碰撞检测（绿色是墙体，现在小人不能再向右移动了）
-![碰撞检测](./readme_resources/碰撞.png)
+> ![碰撞检测](./readme_resources/碰撞.png)
 
 - **2. 文字UI组件（我是说倒计时）**
-![文字UI倒计时](./readme_resources/%E5%80%92%E8%AE%A1%E6%97%B6UI.png)
+> ![文字UI倒计时](./readme_resources/%E5%80%92%E8%AE%A1%E6%97%B6UI.png)
 
 - **3. 相机**
 
