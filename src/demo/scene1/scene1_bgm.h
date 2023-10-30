@@ -8,4 +8,7 @@ extern Audio *bgm;
 void createScene1BGM();
 void setupScene1BGM(void* param);
 void bgmUpdate(ActorNode scene1BGM, double delta);
+
+//changes in new_branch 
+
 #endif
