@@ -2,7 +2,7 @@
 #include "vector.h"
 #include "shape.h"
 
-double COLLISION_MERGEN = 1.01;
+double COLLISION_EXPAND_FACTOR = 1.01;
 
 static bool isRectCollide(Rect *rect1, Rect *rect2);
 static bool isCircleCollide(Circle *circle1, Circle *circle2);
@@ -69,10 +69,10 @@ static bool isRectCollide(Rect *rect1, Rect *rect2)
 	double rect2DeltaY = rect2Y_max - rect2Y_min;
 	double rect1DeltaX = rect1X_max - rect1X_min;
 	double rect1DeltaY = rect1Y_max - rect1Y_min;
-	rect1DeltaX *= COLLISION_MERGEN;
-	rect1DeltaY *= COLLISION_MERGEN;
-	rect2DeltaX *= COLLISION_MERGEN;
-	rect2DeltaY *= COLLISION_MERGEN;
+	rect1DeltaX *= COLLISION_EXPAND_FACTOR;
+	rect1DeltaY *= COLLISION_EXPAND_FACTOR;
+	rect2DeltaX *= COLLISION_EXPAND_FACTOR;
+	rect2DeltaY *= COLLISION_EXPAND_FACTOR;
 
 	destoryVector(delta_p);
 
@@ -207,10 +207,10 @@ Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 	double rect2DeltaY = rect2Y_max - rect2Y_min;
 	double rect1DeltaX = rect1X_max - rect1X_min;
 	double rect1DeltaY = rect1Y_max - rect1Y_min;
-	rect1DeltaX *= COLLISION_MERGEN;
-	rect1DeltaY *= COLLISION_MERGEN;
-	rect2DeltaX *= COLLISION_MERGEN;
-	rect2DeltaY *= COLLISION_MERGEN;
+	rect1DeltaX *= COLLISION_EXPAND_FACTOR;
+	rect1DeltaY *= COLLISION_EXPAND_FACTOR;
+	rect2DeltaX *= COLLISION_EXPAND_FACTOR;
+	rect2DeltaY *= COLLISION_EXPAND_FACTOR;
 
 	destoryVector(delta_p);
 

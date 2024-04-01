@@ -8,7 +8,7 @@
 #define RECT 1
 #define CIRCLE 2
 
-extern double COLLISION_MERGEN;
+extern double COLLISION_EXPAND_FACTOR;
 /*---------------------------Shape Type----------------------------*/
 typedef struct Shape {
 	

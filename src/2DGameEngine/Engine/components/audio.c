@@ -11,8 +11,6 @@ static void Audio_stop(struct Audio *audio);
 static void Audio_setVolume(struct Audio *audio, int volume);
 static char *Audio_getFilePath(struct Audio *audio);
 
-
-
 Audio *newAudio(char *filePath, bool loop)
 {
 	Audio *audio = (Audio *)malloc(sizeof(Audio));
@@ -56,7 +54,7 @@ static void initAudio(struct Audio *audio, char *filePath, bool loop)
 	audio->setMeta = audio->super.setMeta;
 
 	char command[256];
-	sprintf(command, "open \"%s\" type mpegvideo alias audio%d", audio->filePath, (int)audio);
+	sprintf(command, "open \"%s\" type mpegvideo alias audio%lu", audio->filePath, (uintptr_t)audio);
 	mciSendString(command, NULL, 0, NULL);
 }
 
@@ -80,12 +78,12 @@ static void Audio_play(struct Audio *audio)
 	char command[256];
 	if (!audio->loop)
 	{
-		sprintf(command, "play audio%d", (int)audio);
+		sprintf(command, "play audio%d", (uintptr_t)audio);
 		mciSendString(command, NULL, 0, NULL);
 	}
 	else
 	{
-		sprintf(command, "play audio%d repeat", (int)audio);
+		sprintf(command, "play audio%d repeat", (uintptr_t)audio);
 		mciSendString(command, NULL, 0, NULL);
 	}
 
@@ -95,7 +93,7 @@ static void Audio_play(struct Audio *audio)
 static void Audio_pause(struct Audio *audio)
 {
 	char command[256];
-	sprintf(command, "pause audio%d", (int)audio);
+	sprintf(command, "pause audio%d", (uintptr_t)audio);
 	mciSendString(command, NULL, 0, NULL);
 
 	audio->playing = FALSE;
@@ -104,9 +102,9 @@ static void Audio_pause(struct Audio *audio)
 static void Audio_stop(struct Audio *audio)
 {
 	char command[256];
-	sprintf(command, "stop audio%d", (int)audio);
+	sprintf(command, "stop audio%d", (uintptr_t)audio);
 	mciSendString(command, NULL, 0, NULL);
-	sprintf(command, "seek audio%d to %ld", (int)audio, 0L);
+	sprintf(command, "seek audio%d to %ld", (uintptr_t)audio, 0L);
 	mciSendString(command, NULL, 0, NULL);
 
 	audio->playing = FALSE;
@@ -115,7 +113,7 @@ static void Audio_stop(struct Audio *audio)
 static void Audio_setVolume(struct Audio *audio, int volume)
 {
 	char command[256];
-	sprintf(command, "setaudio audio%d volume to %d", (int)audio, volume);
+	sprintf(command, "setaudio audio%d volume to %d", (uintptr_t)audio, volume);
 	mciSendString(command, NULL, 0, NULL);
 
 	audio->volume = volume;
@@ -129,7 +127,7 @@ static char *Audio_getFilePath(struct Audio *audio)
 void destoryAudio(struct Audio *audio)
 {
 	char command[256];
-	sprintf(command, "close audio%d", (int)audio);
+	sprintf(command, "close audio%d", (uintptr_t)audio);
 	mciSendString(command, NULL, 0, NULL);
 	free(audio->super.vptr);
 #if MEM_DEBUG

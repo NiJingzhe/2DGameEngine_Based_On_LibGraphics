@@ -867,4 +867,4 @@ src
 ### ***附录B :  全部代码***
 由于代码过多(4300+ lines)，在这里只放上仓库链接
 [仓库地址](https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics)：https://github.com/NiJingzhe/2DGameEngine_Based_On_LibGraphics
-（[前面的访问不到的话可以试试这个](https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics)：https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics）
+（[前面的访问不到的话可以试试这个](https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics)：https://gitee.com/ni-jingzhe/2-dgame-engine-based-on-lib-graphics ）
