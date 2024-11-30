@@ -2,7 +2,7 @@
 #define _PICTEXTURE_H
 #include "base_component.h"
 #include "public_headers.h"
-#include "Vector.h"
+#include "vector.h"
 
 typedef struct picTexture
 {

@@ -2,7 +2,7 @@
 #define __UI_TEXT_H__
 
 #include "base_component.h"
-#include "Vector.h"
+#include "vector.h"
 
 typedef struct UIText{
 	Component super;

@@ -2,7 +2,7 @@
 #define __BASE_COMP_H__
 
 #include "public_headers.h"
-#include "Vector.h"
+#include "vector.h"
 #include "shape.h"
 #include "camera.h"
 

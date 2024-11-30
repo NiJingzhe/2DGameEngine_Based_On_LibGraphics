@@ -16,7 +16,6 @@
 #include <windows.h>
 #include <time.h>
 #include <wincon.h>
-#include <Windows.h>
 
 #include "genlib.h"
 #include "gcalloc.h"

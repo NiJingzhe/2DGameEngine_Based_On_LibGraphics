@@ -1,5 +1,5 @@
 #include "uitext.h"
-#include "Vector.h"
+#include "vector.h"
 #include "base_component.h"
 static void initUIText(struct UIText *uiText, char *content, Vector pos, char *color, char *font, int style, int pointSize);
 static void renderUIText(Component *c);
