@@ -7,6 +7,7 @@
 #define EMPTY_SHAPE 0
 #define RECT 1
 #define CIRCLE 2
+#define CONVEXPOLYGON 3
 
 extern double COLLISION_EXPAND_FACTOR;
 /*---------------------------Shape Type----------------------------*/
@@ -60,4 +61,17 @@ typedef struct Circle {
 
 Circle* newCircle(Vector *pos, double angle, double radius, bool fill, char* color, double density);
 void destoryCircle(Circle* c);
+
+
+/*-----------------------------ConvexPolygon-----------------------*/
+
+// typedef struct ConvexPolygon {
+// 	Shape super;
+// 	int vertexNum;
+// } ConvexPolygon;
+
+// ConvexPolygon* newConvexPolygon(Vector *pos, double angle, Vector** vertices, int vertexNum, bool fill, char* color, double density);
+// void destoryConvexPolygon(ConvexPolygon* cp);
+
+
 #endif

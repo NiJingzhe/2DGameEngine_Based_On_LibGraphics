@@ -28,58 +28,59 @@ static const int returnCircleType();
 /*-----------------------------------------Private Function---------------------------------------*/
 static bool isRectCollide(Rect *rect1, Rect *rect2)
 {
-	Vector pos1 = rect1->super.pos;
-	Vector pos2 = rect2->super.pos;
-	Vector *delta_p = newVector(pos1.x - pos2.x, pos1.y - pos2.y);
+    // 获取两个矩形的顶点
+    Vector vertices1[4], vertices2[4];
+    for(int i = 0; i < 4; i++) {
+        vertices1[i] = *rect1->super.vertices[i];
+        vertices1[i].rotate(&vertices1[i], rect1->super.angle);
+        vertices1[i].add(&vertices1[i], &rect1->super.pos);
+        
+        vertices2[i] = *rect2->super.vertices[i];
+        vertices2[i].rotate(&vertices2[i], rect2->super.angle);
+        vertices2[i].add(&vertices2[i], &rect2->super.pos);
+    }
 
-	double angle1 = rect1->super.angle;
-	double angle2 = rect2->super.angle;
+    // 获取两个矩形的边的方向向量（标准化）
+    Vector axes[4];
+    axes[0] = *rect1->super.vertices[1];
+    axes[0].sub(&axes[0], rect1->super.vertices[0]);
+    axes[1] = *rect1->super.vertices[3];
+    axes[1].sub(&axes[1], rect1->super.vertices[0]);
+    axes[2] = *rect2->super.vertices[1];
+    axes[2].sub(&axes[2], rect2->super.vertices[0]);
+    axes[3] = *rect2->super.vertices[3];
+    axes[3].sub(&axes[3], rect2->super.vertices[0]);
 
-	Vector vertex[4] = {0};
-	memcpy(&vertex[0], rect1->super.vertices[0], sizeof(Vector));
-	memcpy(&vertex[1], rect1->super.vertices[1], sizeof(Vector));
-	memcpy(&vertex[2], rect1->super.vertices[2], sizeof(Vector));
-	memcpy(&vertex[3], rect1->super.vertices[3], sizeof(Vector));
+    for(int i = 0; i < 4; i++) {
+        axes[i].normalize(&axes[i]);
+    }
 
-	delta_p->rotate(delta_p, -angle2);
-	for (int i = 0; i < 4; ++i)
-	{
-		vertex[i].rotate(&vertex[i], angle1 - angle2);
-		vertex[i].add(&vertex[i], delta_p);
-	}
-
-	double rect1X_min = vertex[0].x, rect1X_max = vertex[0].x;
-	double rect1Y_min = vertex[0].y, rect1Y_max = vertex[0].y;
-	for (int i = 1; i < 4; ++i)
-	{
-		rect1X_min = rect1X_min >= vertex[i].x ? vertex[i].x : rect1X_min;
-		rect1Y_min = rect1Y_min >= vertex[i].y ? vertex[i].y : rect1Y_min;
-		rect1X_max = rect1X_max <= vertex[i].x ? vertex[i].x : rect1X_max;
-		rect1Y_max = rect1Y_max <= vertex[i].y ? vertex[i].y : rect1Y_max;
-	}
-
-	double rect2X_min = -rect2->width / 2;
-	double rect2X_max = -rect2X_min;
-	double rect2Y_min = -rect2->height / 2;
-	double rect2Y_max = -rect2Y_min;
-
-	double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);
-	double deltaYTotal = fmax(rect2Y_max, rect1Y_max) - fmin(rect2Y_min, rect1Y_min);
-	double rect2DeltaX = rect2X_max - rect2X_min;
-	double rect2DeltaY = rect2Y_max - rect2Y_min;
-	double rect1DeltaX = rect1X_max - rect1X_min;
-	double rect1DeltaY = rect1Y_max - rect1Y_min;
-	rect1DeltaX *= COLLISION_EXPAND_FACTOR;
-	rect1DeltaY *= COLLISION_EXPAND_FACTOR;
-	rect2DeltaX *= COLLISION_EXPAND_FACTOR;
-	rect2DeltaY *= COLLISION_EXPAND_FACTOR;
-
-	destoryVector(delta_p);
-
-	if (rect1DeltaX + rect2DeltaX >= deltaXTotal && rect1DeltaY + rect2DeltaY >= deltaYTotal)
-		return TRUE;
-	else
-		return FALSE;
+    // 在每个轴上进行投影检测
+    for(int i = 0; i < 4; i++) {
+        double min1 = 999999, max1 = -999999;
+        double min2 = 999999, max2 = -999999;
+        
+        // 计算rect1的投影
+        for(int j = 0; j < 4; j++) {
+            double proj = vertices1[j].x * axes[i].x + vertices1[j].y * axes[i].y;
+            min1 = fmin(min1, proj);
+            max1 = fmax(max1, proj);
+        }
+        
+        // 计算rect2的投影
+        for(int j = 0; j < 4; j++) {
+            double proj = vertices2[j].x * axes[i].x + vertices2[j].y * axes[i].y;
+            min2 = fmin(min2, proj);
+            max2 = fmax(max2, proj);
+        }
+        
+        // 检查投影是否重叠
+        if(min1 > max2 || min2 > max1) {
+            return FALSE;
+        }
+    }
+    
+    return TRUE;
 }
 
 static bool isCircleCollide(Circle *circle1, Circle *circle2)
@@ -156,174 +157,112 @@ double pointToSegementDist(Vector point, Vector s1, Vector s2)
 	}
 }
 
+/*
+ * 获取圆形之间的碰撞向量
+ * 从c2指向c1的单位向量，即两圆心连线的方向
+ */
 Vector *getCircleCollsionVector(Circle *c1, Circle *c2)
 {
-	Vector *v = newVector(c1->super.pos.x - c2->super.pos.x, c1->super.pos.y - c2->super.pos.y);
-	v->normalize(v);
-	return v;
+    // 计算从c2指向c1的向量
+    Vector *v = newVector(c1->super.pos.x - c2->super.pos.x, 
+                         c1->super.pos.y - c2->super.pos.y);
+    v->normalize(v);  // 标准化为单位向量
+    return v;
 }
 
-Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
+/*
+ * 获取矩形之间的碰撞向量
+ * 基于分离轴定理(SAT)实现
+ * 返回最小重叠轴的方向向量(从rect2指向rect1)
+ */
+static Vector *getRectCollisionVector(Rect *rect1, Rect *rect2)
 {
+    // 计算世界坐标系中的顶点位置
+    Vector vertices1[4], vertices2[4];
+    for(int i = 0; i < 4; i++) {
+        // 获取局部坐标系中的顶点
+        vertices1[i] = *rect1->super.vertices[i];
+        vertices2[i] = *rect2->super.vertices[i];
+        
+        // 应用旋转变换
+        vertices1[i].rotate(&vertices1[i], rect1->super.angle);
+        vertices2[i].rotate(&vertices2[i], rect2->super.angle);
+        
+        // 应用平移变换到世界坐标系
+        vertices1[i].add(&vertices1[i], &rect1->super.pos);
+        vertices2[i].add(&vertices2[i], &rect2->super.pos);
+    }
 
-	Vector pos1 = rect1->super.pos;
-	Vector pos2 = rect2->super.pos;
-	Vector *delta_p = newVector(pos1.x - pos2.x, pos1.y - pos2.y);
+    // 计算用于投影的轴向量
+    // 每个矩形贡献两个轴向量(相邻边的法向量)
+    Vector axes[4];
+    // rect1的两个轴
+    axes[0] = *rect1->super.vertices[1];
+    axes[0].sub(&axes[0], rect1->super.vertices[0]);  // 上边
+    axes[1] = *rect1->super.vertices[3];
+    axes[1].sub(&axes[1], rect1->super.vertices[0]);  // 左边
+    // rect2的两个轴
+    axes[2] = *rect2->super.vertices[1];
+    axes[2].sub(&axes[2], rect2->super.vertices[0]);  // 上边
+    axes[3] = *rect2->super.vertices[3];
+    axes[3].sub(&axes[3], rect2->super.vertices[0]);  // 左边
 
-	double angle1 = rect1->super.angle;
-	double angle2 = rect2->super.angle;
+    double minOverlap = 999999;  // 记录最小重叠量
+    Vector *minAxis = NULL;      // 记录最小重叠量对应的轴向量
+    
+    // 对每个轴进行投影测试
+    for(int i = 0; i < 4; i++) {
+        axes[i].normalize(&axes[i]);  // 标准化轴向量
+        
+        double min1 = 999999, max1 = -999999;  // rect1的投影范围
+        double min2 = 999999, max2 = -999999;  // rect2的投影范围
+        
+        // 计算两个矩形在当前轴上的投影范围
+        for(int j = 0; j < 4; j++) {
+            // 计算顶点在轴上的投影长度(点积)
+            double proj1 = vertices1[j].x * axes[i].x + vertices1[j].y * axes[i].y;
+            double proj2 = vertices2[j].x * axes[i].x + vertices2[j].y * axes[i].y;
+            // 更新投影范围
+            min1 = fmin(min1, proj1);
+            max1 = fmax(max1, proj1);
+            min2 = fmin(min2, proj2);
+            max2 = fmax(max2, proj2);
+        }
+        
+        // 计算当前轴上的重叠量
+        double overlap = fmin(max1, max2) - fmax(min1, min2);
+        // 如果找到更小的重叠量，更新记录
+        if(overlap < minOverlap) {
+            minOverlap = overlap;
+            minAxis = newVector(axes[i].x, axes[i].y);
+        }
+    }
 
-	Vector vertex[4] = {0};
-	memcpy(&vertex[0], rect1->super.vertices[0], sizeof(Vector));
-	memcpy(&vertex[1], rect1->super.vertices[1], sizeof(Vector));
-	memcpy(&vertex[2], rect1->super.vertices[2], sizeof(Vector));
-	memcpy(&vertex[3], rect1->super.vertices[3], sizeof(Vector));
-
-	delta_p->rotate(delta_p, -angle2);
-	for (int i = 0; i < 4; ++i)
-	{
-		vertex[i].rotate(&vertex[i], angle1 - angle2);
-		vertex[i].add(&vertex[i], delta_p);
-	}
-
-	double rect1X_min = vertex[0].x, rect1X_max = vertex[0].x;
-	double rect1Y_min = vertex[0].y, rect1Y_max = vertex[0].y;
-	for (int i = 1; i < 4; ++i)
-	{
-		rect1X_min = rect1X_min >= vertex[i].x ? vertex[i].x : rect1X_min;
-		rect1Y_min = rect1Y_min >= vertex[i].y ? vertex[i].y : rect1Y_min;
-		rect1X_max = rect1X_max <= vertex[i].x ? vertex[i].x : rect1X_max;
-		rect1Y_max = rect1Y_max <= vertex[i].y ? vertex[i].y : rect1Y_max;
-	}
-
-	double rect2X_min = -rect2->width / 2;
-	double rect2X_max = -rect2X_min;
-	double rect2Y_min = -rect2->height / 2;
-	double rect2Y_max = -rect2Y_min;
-
-	double deltaXTotal = fmax(rect2X_max, rect1X_max) - fmin(rect2X_min, rect1X_min);
-	double deltaYTotal = fmax(rect2Y_max, rect1Y_max) - fmin(rect2Y_min, rect1Y_min);
-	double rect2DeltaX = rect2X_max - rect2X_min;
-	double rect2DeltaY = rect2Y_max - rect2Y_min;
-	double rect1DeltaX = rect1X_max - rect1X_min;
-	double rect1DeltaY = rect1Y_max - rect1Y_min;
-	rect1DeltaX *= COLLISION_EXPAND_FACTOR;
-	rect1DeltaY *= COLLISION_EXPAND_FACTOR;
-	rect2DeltaX *= COLLISION_EXPAND_FACTOR;
-	rect2DeltaY *= COLLISION_EXPAND_FACTOR;
-
-	destoryVector(delta_p);
-
-	Vector *v = NULL;
-
-	Vector verticesofRect1[4];
-	memcpy(&(verticesofRect1[0]), rect1->super.vertices[0], sizeof(Vector));
-	memcpy(&(verticesofRect1[1]), rect1->super.vertices[1], sizeof(Vector));
-	memcpy(&(verticesofRect1[2]), rect1->super.vertices[2], sizeof(Vector));
-	memcpy(&(verticesofRect1[3]), rect1->super.vertices[3], sizeof(Vector));
-	verticesofRect1[0].rotate(&(verticesofRect1[0]), angle1);
-	verticesofRect1[1].rotate(&(verticesofRect1[1]), angle1);
-	verticesofRect1[2].rotate(&(verticesofRect1[2]), angle1);
-	verticesofRect1[3].rotate(&(verticesofRect1[3]), angle1);
-	verticesofRect1[0].add(&(verticesofRect1[0]), &pos1);
-	verticesofRect1[1].add(&(verticesofRect1[1]), &pos1);
-	verticesofRect1[2].add(&(verticesofRect1[2]), &pos1);
-	verticesofRect1[3].add(&(verticesofRect1[3]), &pos1);
-
-	Vector verticesofRect2[4];
-	memcpy(&(verticesofRect2[0]), rect2->super.vertices[0], sizeof(Vector));
-	memcpy(&(verticesofRect2[1]), rect2->super.vertices[1], sizeof(Vector));
-	memcpy(&(verticesofRect2[2]), rect2->super.vertices[2], sizeof(Vector));
-	memcpy(&(verticesofRect2[3]), rect2->super.vertices[3], sizeof(Vector));
-	verticesofRect2[0].rotate(&(verticesofRect2[0]), angle2);
-	verticesofRect2[1].rotate(&(verticesofRect2[1]), angle2);
-	verticesofRect2[2].rotate(&(verticesofRect2[2]), angle2);
-	verticesofRect2[3].rotate(&(verticesofRect2[3]), angle2);
-	verticesofRect2[0].add(&(verticesofRect2[0]), &pos2);
-	verticesofRect2[1].add(&(verticesofRect2[1]), &pos2);
-	verticesofRect2[2].add(&(verticesofRect2[2]), &pos2);
-	verticesofRect2[3].add(&(verticesofRect2[3]), &pos2);
-
-	if (rect1DeltaX + rect2DeltaX >= 1.01 * deltaXTotal && rect1DeltaY + rect2DeltaY >= 1.01 * deltaYTotal)
-	{
-		double minVertextoCenterDist = 9999;
-		double vertextoCenterDist;
-		int minIndex_;
-		for (int i = 0; i < 4; ++i){
-			vertextoCenterDist = sqrt((pos1.x - verticesofRect2[i].x) * (pos1.x - verticesofRect2[i].x) + 
-									 (pos1.y - verticesofRect2[i].y) * (pos1.y - verticesofRect2[i].y));
-			if (vertextoCenterDist < minVertextoCenterDist)
-			{
-				minVertextoCenterDist = vertextoCenterDist;
-				minIndex_ = i;
-			}
-		}
-		Vector minDistVertex;
-		memcpy(&minDistVertex, &(verticesofRect2[minIndex_]), sizeof(Vector));
-
-		double minSegemntToVertexDist = 9999;
-		double segmentToVertexDist;
-		int minIndex;
-		for (int i = 0; i < 4; ++i)
-		{
-			segmentToVertexDist = pointToSegementDist(minDistVertex, verticesofRect1[i], verticesofRect1[(i + 1) % 4]);
-			if (segmentToVertexDist < minSegemntToVertexDist)
-			{
-				minSegemntToVertexDist = segmentToVertexDist;
-				minIndex = i;
-			}
-		}
-		v = newVector(verticesofRect1[minIndex].y - verticesofRect1[(minIndex + 1) % 4].y, verticesofRect1[(minIndex + 1) % 4].x - verticesofRect1[minIndex].x);
-	}
-	else
-	{
-		double minVertextoCenterDist = 9999;
-		double vertextoCenterDist;
-		int minIndex_;
-		for (int i = 0; i < 4; ++i){
-			vertextoCenterDist = sqrt((pos2.x - verticesofRect1[i].x) * (pos2.x - verticesofRect1[i].x) + 
-									 (pos2.y - verticesofRect1[i].y) * (pos2.y - verticesofRect1[i].y));
-			if (vertextoCenterDist < minVertextoCenterDist)
-			{
-				minVertextoCenterDist = vertextoCenterDist;
-				minIndex_ = i;
-			}
-		}
-		Vector minDistVertex;
-		memcpy(&minDistVertex, &(verticesofRect1[minIndex_]), sizeof(Vector));
-
-		double minSegemntToVertexDist = 9999;
-		double segmentToVertexDist;
-		int minIndex;
-		for (int i = 0; i < 4; ++i)
-		{
-			segmentToVertexDist = pointToSegementDist(minDistVertex, verticesofRect2[i], verticesofRect2[(i + 1) % 4]);
-			if (segmentToVertexDist < minSegemntToVertexDist)
-			{
-				minSegemntToVertexDist = segmentToVertexDist;
-				minIndex = i;
-			}
-		}
-		v = newVector(verticesofRect2[minIndex].y - verticesofRect2[(minIndex + 1) % 4].y, verticesofRect2[(minIndex + 1) % 4].x - verticesofRect2[minIndex].x);
-	}
-
-	if (v != NULL)
-	{
-		v->normalize(v);
-		if (0 > (v->x * (pos1.x - pos2.x) + v->y * (pos1.y - pos2.y)))
-		{
-			v->mult(v, -1);
-		}
-	}
-
-	return v;
+    // 确保碰撞向量方向正确（从rect2指向rect1）
+    if(minAxis != NULL) {
+        Vector center_diff;  // 两矩形中心点之差
+        center_diff.x = rect1->super.pos.x - rect2->super.pos.x;
+        center_diff.y = rect1->super.pos.y - rect2->super.pos.y;
+        // 如果轴向量与中心差向量方向相反，翻转轴向量
+        if(center_diff.x * minAxis->x + center_diff.y * minAxis->y < 0) {
+            minAxis->mult(minAxis, -1);
+        }
+    }
+    
+    return minAxis;
 }
 
+/*
+ * 获取矩形和圆形之间的碰撞向量
+ * 从圆心指向矩形中心的单位向量
+ */
 Vector *getRectCircleCollisionVector(Rect *r, Circle *c)
 {
-	Vector *v = newVector(r->super.pos.x - c->super.pos.x, r->super.pos.y - c->super.pos.y);
-	v->normalize(v);
-	return v;
+    // 计算从圆心指向矩形中心的向量
+    Vector *v = newVector(r->super.pos.x - c->super.pos.x, 
+                         r->super.pos.y - c->super.pos.y);
+    v->normalize(v);  // 标准化为单位向量
+    return v;
 }
 
 /*--------------------------------------Public Function------------------------------------------*/
@@ -528,9 +467,13 @@ static void initRect(Rect *rect, Vector pos, double angle, double width, double 
 		return;
 	}
 	rect->super.vertices[0] = newVector(-width / 2, height / 2);
+	rect->super.vertices[0]->rotate(rect->super.vertices[0], angle);
 	rect->super.vertices[1] = newVector(width / 2, height / 2);
+	rect->super.vertices[1]->rotate(rect->super.vertices[1], angle);
 	rect->super.vertices[2] = newVector(width / 2, -height / 2);
+	rect->super.vertices[2]->rotate(rect->super.vertices[2], angle);
 	rect->super.vertices[3] = newVector(-width / 2, -height / 2);
+	rect->super.vertices[3]->rotate(rect->super.vertices[3], angle);
 
 	destoryShape(shapeptr);
 

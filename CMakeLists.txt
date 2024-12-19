@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.8.0)
+﻿cmake_minimum_required (VERSION 3.11.0)
 
 project ("2DGameEngine")
 
@@ -31,8 +31,9 @@ aux_source_directory(src/2DGameEngine/ CONF_LIST)
 
 # 将源代码添加到此项目的可执行文件。
 
+set(CMAKE_BUILD_WITH_INSTALL_RPATH TRUE)
 add_executable (${TARGET_NAME} ${HEAD_LIST} ${ENG_LIST} ${CONF_LIST} ${COMP_LIST} ${DEMO_LIST} ${SCENE1_LIST} ${SCENE2_LIST})
-target_link_libraries(${TARGET_NAME} winmm.lib)
+target_link_libraries(${TARGET_NAME} winmm gdi32)
 
 # TODO: 如有需要，请添加测试并安装目标。
 install(TARGETS ${TARGET_NAME} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/test_env)

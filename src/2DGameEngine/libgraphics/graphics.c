@@ -271,7 +271,7 @@ static void DisplayExit(void);
 static HWND FindConsoleWindow(void);
 static BOOL CALLBACK EnumerateProc(HWND window, LPARAM clientData);
 static void RegisterWindowClass(void);
-static LONG FAR PASCAL GraphicsEventProc(HWND w, UINT msg,
+static LRESULT CALLBACK GraphicsEventProc(HWND w, UINT msg,
                                          WPARAM p1, LPARAM p2);
 static void CheckEvents(void);
 static void DoUpdate(void);
@@ -942,7 +942,7 @@ static void InitDisplay(void)
     wndcls.hCursor = LoadCursor(NULL, IDC_ARROW);
     wndcls.hIcon = LoadIcon(NULL, IDI_APPLICATION);
     wndcls.hInstance = NULL;
-    wndcls.lpfnWndProc = GraphicsEventProc;
+    wndcls.lpfnWndProc = (WNDPROC)GraphicsEventProc;
     wndcls.lpszClassName = "Graphics Window";
     wndcls.lpszMenuName = NULL;
     wndcls.style = CS_HREDRAW | CS_VREDRAW;
@@ -1154,7 +1154,7 @@ static void RegisterWindowClass(void)
  * is the paint event, which forces a screen update.
  */
 
-static LONG FAR PASCAL GraphicsEventProc(HWND hwnd, UINT msg,
+static LRESULT CALLBACK GraphicsEventProc(HWND hwnd, UINT msg,
                                          WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
