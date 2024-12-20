@@ -264,7 +264,6 @@ Vector *getRectCircleCollisionVector(Rect *r, Circle *c)
     v->normalize(v);  // 标准化为单位向量
     return v;
 }
-
 /*--------------------------------------Public Function------------------------------------------*/
 Shape *newShape(Vector *pos, double angle, bool fill, char *color, double density)
 {
